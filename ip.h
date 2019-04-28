@@ -12,7 +12,6 @@
 #include <string>
 #include <QDebug>
 #include "key.h"
-
 class IP
 {
     /*
@@ -26,10 +25,9 @@ class IP
 
     /*
      * IP.key stores the public key of the current player.
-     * Format: 1024-length string(length may vary).
      */
 
-    QString key;
+    Key key;
 
 
     /*
@@ -98,20 +96,20 @@ public:
      * Method: setKey
      * Set the key of the corresponding IP.
      * ------------------------------------
-     * Usage: ip.setKey( QString("key") );
+     * Usage: ip.setKey( Key1 );
      */
 
-    void setKey(QString);
+    void setKey(Key);
 
 
     /*
      * Method: getKey
      * Get the key of the corresponding IP.
      * ------------------------------------
-     * Usage: QString key = ip.getkey();
+     * Usage: Key key = ip.getkey();
      */
 
-    QString getKey();
+    Key getKey();
 
 
     /*

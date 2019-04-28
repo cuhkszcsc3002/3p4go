@@ -12,6 +12,7 @@ class Key
 public:
     quint64 keyValue;
     quint64 N;
+    Key();
     Key(quint64 v, quint64 n);
 
 
@@ -21,6 +22,7 @@ public:
 
     QString encode();
 
+    QString toString();
 
     /*
      * Decode a string into a key object.

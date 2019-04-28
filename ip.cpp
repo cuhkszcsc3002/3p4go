@@ -3,7 +3,7 @@
 IP::IP()
 {
     address = QString();
-    key = QString();
+    key = Key();
 }
 
 
@@ -43,12 +43,12 @@ bool IP::setAddressFromInt(QList<int> newAddressInt)
 
 }
 
-void IP::setKey(QString newKey)
+void IP::setKey(Key newKey)
 {
     key = newKey;
 }
 
-QString IP::getKey()
+Key IP::getKey()
 {
     return key;
 }
@@ -145,11 +145,11 @@ void testIP()
     qDebug() << ip.getAddress();
 
 
-    qDebug()<<"key String: ";
-    cin >> temp;
-    key = QString::fromStdString(temp);
-    ip.setKey(key);
-    qDebug() << ip.getKey();
+//    qDebug()<<"key String: ";
+//    cin >> temp;
+//    key = QString::fromStdString(temp);
+//    ip.setKey(key);
+//    qDebug() << ip.getKey();
 
     qDebug() <<"Port: ";
     cin >> port;

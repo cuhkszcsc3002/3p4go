@@ -25,6 +25,12 @@ class Move
 
     int y;
 
+    /*
+     * At most 3 signatures for every move.
+     */
+
+    QList<QString> signatures;
+
 public:
 
     /*
@@ -36,6 +42,14 @@ public:
 
     Move(int playerIndex, int x, int y);
 
+    /*
+     * Method: addSign
+     * Add a new sign to the index.
+     * Fail: return 0: when the index is not the next index or >=3.
+     * Success: return 1: write the sign and return 1.
+     */
+
+    bool addSign(QString newSign, int index);
 
     int getPlayerIndex();
 

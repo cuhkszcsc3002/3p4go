@@ -14,6 +14,7 @@ class MoveChain
 {
     QList<Move> moveList;
 
+
 public:
 
     /*
