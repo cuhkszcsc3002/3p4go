@@ -3,7 +3,7 @@
 IP::IP()
 {
     address = QString();
-    key = Key();
+    key = Key2();
 }
 
 
@@ -45,7 +45,7 @@ bool IP::setAddressFromInt(QList<int> newAddressInt)
 
 void IP::setKey(Key2 newKey)
 {
-    key2 = newKey;
+    key = newKey;
 }
 
 Key2 IP::getKey()
