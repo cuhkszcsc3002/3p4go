@@ -24,12 +24,10 @@ class IP
     QString address;
 
 
-    /*
-     * IP.key stores the public key of the current player.
-     */
+    Key2 publicKey;
 
-    Key2 key;
 
+    Key2 privateKey;
 
     /*
      * IP.port stores the port of the player's server.
@@ -91,26 +89,6 @@ public:
      */
 
     bool setAddressFromInt(QList<int>);
-
-
-    /*
-     * Method: setKey
-     * Set the key of the corresponding IP.
-     * ------------------------------------
-     * Usage: ip.setKey( Key1 );
-     */
-
-    void setKey(Key2);
-
-
-    /*
-     * Method: getKey
-     * Get the key of the corresponding IP.
-     * ------------------------------------
-     * Usage: Key key = ip.getkey();
-     */
-
-    Key2 getKey();
 
 
     /*
@@ -182,6 +160,10 @@ public:
 
     static QList<int> addressStringToInt(QString, bool &result = *(new bool));
 
+    Key2 getPublicKey() const;
+    void setPublicKey(const Key2 &value);
+    Key2 getPrivateKey() const;
+    void setPrivateKey(const Key2 &value);
 };
 
 

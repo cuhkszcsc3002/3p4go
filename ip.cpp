@@ -1,9 +1,28 @@
 ﻿#include "ip.h"
 
+Key2 IP::getPublicKey() const
+{
+    return publicKey;
+}
+
+void IP::setPublicKey(const Key2 &value)
+{
+    publicKey = value;
+}
+
+Key2 IP::getPrivateKey() const
+{
+    return privateKey;
+}
+
+void IP::setPrivateKey(const Key2 &value)
+{
+    privateKey = value;
+}
+
 IP::IP()
 {
     address = QString();
-    key = Key2();
 }
 
 
@@ -43,15 +62,6 @@ bool IP::setAddressFromInt(QList<int> newAddressInt)
 
 }
 
-void IP::setKey(Key2 newKey)
-{
-    key = newKey;
-}
-
-Key2 IP::getKey()
-{
-    return key;
-}
 
 int IP::getPort()
 {
