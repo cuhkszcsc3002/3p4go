@@ -43,12 +43,12 @@ bool IP::setAddressFromInt(QList<int> newAddressInt)
 
 }
 
-void IP::setKey(Key newKey)
+void IP::setKey(Key2 newKey)
 {
-    key = newKey;
+    key2 = newKey;
 }
 
-Key IP::getKey()
+Key2 IP::getKey()
 {
     return key;
 }
@@ -144,12 +144,6 @@ void testIP()
         cout<<"Error of setting address.";
     qDebug() << ip.getAddress();
 
-
-//    qDebug()<<"key String: ";
-//    cin >> temp;
-//    key = QString::fromStdString(temp);
-//    ip.setKey(key);
-//    qDebug() << ip.getKey();
 
     qDebug() <<"Port: ";
     cin >> port;

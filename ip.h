@@ -11,7 +11,8 @@
 #include <iostream>
 #include <string>
 #include <QDebug>
-#include "key.h"
+#include "key2.h"
+
 class IP
 {
     /*
@@ -27,7 +28,7 @@ class IP
      * IP.key stores the public key of the current player.
      */
 
-    Key key;
+    Key2 key;
 
 
     /*
@@ -99,7 +100,7 @@ public:
      * Usage: ip.setKey( Key1 );
      */
 
-    void setKey(Key);
+    void setKey(Key2);
 
 
     /*
@@ -109,7 +110,7 @@ public:
      * Usage: Key key = ip.getkey();
      */
 
-    Key getKey();
+    Key2 getKey();
 
 
     /*
