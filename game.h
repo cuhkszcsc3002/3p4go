@@ -15,19 +15,12 @@
 #include <iostream>
 #include <string>
 #include <QDebug>
-#include "newmove.h"
+#include "ip.h"
+#include "coordinate.h"
+#include "movechain.h"
 using namespace std;
 
 
-struct temp
-{
-public :
-int x ;
-public :
-int y ;
-public :
-string str ;
-};
 
 
 
@@ -49,7 +42,7 @@ class Game
      * after you have done a newmove.
      */
 
-    string nextPlayer;
+    IP nextPlayer;
 
     /*
      * Game.lastPlayer stores the IP of the last player.
@@ -58,9 +51,62 @@ class Game
      * Order: You -> the next player -> the last player -> You
      */
 
-    string lastPlayer;
+    IP lastPlayer;
     
-    
+    /*
+     * Game.newmoveSig stores the signature state of a newmove.
+     * Note: 0 represents the movechain has not passed to the player.
+     * 1 represents the signatures of newmove in the movechain
+     * are right, and it will trigger Game.acceptForSig().
+     * 2 represents there is something wrong with the signatures of
+     * newmove in the movechain, and it will trigger Game.rejectForSig().
+     * It will turn back to 0 in Game.updateNewmove().
+     * Order: You -> the next player -> the last player -> You
+     */
+
+    int newmoveSig = 0;
+
+
+    /*
+     * Game.sendSigTimes stores how many times did the player send
+     * history chain to others and be rejected.
+     * Note: 0 represents the movechain has not passed to the player.
+     * 1 represents the history movechain has been sent to the next player.
+     * if the movechain is rejected (Game.SigRejected() is called) by next player,
+     * sendSigTimes will plus 1 and the player will delete his signature and
+     * send a movechain with his new signned signature.
+     * If sendSIgTimes is 4, it will alarm.
+     */
+
+    int sendSigTimes = 0;
+
+    /*Client加了一个Client.updateNewmove(ones'IP) to inform 另外两个players update the chain.
+     * Game.broadcastTimes represents the state of broadcastNewmove().
+     * If one player returns True through Client.broadcastNewmove(),
+     * the signal will plus 1. If one player returns false, the player will
+     * send the history chain again to others and the signal will be
+     * changed back to 0. If the signal equals to 2, Game.updateNewmove and
+     * Client.updateNewmove(ones'IP) will be called.
+     */
+
+    int broadcastTimes = 0;
+
+    /*
+     * Game.restartF is to trigger Game.restart().
+     * if it becomes 1, a new game will start.
+     */
+
+    int restartF = 0;
+
+
+    /*
+     * Game.localMoveChain is used to store current movechain.
+     */
+
+    MoveChain localMoveChain;
+
+
+
 public:
     Game();
 
@@ -98,12 +144,14 @@ public:
      * Method: sendInvite
      * Usage:
      * -----------------------------------
+     * p can be 1 or 2, 1 represents the
+     * nextPlayer, while 2 represents the lastPlayer.
      * This method is called when the host
      * inviting other players through IP at GUI.
      * It calls Client.sendInvite() respectively.
      */
 
-    void sendInvite(string players_Ip);
+    void sendInvite(IP players_Ip, int p);
 
     /*
      * Method: receiveInvite
@@ -114,7 +162,7 @@ public:
      * It calls GUI.receiveInvite() and change the GUI signal.
      */
 
-    void receiveInvite(string host_Ip);
+    void receiveInvite(IP host_Ip);
 
     /*
      * Method: acceptInvite
@@ -153,7 +201,7 @@ public:
      * call GUI.showMessage().
      */
 
-    void inviteAccept();
+    void inviteAccept(IP players_Ip, int p);
 
     /*
      * Method: rejectAccept
@@ -162,10 +210,11 @@ public:
      * This method is called when a player has
      * rejected the invite from the host.
      * It will call GUI.showMessage(), and
-     * let the host invite other players instead.
+     * call Game.sendInvite(IP otherPlayers_Ip, int p)
+     * to invite other players instead.
      */
 
-    void rejectAccept();
+    void rejectAccept(IP players_Ip, int p);
 
     /*
      * Method: check3P
@@ -194,7 +243,7 @@ public:
      * player in order. At last, it will call Game.startGame().
      */
 
-    void updatePlayerInfo(string host, string B_player, string C_player);
+    void updatePlayerInfo(IP host, IP B_player, IP C_player);
 
 
 
@@ -205,10 +254,176 @@ public:
      * ---------------------------------------
      * This method is called by Game.check3P()
      * and Game.updatePlayerInfo().
-     * It calls GUI.showGame().
+     * It calls GUI.showGame() and change
+     * the signal restartF to 0.
      */
 
     void startGame();
+
+
+    /*
+     * Method: newclick
+     * Usage:
+     * ---------------------------------------
+     * This method is triggered by GUI.newclick(),
+     * which has checked whether the coordinate
+     * is available or not, and Game.newclick() is
+     * used to call client.sendForSig().
+     */
+
+    void newclick();
+
+
+
+    /* for those who are not the owner of a newmove */
+
+
+    /*
+     * Method: validateForSig
+     * Usage:
+     * ---------------------------------------
+     * This method is called by Server.receiveSigReq(),
+     * and used to prevent cheating. It will check whether
+     * there are differences on the signatures of the newmove.
+     * It will change the Game.newmoveSig() to trigger other
+     * methods.
+     */
+
+    bool validateForSig();
+
+    /*
+     * Method: acceptForSig
+     * Usage:
+     * ---------------------------------------
+     * This method is triggered if Game.newmoveSig
+     * is 1, and it will call Server.acceptSig(), to
+     * response to the last player and send the
+     * history chain with his signature to next player.
+     */
+
+    void acceptForSig();
+
+    /*
+     * Method: rejectForSig
+     * Usage:
+     * ---------------------------------------
+     * This method is triggered if Game.newmoveSig
+     * is 2, and it will call Server.rejectSig(),
+     * responsing to the player who send the history
+     * chain to him.
+     */
+
+    void rejectForSig();
+
+
+ /* For players who have sent movechain with signatures to others */
+
+
+    /*
+     * Method: sigAccepted
+     * Usage:
+     * ---------------------------------------
+     * This method is called if Client.sendForSig() returns 1.
+     * the player who send the moveChain will be informed of
+     * that the next player has accepted the history chain and
+     * signatures. It will save signatures and recover the
+     * sendSIgTimes to 0.
+     */
+
+    MoveChain sigAccepted();
+
+    /*
+     * Method: sigRejected
+     * Usage:
+     * ---------------------------------------
+     * This method is called if Client.sendForSig() returns 0.
+     * the player will be asked to send a new history chain
+     * with correct signatures, and the signal
+     * Game.sendSigTimes will plus 1 every time.
+     * If Game.sendSigTimes is 4, it will alarm.
+     */
+
+    MoveChain sigRejected(IP ones_IP);
+
+
+   /* For the one who own the newmove*/
+
+    /*
+     * Method: collectAllSig
+     * Usage:
+     * ----------------------------------------------------
+     * This method is called after Game.validateForSig(),
+     * and used to check whether they have collected all
+     * signatures.
+     */
+
+    bool collectAllSig();
+
+    /*
+     * Method: broadcastNewmove
+     * Usage:
+     * -------------------------------------------
+     * This method is called by Game.collectAllSig().
+     * It will call Client.broadcastNewmove() to send
+     * the new history movechain to the other two players,
+     * and wait for their responses. If one player response
+     * false (broadcastTimes = -1), it will send the history
+     * moveChain again, or update the new movechain when
+     * broadcastTimes equal to 2.
+     */
+
+    void broadcastNewmove(MoveChain newMoveChain);
+
+  /* For the others */
+
+    /*
+     * Method: checkNewmove
+     * Usage:
+     * ---------------------------------------
+     * This method will check whether there is
+     * difference between the movechains and the
+     * newmove is valid or not.
+     * It is called by Server.receiveNewmove(),
+     * and used to call Game.acceptNewmove() or
+     * Game.rejectNewmove(). If the newmove is valid
+     * (it returns 1), Newmove.acceptNewmove() is called;
+     * otherwise, Newmove.rejectNewmove() is called.
+     */
+
+    bool checkNewmove(MoveChain newMoveChain);
+
+    /*
+     * Method: acceptNewmove
+     * Usage:
+     * ---------------------------------------
+     * This method is called when Newmove.checkNewmove()
+     * returns 1, and used to call Server.acceptNewmove().
+     */
+
+    void acceptNewmove();
+
+    /*
+     * Method: rejectNewmove
+     * Usage:
+     * ---------------------------------------
+     * This method is called when Newmove.checkNewmove()
+     * returns 0, and used to call Server.rejectNewmove().
+     */
+
+    void rejectNewmove();
+
+    /*
+     * Method: updateNewmove
+     * Usage:
+     * ---------------------------------------
+     * This method is called by Newmove.broadcastNewmove()
+     * or Client.updateMoveChain, and used to update the movechain
+     * in localMoveChain and call GUI.updateNewmove().
+     * newmoveSig will be changed back to 0.
+     */
+
+    MoveChain updateNewmove(MoveChain newMoveChain);
+
 
     /*
      * Method: checkFinish
@@ -234,11 +449,22 @@ public:
      * ---------------------------------------
      * This method is called by Game.finish(),
      * and used to calculate the score for this round
-     * and update the score history in history_score.txt.
+     * and update (read + calculate + write) the score history
+     * in history_score.txt.
      */
     
     void history();
     
+    /*
+     * Method: restart
+     * ------------------------------------------
+     * This Method is called when the signal restartF
+     * equals to 1, then a new game will start.
+     */
+
+    void restart();
+
+
     /*
      * Method: exit
      * ---------------------------------------

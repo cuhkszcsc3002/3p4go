@@ -37,7 +37,9 @@ SOURCES += \
     move.cpp \
     movechain.cpp \
     rsa.cpp \
-    key.cpp
+    key.cpp \
+    coordinate.cpp \
+    server.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +49,9 @@ HEADERS += \
     move.h \
     movechain.h \
     rsa.h \
-    key.h
+    key.h \
+    coordinate.h \
+    server.h
 
 FORMS += \
         mainwindow.ui
