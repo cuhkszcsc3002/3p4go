@@ -10,7 +10,12 @@
 #include <QList>
 #include <QString>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QtDebug>
+
+// The winner's requirement of consecutive moves(Go).
+
+#define WINNUM 4
 
 class Move
 {
@@ -20,9 +25,7 @@ class Move
      */
 
     int playerIndex;
-
     int x;
-
     int y;
 
     /*
@@ -43,6 +46,14 @@ public:
     Move(int playerIndex, int x, int y);
 
     /*
+     * Constructor from QJsonObject
+     * ----------------------------
+     * Usage: Move m(jsonObj);
+     */
+
+    Move(QJsonObject obj);
+
+    /*
      * Method: addSign
      * Add a new sign to the index.
      * Fail: return 0: when the index is not the next index or >=3.
@@ -50,6 +61,17 @@ public:
      */
 
     bool addSign(QString newSign, int index);
+
+
+    /*
+     * Method: overwriteSign
+     * Overwrite a signature in the specific index, where a signature
+     * already exists.
+     * Fail: if the signatures[index] is empty.
+     *
+     */
+
+    bool overwriteSign(QString newSign, int index);
 
     int getPlayerIndex();
 
@@ -79,6 +101,25 @@ public:
 
     QJsonObject toJson();
 
+    void setPlayerIndex(int value);
+    void setX(int value);
+    void setY(int value);
+
+
+    /*
+     * == will not compare signatures.
+     */
+
+    bool operator == (Move& m) const;
+
+
+    /*
+     * fullCmp will compare signaretures.
+     */
+
+    bool fullCmp(Move& m) const;
+    QList<QString> getSignatures() const;
+    void setSignatures(const QList<QString> &value);
 };
 
 void testMove();
