@@ -5,6 +5,7 @@
  * The private data field includes a pointer of the game object, which is the main
  * source of game information.
  */
+
 #ifndef GAME_H
 #define GAME_H
 
@@ -18,15 +19,23 @@
 #include "ip.h"
 #include "coordinate.h"
 #include "movechain.h"
+#include "client.h"
+//#include "server.h"
+
 using namespace std;
-
-
-
-
 
 
 class Game
 {
+
+    friend class Client;
+    friend class Server;
+    friend class GUI;
+
+    Client client;
+    Server server;
+    GUI gui;
+
     /*
      * Game.availableFlag stores the state of the player.
      * Note: 1 represents that the player is available
@@ -36,22 +45,42 @@ class Game
 
     bool availableFlag;
 
-    /*
-     * Game.nextPlayer stores the IP of the next player.
-     * Note: the next player will give a new movement
-     * after you have done a newmove.
-     */
-
-    IP nextPlayer;
 
     /*
-     * Game.lastPlayer stores the IP of the last player.
-     * Note: the last player will give a new movement
-     * after the next player has taken a new movement.
-     * Order: You -> the next player -> the last player -> You
+     * There are 3 players in order in this game.
+     * The first player is the host, but not necessarily the
+     * current player! Information about the index of the current
+     * player is stored in myIndex.
      */
 
-    IP lastPlayer;
+    QList<IP> players;
+
+
+    /*
+     * myIndex: the index of the current player, which is 0, 1, or 2.
+     * Before game starts, myIndex = -1.
+     * myIP = players[myIndex];
+     */
+
+    int myIndex;
+
+
+//    /*
+//     * Game.nextPlayer stores the IP of the next player.
+//     * Note: the next player will give a new movement
+//     * after you have done a newmove.
+//     */
+
+//    IP nextPlayer;
+
+//    /*
+//     * Game.lastPlayer stores the IP of the last player.
+//     * Note: the last player will give a new movement
+//     * after the next player has taken a new movement.
+//     * Order: You -> the next player -> the last player -> You
+//     */
+
+//    IP lastPlayer;
     
     /*
      * Game.newmoveSig stores the signature state of a newmove.
@@ -106,7 +135,6 @@ class Game
     MoveChain localMoveChain;
 
 
-
 public:
     Game();
 
@@ -128,6 +156,33 @@ public:
      */
 
     void init();
+
+
+    /*
+     * The set, get methods.
+     */
+
+    int getMyIndex() const;
+    void setMyIndex(int value);
+    bool getAvailableFlag() const;
+    void setAvailableFlag(bool value);
+    int getNewmoveSig() const;
+    void setNewmoveSig(int value);
+    int getSendSigTimes() const;
+    void setSendSigTimes(int value);
+    int getBroadcastTimes() const;
+    void setBroadcastTimes(int value);
+    int getRestartF() const;
+    void setRestartF(int value);
+
+    bool setIP(IP newIP, int index);
+    IP getIP(int index);
+
+    /*
+     * Set, get methods end.
+     */
+
+
 
     /*
      * Method: LoginShow
@@ -473,7 +528,6 @@ public:
      */
     
     void exit();
-
 
 };
 

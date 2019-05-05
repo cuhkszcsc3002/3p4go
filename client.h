@@ -19,7 +19,8 @@
 #include <QtNetwork/QtNetwork>
 #include <QString>
 #include "ip.h"
-#include "game.h"
+
+extern class Game;
 
 class Client: public QObject
 {
