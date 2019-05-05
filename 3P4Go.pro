@@ -9,6 +9,13 @@ QT += network
 
 CONFIG += c++11 console
 
+# GMP
+INCLUDEPATH += C:/gmpbuild/include
+
+DEPENDPATH += C:/gmpbuild/include
+
+LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
