@@ -19,6 +19,7 @@
 #include <QtNetwork/QtNetwork>
 #include <QString>
 #include "ip.h"
+#include "rsa2.h"
 
 extern class Game;
 
@@ -45,6 +46,28 @@ public:
      */
 
     Client();
+
+
+    /*
+     * Method: getLocalIPAddress
+     * This function will return the user's local IP.
+     * If no IP available, return NULL.
+     * ----------------------------------------------
+     * Usage: QString localIP = getLocalIPString();
+     */
+
+    static QString getLocalIPAddress();
+
+    /*
+     * Method: getLocalIP
+     * This function will return the user's local IP.
+     * Then it will run the RSA to generate a key pair.
+     * If no IP available, return NULL.
+     * ----------------------------------------------
+     * Usage: IP localIP = getLocalIP();
+     */
+
+    static IP getLocalIP();
 
 
     /*
@@ -116,4 +139,5 @@ public:
     void finish();
 };
 
+void testClient();
 #endif // CLIENT_H

@@ -57,6 +57,12 @@ class Game
 
 
     /*
+     * This is myIP, containing the address, privateKey, and the publicKey.
+     */
+
+    IP myIP;
+
+    /*
      * myIndex: the index of the current player, which is 0, 1, or 2.
      * Before game starts, myIndex = -1.
      * myIP = players[myIndex];
@@ -204,6 +210,17 @@ public:
      * This method is called when the host
      * inviting other players through IP at GUI.
      * It calls Client.sendInvite() respectively.
+     *
+     * ----------------------------------------------------------
+     * Called by GUI, when the player pushes the "invite" button.
+     *
+     * Then, call client.sendInvite(players_IP).
+     * Note: DON'T modify players[p]! This will be done by client
+     * because client will receive the privateKey.
+     *
+     * If the return is true, go to check3P().
+     * Else, do nothing.
+     *
      */
 
     void sendInvite(IP players_Ip, int p);
@@ -223,7 +240,7 @@ public:
      * Method: acceptInvite
      * Usage: Game::acceptInvite()
      * ---------------------------------------------------------
-     * This method is triggered by signal rejectInvite in invite.h.
+     * This method is triggered by signal acceptInvite in invite.h.
      * It change "availableFlag" from 1 to 0, so that other hosts
      * can not invite him again and he can not invite others as a host.
      * It also calls Server.replyInvite(), to inform the host.
