@@ -8,14 +8,15 @@ QT += core gui
 QT += network
 
 CONFIG += c++11 console
-
+CONFIG += sdk_no_version_check
 # GMP
-INCLUDEPATH += C:/gmpbuild/include
+#INCLUDEPATH += C:/gmpbuild/include
 
-DEPENDPATH += C:/gmpbuild/include
+#DEPENDPATH += C:/gmpbuild/include
 
-LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
+#LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
 
+INCLUDEPATH += /usr/local/include
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,8 +37,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     game.cpp \
     client.cpp \
     ip.cpp \
@@ -46,10 +47,10 @@ SOURCES += \
     rsa2.cpp \
     key2.cpp \
     coordinate.cpp \
-#    server.cpp
+    server.cpp
 
 HEADERS += \
-        mainwindow.h \
+    mainwindow.h \
     client.h \
     game.h \
     ip.h \
@@ -58,7 +59,7 @@ HEADERS += \
     rsa2.h \
     key2.h \
     coordinate.h \
-#    server.h
+    server.h
 
 FORMS += \
         mainwindow.ui
@@ -67,3 +68,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+include(QtWebApp/httpserver/httpserver.pri)
+OTHER_FILES += webapp1.ini
