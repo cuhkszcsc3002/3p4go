@@ -5,7 +5,6 @@
  * The private data field includes a pointer of the game object, which is the main
  * source of game information.
  */
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -19,23 +18,15 @@
 #include "ip.h"
 #include "coordinate.h"
 #include "movechain.h"
-#include "client.h"
-//#include "server.h"
-
 using namespace std;
+
+
+
+
 
 
 class Game
 {
-
-    friend class Client;
-    friend class Server;
-    friend class GUI;
-
-    Client client;
-    Server server;
-    GUI gui;
-
     /*
      * Game.availableFlag stores the state of the player.
      * Note: 1 represents that the player is available
@@ -45,48 +36,22 @@ class Game
 
     bool availableFlag;
 
-
     /*
-     * There are 3 players in order in this game.
-     * The first player is the host, but not necessarily the
-     * current player! Information about the index of the current
-     * player is stored in myIndex.
+     * Game.nextPlayer stores the IP of the next player.
+     * Note: the next player will give a new movement
+     * after you have done a newmove.
      */
 
-    QList<IP> players;
-
-
-    /*
-     * This is myIP, containing the address, privateKey, and the publicKey.
-     */
-
-    IP myIP;
+    IP nextPlayer;
 
     /*
-     * myIndex: the index of the current player, which is 0, 1, or 2.
-     * Before game starts, myIndex = -1.
-     * myIP = players[myIndex];
+     * Game.lastPlayer stores the IP of the last player.
+     * Note: the last player will give a new movement
+     * after the next player has taken a new movement.
+     * Order: You -> the next player -> the last player -> You
      */
 
-    int myIndex;
-
-
-//    /*
-//     * Game.nextPlayer stores the IP of the next player.
-//     * Note: the next player will give a new movement
-//     * after you have done a newmove.
-//     */
-
-//    IP nextPlayer;
-
-//    /*
-//     * Game.lastPlayer stores the IP of the last player.
-//     * Note: the last player will give a new movement
-//     * after the next player has taken a new movement.
-//     * Order: You -> the next player -> the last player -> You
-//     */
-
-//    IP lastPlayer;
+    IP lastPlayer;
     
     /*
      * Game.newmoveSig stores the signature state of a newmove.
@@ -141,6 +106,7 @@ class Game
     MoveChain localMoveChain;
 
 
+
 public:
     Game();
 
@@ -163,33 +129,6 @@ public:
 
     void init();
 
-
-    /*
-     * The set, get methods.
-     */
-
-    int getMyIndex() const;
-    void setMyIndex(int value);
-    bool getAvailableFlag() const;
-    void setAvailableFlag(bool value);
-    int getNewmoveSig() const;
-    void setNewmoveSig(int value);
-    int getSendSigTimes() const;
-    void setSendSigTimes(int value);
-    int getBroadcastTimes() const;
-    void setBroadcastTimes(int value);
-    int getRestartF() const;
-    void setRestartF(int value);
-
-    bool setIP(IP newIP, int index);
-    IP getIP(int index);
-
-    /*
-     * Set, get methods end.
-     */
-
-
-
     /*
      * Method: LoginShow
      * Usage:
@@ -210,17 +149,6 @@ public:
      * This method is called when the host
      * inviting other players through IP at GUI.
      * It calls Client.sendInvite() respectively.
-     *
-     * ----------------------------------------------------------
-     * Called by GUI, when the player pushes the "invite" button.
-     *
-     * Then, call client.sendInvite(players_IP).
-     * Note: DON'T modify players[p]! This will be done by client
-     * because client will receive the privateKey.
-     *
-     * If the return is true, go to check3P().
-     * Else, do nothing.
-     *
      */
 
     void sendInvite(IP players_Ip, int p);
@@ -240,7 +168,7 @@ public:
      * Method: acceptInvite
      * Usage: Game::acceptInvite()
      * ---------------------------------------------------------
-     * This method is triggered by signal acceptInvite in invite.h.
+     * This method is triggered by signal rejectInvite in invite.h.
      * It change "availableFlag" from 1 to 0, so that other hosts
      * can not invite him again and he can not invite others as a host.
      * It also calls Server.replyInvite(), to inform the host.
@@ -545,6 +473,7 @@ public:
      */
     
     void exit();
+
 
 };
 
