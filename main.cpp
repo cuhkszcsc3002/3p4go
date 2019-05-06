@@ -1,10 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "client.h"
+//#include "client.h"
 #include "game.h"
-//#include "ip.h"
-//#include "move.h"
-//#include "rsa.h"
+#include "rsa2.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,5 +10,6 @@ int main(int argc, char *argv[])
     qDebug()<<"Testing...";
     Game g;
     g.init();
+//    testRSA2();
     return a.exec();
 }

@@ -90,13 +90,8 @@ void Game::setRestartF(int value)
 
 Game::Game()
 {
-    Game::init();
+// NOTE: Game::init(); 不要写在这里!单独调用init();
 
-    gui.init(this);
-
-    server.init(this);
-
-    client.init(this);
 
 }
 
@@ -106,12 +101,18 @@ void Game::init()
     players.append(IP());
     players.append(IP());
     players.append(IP());
-    Q_ASSERT(Client::getLocalIPAddress() != NULL);
-    myIP.setAddressFromString(Client::getLocalIPAddress());
+    QString localIP = Client::getLocalIPAddress();
+    Q_ASSERT(localIP != NULL);
+    myIP.setAddressFromString(localIP);
 //    myIP.setPort(Server::getPort());
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
+    //    gui.init(this);
+
+    //    server.init(this);
+
+    client.init(this);
 }
 

@@ -21,7 +21,7 @@
 #include "ip.h"
 #include "rsa2.h"
 
-extern class Game;
+class Game;
 
 class Client: public QObject
 {
@@ -33,7 +33,7 @@ class Client: public QObject
      * The game is an intermediate pathway to connect with other components.
      */
 
-    Game * game;
+    Game* game;
 
 public:
 

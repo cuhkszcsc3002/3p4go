@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 QT += network
 
 CONFIG += c++11 console
@@ -38,27 +38,27 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    game.cpp \
     client.cpp \
     ip.cpp \
-    game.cpp \
     move.cpp \
     movechain.cpp \
-    rsa.cpp \
-    key.cpp \
+    rsa2.cpp \
+    key2.cpp \
     coordinate.cpp \
-    server.cpp
+#    server.cpp
 
 HEADERS += \
         mainwindow.h \
     client.h \
-    ip.h \
     game.h \
+    ip.h \
     move.h \
     movechain.h \
-    rsa.h \
-    key.h \
+    rsa2.h \
+    key2.h \
     coordinate.h \
-    server.h
+#    server.h
 
 FORMS += \
         mainwindow.ui

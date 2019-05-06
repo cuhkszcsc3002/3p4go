@@ -1,4 +1,4 @@
-#include "game.h"
+#include "client.h"
 
 Client::Client()
 {

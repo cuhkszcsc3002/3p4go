@@ -24,6 +24,13 @@
 
 using namespace std;
 
+class Server {
+
+};
+
+class GUI {
+
+};
 
 class Game
 {
