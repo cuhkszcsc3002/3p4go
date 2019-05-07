@@ -10,13 +10,13 @@ QT += network
 CONFIG += c++11 console
 CONFIG += sdk_no_version_check
 # GMP
-#INCLUDEPATH += C:/gmpbuild/include
+INCLUDEPATH += C:/gmpbuild/include
 
-#DEPENDPATH += C:/gmpbuild/include
+DEPENDPATH += C:/gmpbuild/include
 
-#LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
+LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
 
-INCLUDEPATH += /usr/local/include
+#INCLUDEPATH += /usr/local/include
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

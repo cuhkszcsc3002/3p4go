@@ -35,6 +35,7 @@ QString Client::getLocalIPAddress()
     return NULL;
 }
 
+
 void Client::init(Game * g)
 {
     game = g;
@@ -42,6 +43,30 @@ void Client::init(Game * g)
     // 1. Use getLocalIP and set the local IP and keys.
 
 }
+
+QString Client::postRequest(QString url, QJsonDocument data)
+{
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    QUrl qurl = QUrl(url);
+
+    QByteArray dataArray = data.toJson(QJsonDocument::Compact);
+
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply * reply = manager->post(request, dataArray);
+
+    QEventLoop eventLoop;
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    QByteArray replyData = reply->readAll();
+    qDebug()<<replyData;
+    return replyData;
+}
+
 
 int Client::sendInvite(IP &ip)
 {
@@ -100,4 +125,6 @@ void testClient()
 {
     Client client;
     qDebug() << client.getLocalIPAddress();
+    client.postRequest("http://www.baidu.com", QJsonDocument());
+
 }

@@ -47,6 +47,8 @@ public:
 
     Client();
 
+    QString postRequest(QString url, QJsonDocument data);
+
 
     /*
      * Method: getLocalIPAddress
@@ -139,5 +141,7 @@ public:
     void finish();
 };
 
+
 void testClient();
+
 #endif // CLIENT_H

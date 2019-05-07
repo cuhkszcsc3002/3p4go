@@ -8,8 +8,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     qDebug()<<"Testing...";
-    Game g;
-    g.init();
+//    Game g;
+//    g.init();
 //    testRSA2();
+    testClient();
     return a.exec();
 }
