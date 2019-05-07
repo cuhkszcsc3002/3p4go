@@ -91,10 +91,21 @@ public:
      * with predefined codes for invitation.
      * Return 1 if success; return 0 if rejected; return -1 if connection fails.
      * ----------------------------------------------------------
-     * Usage: client.sendInvite(ip);
+     * Usage: client.sendInvite(IPindex);
+     *
+     * ------------------------------
+     * POST FORMAT:
+     * A JSON object.
+     * IP: XXX.XXX.XXX.XXX
+     * port: XXXX
+     *
+     * EXPECTED FEEDBACK:
+     * A JSON object.
+     * result: 1 / 0
+     * key: key.encode()
      */
 
-    int sendInvite(IP &ip);
+    int sendInvite(int playerIndex);
 
 
     /*
@@ -103,6 +114,15 @@ public:
      * Return 1 if success; return -1 if connection fails.
      * -------------------------------------------------------------------
      * Usage: client.sendPlayerInfo();
+     *
+     * -------------------------------
+     * POST FORMAT:
+     * A JSON ARRAY.
+     * [{IP: ...; port: ...; key: key.encode()}, { ... }, { ... }]
+     *
+     * EXPECTED FEEDBACK:
+     * 1: Successfully Received.
+     * 0: Something Wrong, may try to send again.
      */
 
     int sendPlayerInfo();
@@ -114,6 +134,20 @@ public:
      * Return 1 if success; return 0 if rejected; return -1 if connection fails.
      * --------------------------------------------------------------------------------------
      * Usage: int status = client.sendForSig();
+     *
+     * ----------------------------------------
+     * POST FORMAT:
+     * A JSON OBJECT.
+     * { moveChain: moveChain.toJsonString() }
+     *
+     * SERVER's WORK:
+     * 1. decode moveChainString
+     * 2. Send to game.
+     *
+     *
+     * EXCEPPTED FEEDBACK:
+     * 1. I accept, sign, and send to the next player, while the next player also replies 1.
+     * 0. I reject, or the next player rejects.
      */
 
     int sendForSig();
@@ -126,6 +160,15 @@ public:
      * Return 1 if success; return 0 if rejected; return -1 if connect fails.
      * ---------------------------------------------------------------------------------------
      * Usage: int status = client.boardcastNewMove
+     *
+     * -------------------------------------------
+     * POST FORMAT:
+     * A JSON OBJECT.
+     * { moveChain: moveChain.toJsonString() }
+     *
+     * EXPECTED FEEDBACK:
+     * 1. Accepted.
+     * 0. Rejected.
      */
 
     int boardcastNewMove();
