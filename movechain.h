@@ -15,9 +15,14 @@
  * bool check = mc.verifyNewMove(newMove);
  *
  * 4. Add a signature to the last move.
- * 4.1) If you are the host of move:
+ * 4.1 Get an abstract of the moveChain:
+ *      QString absStr = mc.abstract();
+ * 4.2 Sign the abstract with the key:
+ *      QString newSign = RSA2::generateSign(absStr, privateKey);
+ * 4.3 Add the sign to mc:
+ *  4.3.1) If you are the host of move:
  *      mc.signLast(newSign, 0);
- * 4.2) If you are the client of move:
+ *  4.3.2) If you are the guest of move:
  *      int yourIndex = (indexOfGame + indexOfMove) % 3;
  *      mc.signLast(newSign, yourIndex);
  *
@@ -36,7 +41,9 @@
  *
  * mc1 <= mc2.
  *
- *
+ * 7. Check the signature of the last move:
+ * bool check = mc.checkLastSign(publicKey, index); // index is 0, 1, 2, the signature's index.
+ * or bool check = mc.checkLastSign(publicKey); // index is default to be the last signature.
  *
  */
 
@@ -48,7 +55,9 @@
 #include <QJsonDocument>
 #include "move.h"
 #include <iostream>
+#include "rsa2.h"
 
+class Game;
 
 class MoveChain
 {
@@ -122,6 +131,16 @@ public:
 
     bool signLast(QString newSign, int index, bool forceSign=false);
 
+    bool checkLastSign(Key2 publicKey, int index);
+
+    /*
+     * default index: the last signature.
+     */
+
+    bool checkLastSign(Key2 publicKey);
+
+
+
     /*
      * Method: toJson
      * Return the QJsonArray of moveChain.
@@ -132,6 +151,17 @@ public:
     QJsonArray toJson();
 
     QString toJsonString();
+
+
+    /*
+     * Method: abstract
+     * Return an abstract of moveChain based on the x, y, playerIndex list.
+     * The return length is ENCODELEN = 100 (in rsa2.h).
+     * --------------------------------------------------------------------
+     * Usage: QString abstract = moveChain.abstract();
+     */
+
+    QString abstract();
 
 
     bool operator<=(MoveChain& mc) const;

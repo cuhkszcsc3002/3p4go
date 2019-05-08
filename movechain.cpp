@@ -1,4 +1,4 @@
-#include "movechain.h"
+#include "game.h"
 
 MoveChain::MoveChain()
 {
@@ -165,6 +165,22 @@ bool MoveChain::signLast(QString newSign, int index, bool forceSign)
     return moveList.last().addSign(newSign, index);
 }
 
+bool MoveChain::checkLastSign(Key2 publicKey, int index)
+{
+    if (index>=moveList.last().getSignatures().length()) {
+        qDebug() << "CheckLastSign: index overflow.";
+        return false;
+    }
+
+    QString sign = moveList.last().getSignatures()[index];
+    return RSA2::verify(abstract(), sign, publicKey);
+}
+
+bool MoveChain::checkLastSign(Key2 publicKey)
+{
+    return checkLastSign(publicKey, moveList.last().getSignatures().length()-1);
+}
+
 
 QJsonArray MoveChain::toJson()
 {
@@ -182,6 +198,17 @@ QString MoveChain::toJsonString()
     QJsonDocument doc;
     doc.setArray(toJson());
     return QString(doc.toJson());
+}
+
+QString MoveChain::abstract()
+{
+    QString absStr;
+    for (Move& m: moveList)
+    {
+        absStr += QString::number(m.getX()) + QString::number(m.getY()) + QString::number(m.getPlayerIndex());
+    }
+    absStr = absStr.mid(0, ENCODELEN);
+    return absStr;
 }
 
 bool MoveChain::operator<=(MoveChain &mc) const
