@@ -11,13 +11,13 @@ CONFIG += c++11 console
 CONFIG += sdk_no_version_check
 
 # GMP
-#INCLUDEPATH += C:/gmpbuild/include
+INCLUDEPATH += C:/gmpbuild/include
 
-#DEPENDPATH += C:/gmpbuild/include
+DEPENDPATH += C:/gmpbuild/include
 
-#LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
+LIBS += -LC:/gmpbuild/lib/ -lgmpxx -lgmp
 
-LIBS += -lgmpxx -lgmp
+#LIBS += -lgmpxx -lgmp
 
 
 INCLUDEPATH += /usr/local/Cellar/gmp/6.1.2_2/include
@@ -76,15 +76,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 include(QtWebApp/httpserver/httpserver.pri)
 OTHER_FILES += webapp1.ini
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/ -lgmpxx
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/ -lgmpxx
-else:unix: LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/ -lgmpxx
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/ -lgmpxx
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/ -lgmpxx
+#else:unix: LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/ -lgmpxx
 
-INCLUDEPATH += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2
-DEPENDPATH += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2
+#INCLUDEPATH += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2
+#DEPENDPATH += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/libgmpxx.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/libgmpxx.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/gmpxx.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/gmpxx.lib
-else:unix: PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/libgmpxx.a
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/libgmpxx.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/libgmpxx.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/release/gmpxx.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/debug/gmpxx.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/libgmpxx.a
