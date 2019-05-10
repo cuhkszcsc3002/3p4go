@@ -2,7 +2,7 @@
 #include <QApplication>
 //#include "client.h"
 #include "game.h"
-#include "rsa2.h"
+//#include "rsa2.h"
 
 int main(int argc, char *argv[])
 {
