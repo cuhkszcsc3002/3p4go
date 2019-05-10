@@ -5,6 +5,15 @@
 #include <QtNetwork/QtNetwork>
 #include <QString>
 #include "ip.h"
+#include <QCoreApplication>
+#include <QSettings>
+#include <QFile>
+#include <QDir>
+#include <QString>
+#include <QTextStream>
+#include "httplistener.h"
+#include "httprequesthandler.h"
+#include "requestmapper.h"
 
 class Game;
 
@@ -64,7 +73,7 @@ public:
      * Usage: server.receivite();
      */
 
-    int receiveInvite();
+    int receiveInvite(IP players_Ip, int p);
 
 
     /*
@@ -131,6 +140,6 @@ public:
     void finish();
 };
 
-void testServer();
+int testServer(int argc, char *argv[]);
 
 #endif // SERVER_H

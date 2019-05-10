@@ -23,16 +23,27 @@ QString Client::getLocalIPAddress()
 
     QString localHostName = QHostInfo::localHostName();
     QHostInfo info = QHostInfo::fromName(localHostName);
+    qDebug() << info.addresses();
+    QString localIPAddress = "";
+      QList<QHostAddress> listAddress = QNetworkInterface::allAddresses();
+      for(int j = 0; j < listAddress.size(); j++){
+          if(!listAddress.at(j).isNull()
+              && listAddress.at(j).protocol() == QAbstractSocket::IPv4Protocol
+              && listAddress.at(j) != QHostAddress::LocalHost){
+                  localIPAddress = listAddress.at(j).toString();
+                  return localIPAddress;
+          }
+      }
+//    foreach(QHostAddress address, info.addresses())
 
-    foreach(QHostAddress address, info.addresses())
+//    {
+//         if(address.protocol() == QAbstractSocket::IPv4Protocol) {
+//            qDebug() << "Loading Local IP:" <<address.toString();
+//            return address.toString();
+//         }
+//    }
+//    return NULL;
 
-    {
-         if(address.protocol() == QAbstractSocket::IPv4Protocol) {
-            qDebug() << "Loading Local IP:" <<address.toString();
-            return address.toString();
-         }
-    }
-    return NULL;
 }
 
 
