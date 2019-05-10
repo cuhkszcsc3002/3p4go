@@ -1,4 +1,4 @@
 
-HEADERS += $$PWD/game.h
+HEADERS += game.h
 
-SOURCES += $$PWD/game.cpp
+SOURCES += game.cpp

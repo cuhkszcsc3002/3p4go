@@ -1,3 +1,3 @@
-HEADERS += $$PWD/client.h
+HEADERS += client.h
 
-SOURCES += $$PWD/client.cpp
+SOURCES += client.cpp

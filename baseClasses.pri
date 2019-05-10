@@ -1,15 +1,15 @@
 
-HEADERS += $$PWD/ip.h \
-    $$PWD/move.h \
-    $$PWD/movechain.h \
-    $$PWD/rsa2.h \
-    $$PWD/key2.h \
-    $$PWD/coordinate.h \
+HEADERS += ip.h \
+    move.h \
+    movechain.h \
+    rsa2.h \
+    key2.h \
+    coordinate.h \
 
 
-SOURCES += $$PWD/ip.cpp \
-    $$PWD/move.cpp \
-    $$PWD/movechain.cpp \
-    $$PWD/rsa2.cpp \
-    $$PWD/key2.cpp \
-    $$PWD/coordinate.cpp \
+SOURCES += ip.cpp \
+    move.cpp \
+    movechain.cpp \
+    rsa2.cpp \
+    key2.cpp \
+    coordinate.cpp \
