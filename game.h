@@ -20,13 +20,10 @@
 #include "coordinate.h"
 #include "movechain.h"
 #include "client.h"
-//#include "server.h"
+#include "server.h"
 
 using namespace std;
 
-class Server {
-
-};
 
 class GUI {
 
@@ -72,7 +69,7 @@ class Game
     /*
      * myIndex: the index of the current player, which is 0, 1, or 2.
      * Before game starts, myIndex = -1.
-     * myIP = players[myIndex];
+     * myIP = players[myIndex];可以删去availableFlag了
      */
 
     int myIndex;
@@ -94,7 +91,7 @@ class Game
 //     */
 
 //    IP lastPlayer;
-    
+
     /*
      * Game.newmoveSig stores the signature state of a newmove.
      * Note: 0 represents the movechain has not passed to the player.
@@ -146,7 +143,6 @@ class Game
      */
 
     MoveChain localMoveChain;
-
 
 public:
     Game();
@@ -223,9 +219,9 @@ public:
      *
      * Then, call client.sendInvite(players_IP).
      * Note: DON'T modify players[p]! This will be done by client
-     * because client will receive the privateKey.
+     * because client will receive the privateKey.???
      *
-     * If the return is true, go to check3P().
+     * If the return is true, go to check3P().QQQ问check3P()is called by inviteAccepted()
      * Else, do nothing.
      *
      */
@@ -277,10 +273,10 @@ public:
      * This method is called when a player has
      * accepted the invite from the host.
      * It will store the IP of the player, and
-     * call GUI.showMessage().
+     * call GUI.showMessage().和check3p以及startgame连起来了
      */
 
-    void inviteAccepted(IP players_Ip, int p);
+    void inviteAccepted(IP players_Ip, int p, Qlist<IP> players);
 
     /*
      * Method: inviteRejected
@@ -303,7 +299,7 @@ public:
      * game. By checking the acceptInvite signals
      * of other players that the host invited,
      * the client.sendPlayerInfo() is called if
-     * it returns 1. At last, it will call
+     * it returns true. At last, it will call
      * Game.startGame().
      */
 
@@ -531,9 +527,9 @@ public:
      * and update (read + calculate + write) the score history
      * in history_score.txt.
      */
-    
+
     void history();
-    
+
     /*
      * Method: restart
      * ------------------------------------------
@@ -550,7 +546,7 @@ public:
      * This method is called when the user choose
      * to exit from the game.
      */
-    
+
     void exit();
 
 };
