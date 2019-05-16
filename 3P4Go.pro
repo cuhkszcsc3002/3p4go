@@ -61,46 +61,46 @@ HEADERS += \
     mainwindow.h 
 
 
-HEADERS += client.h
+#HEADERS += client.h
 
-SOURCES += client.cpp
-
-
-HEADERS += game.h
-
-SOURCES += game.cpp
+#SOURCES += client.cpp
 
 
+#HEADERS += game.h
 
-HEADERS += server.h \
-    helloworldcontroller.h \
-    listdatacontroller.h \
-    logincontroller.h \
-    requestmapper.h
-
-SOURCES += server.cpp \
-    helloworldcontroller.cpp \
-    listdatacontroller.cpp \
-    logincontroller.cpp \
-    requestmapper.cpp
-
-OTHER_FILES += webapp1.ini
+#SOURCES += game.cpp
 
 
-HEADERS += ip.h \
-    move.h \
-    movechain.h \
-    rsa2.h \
-    key2.h \
-    coordinate.h 
+
+#HEADERS += server.h \
+#    helloworldcontroller.h \
+#    listdatacontroller.h \
+#    logincontroller.h \
+#    requestmapper.h
+
+#SOURCES += server.cpp \
+#    helloworldcontroller.cpp \
+#    listdatacontroller.cpp \
+#    logincontroller.cpp \
+#    requestmapper.cpp
+
+#OTHER_FILES += webapp1.ini
 
 
-SOURCES += ip.cpp \
-    move.cpp \
-    movechain.cpp \
-    rsa2.cpp \
-    key2.cpp \
-    coordinate.cpp 
+#HEADERS += ip.h \
+#    move.h \
+#    movechain.h \
+#    rsa2.h \
+#    key2.h \
+#    coordinate.h
+
+
+#SOURCES += ip.cpp \
+#    move.cpp \
+#    movechain.cpp \
+#    rsa2.cpp \
+#    key2.cpp \
+#    coordinate.cpp
 
 
 
@@ -113,4 +113,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 include(QtWebApp/httpserver/httpserver.pri)
+include(client.pri)
+include(server.pri)
+include(game.pri)
+include(baseClasses.pri)
 
