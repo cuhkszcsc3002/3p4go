@@ -1,6 +1,8 @@
 #include "game.h"
 
 
+
+
 int Game::getMyIndex() const
 {
     return myIndex;
@@ -23,19 +25,6 @@ IP Game::getIP(int index)
 {
     Q_ASSERT(index>=0 && index<=2);
     return players[index];
-}
-
-void Game::loginShow()
-{
-    // 1. Invoke gui.loginShow()
-    // Note for GUI: Now, 2 options for the player:
-    // 1. Wait for the server.receiveInvite
-    // 2. When the player invites 2 other players, call sendInvite.
-}
-
-void Game::sendInvite(IP players_Ip, int p)
-{
-
 }
 
 bool Game::getAvailableFlag() const
@@ -111,8 +100,193 @@ void Game::init()
 
     //    gui.init(this);
 
-    //    server.init(this);
+    //   server.init(this);
 
     client.init(this);
 }
+
+void Game::restart() //same as init
+{
+    myIndex = -1;
+    players.append(IP());
+    players.append(IP());
+    players.append(IP());
+    QString localIP = Client::getLocalIPAddress();
+    Q_ASSERT(localIP != NULL);
+    myIP.setAddressFromString(localIP);
+//    myIP.setPort(Server::getPort());
+    QList<Key2> keys = RSA2::generateKey();
+    myIP.setPublicKey(keys.at(0));
+    myIP.setPrivateKey(keys.at(1));
+
+    //    gui.init(this);
+
+    //   server.init(this);
+
+    client.init(this);
+}
+
+void Game::exit()
+{
+
+}
+
+void Game::loginShow()
+{
+    // 1. Invoke gui.loginShow()
+    // Note for GUI: Now, 2 options for the player:
+    // 1. Wait for the server.receiveInvite
+    // 2. When the player invites 2 other players, call sendInvite.
+}
+
+void Game::sendInvite(IP players_Ip, int p)
+{
+    client.sendInvite(players_Ip);
+
+}
+
+void Game::receiveInvite(IP host_Ip)
+{
+    gui.receiveInvite();
+    //change gui signal?
+}
+
+void Game::acceptInvite()
+{
+    setAvailableFlag(0);
+    server.replyInvite(IP myIp, IP host_Ip);
+}
+
+void Game::rejectInvite()
+{
+    server.replyInvite(IP myIp, IP host_Ip);
+}
+
+/* For the host*/
+
+void Game::inviteAccepted(IP players_Ip, int p, Qlist players)
+{
+    players.append(players_Ip);
+    gui.showMessage();
+    if (check3P() == true){
+        client.sendPlayerInfo();
+        game.startGame();
+    }
+}
+
+void Game::inviteRejected(IP players_Ip, int p)
+{
+    gui.showMessage();
+}
+
+bool Game::check3P()
+{
+    if (players.count() == 3){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+/* for other players */
+
+void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
+{
+    players[0] = host;
+    players[1] = B_player;
+    players[2] = C_player;
+    for (int i = 0; i < 3; i++){
+        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
+            myIndex = i;
+            players[i] = myIP;
+            break;
+        }//如果没有找到 how
+    }
+}
+
+void Game::startGame()
+{
+
+}
+
+void Game::newclick()
+{
+
+}
+
+bool Game::validateForSig()
+{
+
+}
+
+void Game::acceptForSig()
+{
+
+}
+
+void Game::rejectForSig()
+{
+
+}
+
+MoveChain Game::sigAccepted()
+{
+
+}
+
+MoveChain Game::sigRejected(IP ones_IP)
+{
+
+}
+
+bool Game::collectAllSig()
+{
+
+}
+
+void Game::broadcastNewmove(MoveChain newMoveChain)
+{
+
+}
+
+  /* For the others */
+
+bool Game::checkNewmove(MoveChain newMoveChain)
+{
+
+}
+
+void Game::acceptNewmove()
+{
+
+}
+
+void Game::rejectNewmove()
+{
+
+}
+
+MoveChain Game::updateNewmove(MoveChain newMoveChain)
+{
+
+}
+
+bool Game::checkFinish()
+{
+
+}
+
+void Game::finish()
+{
+
+}
+
+void Game::history()
+{
+
+}
+
+
+
 
