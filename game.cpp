@@ -255,15 +255,16 @@ void Game::startGame()
     gui->showGame();
 }
 
-void Game::newclick()
+void Game::newclick()       //rules?!
 {
     client.sendForSig();
 }
 
-//bool Game::validateForSig()
-//{
+bool Game::validateForSig()
+{
+    if ()
 
-//}
+}
 
 //void Game::acceptForSig()
 //{
