@@ -10,18 +10,94 @@ void Server::init(Game * g)
     game = g;
 }
 
-int Server::receiveInvite(IP players_Ip, int p)
+int Server::receiveInvite()
 {
+    /*
+     * A smart handler:
+     * If http:// is lacked, add it automatically as default.
+     */
+    QString url="http://127.0.0.1:8080/sendInvite";
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    QUrl qurl = QUrl(url);
+
+    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
+
+    request.setUrl(url);
+//    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply * reply = manager->post(request, dataArray);
+
+    QEventLoop eventLoop;
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    QByteArray ipAddress = reply->readAll();
+
+    qDebug()<<ipAddress;
+    bool ok;
+    int result=ipAddress.toInt(&ok,10);
+    return result;
+
+//    return replyData;
+}
+
+QString Server::receivePlayerInfo()
+{
+    QString url="http://127.0.0.1:8080/sendPlayerInfo";
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    QUrl qurl = QUrl(url);
+
+    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
+
+    request.setUrl(url);
+
+    QNetworkReply * reply = manager->post(request, dataArray);
+
+    QEventLoop eventLoop;
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    QByteArray playerInfo = reply->readAll();
+    QString stringInfo=playerInfo;
+
+    qDebug()<<stringInfo;
+
+    return stringInfo;
+
 
 }
 
-int Server::receivePlayerInfo()
+QString Server::receiveSigReq()
 {
+    QString url="http://127.0.0.1:8080/sendPlayerInfo";
 
-}
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    QUrl qurl = QUrl(url);
 
-int Server::receiveSigReq(int request)
-{
+    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
+
+    request.setUrl(url);
+
+    QNetworkReply * reply = manager->post(request, dataArray);
+
+    QEventLoop eventLoop;
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    QByteArray arraySig = reply->readAll();
+    QString stringSig=arraySig;
+
+    qDebug()<<stringSig;
+
+    return stringSig;
 
 }
 
