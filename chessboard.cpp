@@ -175,7 +175,7 @@ void chessBoard::DrawItems()
     painter.setPen(pen);
 
     /* Scan all chess stones */
-    for (int i=0; i<Stone.size(); i++)
+    for (int i=0; i<localMoveChain.length(); i++)
     {
         /* Reading from the string and get the chess stone information */
         unsigned int first, second;
