@@ -141,22 +141,9 @@ void Game::loginShow()
     gui->loginShow();
 }
 
-void Game::sendInvite(int playerIndex1, int playerIndex2)
+void Game::sendInvite(IP players_Ip, int p)
 {
-    IP player1, player2;
-    players[1] = player1;
-    players[2] = player2;
-    int result = client.sendInvite(1);
-    if (result == 1){
-        result = client.sendInvite(2);
-        if (result == 1){
-            inviteAccepted();//success
-        }else{      // Add :  when result = -1, wait please!
-            inviteRejected();
-        }
-    }else{
-        inviteRejected();
-    }
+    client.sendInvite(players_Ip);
 
 }
 
@@ -179,18 +166,19 @@ void Game::rejectInvite()
 
 /* For the host*/
 
-void Game::inviteAccepted()
+void Game::inviteAccepted(IP players_Ip, int p, Qlist players)
 {
+    players.append(players_Ip);
+    gui->showReject();
     if (check3P() == true){
         client.sendPlayerInfo();
-        startGame();
+        game.startGame();
     }
 }
 
-void Game::inviteRejected()
+void Game::inviteRejected(IP players_Ip, int p)
 {
     gui->showReject();
-
 }
 
 bool Game::check3P()

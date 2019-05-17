@@ -62,7 +62,7 @@ QString IP::getAddress() const
     return address;
 }
 
-bool IP::setAddressFromString(const QString & newAddress)
+bool IP::setAddressFromString(QString newAddress)
 {
     if (!checkAddressString(newAddress))
         return false;
@@ -72,7 +72,7 @@ bool IP::setAddressFromString(const QString & newAddress)
     }
 }
 
-bool IP::setAddressFromInt(const QList<int> & newAddressInt)
+bool IP::setAddressFromInt(QList<int> newAddressInt)
 {
     if (!checkAddressInt(newAddressInt))
         return false;
@@ -89,7 +89,7 @@ int IP::getPort() const
     return port;
 }
 
-void IP::setPort(const int & newPort)
+void IP::setPort(int newPort)
 {
     port = newPort;
 }
@@ -100,7 +100,7 @@ QString IP::getFullAddress() const
     return fullAddress;
 }
 
-bool IP::checkAddressInt(const QList<int> & addressInt)
+bool IP::checkAddressInt(QList<int> addressInt)
 {
     if (addressInt.length()!=4)
         return false;
@@ -114,7 +114,7 @@ bool IP::checkAddressInt(const QList<int> & addressInt)
     return true;
 }
 
-bool IP::checkAddressString(const QString & addressString)
+bool IP::checkAddressString(QString addressString)
 {
     QList<int> addressInt;
     bool valid = true;
@@ -143,7 +143,7 @@ QString IP::addressIntToString(const QList<int> & intList, bool &result)
     return addressString;
 }
 
-QList<int> IP::addressStringToInt(const QString & addressString, bool& result)
+QList<int> IP::addressStringToInt(QString addressString, bool& result)
 {
     QList<int> addressInt;
     bool valid;
@@ -166,7 +166,7 @@ void testIP()
     QString key;
 
     // Test initialize a IP:
-    IP emptyIP, strIP(QString("123.45.67.8")), withPortIP(QString("123.45.67.8"), 1000);
+    IP emptyIP, strIP(QString("123.45.67.8"));
     QList<int> intIP;
     intIP << 123 << 45 << 67 << 8;
     qDebug() << intIP;
@@ -174,13 +174,11 @@ void testIP()
     qDebug() << "Empty IP:"<< emptyIP;
     qDebug() << "String IP:"<< strIP;
     qDebug() << "qList<int> IP:"<< qListIP;
-    qDebug() << "withPortIP:"<< withPortIP;
-    qDebug() << "Initialize: 1. Empty 2. String 3. qList<int> 4. withPortIP: Passed.";
+    qDebug() << "Initialize: 1. Empty 2. String 3. qList<int>: Passed.";
     qDebug() << "setAddressFrom String, setAddressFromInt, addressIntToString: Passed.";
     qDebug() << "qDebug() << IP: Passed.";
 
     Q_ASSERT(strIP == qListIP);
-    Q_ASSERT(!(strIP == withPortIP));
     qDebug() << "== Test Passed";
     Q_ASSERT(strIP.addressToInt() == qListIP.addressToInt());
     qDebug() << "addressToInt Test Passed.";
