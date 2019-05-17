@@ -98,25 +98,13 @@ public:
 
 
     /*
-     * Method: rejectSig
-     * Receive the request from client. If the signature is invalid, pass the reject info
-     * to game class.
+     * Method: sigRequestFromGame
+     * Receive the result after validating the signature in game and return the result to client.
      * ---------------------------------------------------------------------------------------
      * Usage: int status = client.boardcastNewMove
      */
 
-    int rejectSig();
-
-
-    /*
-     * Method: acceptSig
-     * Receive the request from client. If the signature is valid, pass the accept info
-     * to game class.
-     * ---------------------------------------------------------------------------------------
-     * Usage: int status = client.boardcastNewMove
-     */
-
-    int acceptSig();
+    int sigRequestFromGame();
 
 
     /*
@@ -126,7 +114,13 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    int receiveNewMove();
+    QString receiveNewMove();
+
+//    TODO
+    int acceptNewMove();
+
+//    TODO
+    int rejectNewMove();
 
 
     /*
