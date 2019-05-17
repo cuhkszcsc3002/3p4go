@@ -51,7 +51,7 @@ public:
      * Usage: Move m(jsonObj);
      */
 
-    Move(QJsonObject obj);
+    Move(const QJsonObject & obj);
 
     /*
      * Method: addSign
@@ -60,7 +60,7 @@ public:
      * Success: return 1: write the sign and return 1.
      */
 
-    bool addSign(QString newSign, int index);
+    bool addSign(const QString & newSign, int index);
 
 
     /*
@@ -71,9 +71,9 @@ public:
      *
      */
 
-    bool overwriteSign(QString newSign, int index);
+    bool overwriteSign(const QString & newSign, int index);
 
-    int getPlayerIndex();
+    int getPlayerIndex() const;
 
 
     /*
@@ -83,13 +83,13 @@ public:
      * Usage: QList grid = move.getGrid();
      */
 
-    QList<int> getGrid();
+    QList<int> getGrid() const;
 
 
-    int getX();
+    int getX() const;
 
 
-    int getY();
+    int getY() const;
 
 
     /*
@@ -102,7 +102,9 @@ public:
     QJsonObject toJson();
 
     void setPlayerIndex(int value);
+
     void setX(int value);
+
     void setY(int value);
 
 
@@ -110,14 +112,14 @@ public:
      * == will not compare signatures.
      */
 
-    bool operator == (Move& m) const;
+    bool operator == (const Move & m) const;
 
 
     /*
      * fullCmp will compare signaretures.
      */
 
-    bool fullCmp(Move& m) const;
+    bool fullCmp(const Move & m) const;
     QList<QString> getSignatures() const;
     void setSignatures(const QList<QString> &value);
 };

@@ -15,12 +15,12 @@ void Move::setY(int value)
     y = value;
 }
 
-bool Move::operator ==(Move &m) const
+bool Move::operator ==(const Move &m) const
 {
     return (playerIndex==m.playerIndex && x==m.x && y==m.y);
 }
 
-bool Move::fullCmp(Move &m) const
+bool Move::fullCmp(const Move &m) const
 {
     if (*this == m)
     {
@@ -48,7 +48,7 @@ Move::Move(int playerIndex, int x, int y)
     this->y = y;
 }
 
-Move::Move(QJsonObject obj)
+Move::Move(const QJsonObject & obj)
 {
     playerIndex = obj.value("playerIndex").toInt();
     x = obj.value("x").toInt();
@@ -59,7 +59,7 @@ Move::Move(QJsonObject obj)
     }
 }
 
-bool Move::addSign(QString newSign, int index)
+bool Move::addSign(const QString & newSign, int index)
 {
     if (signatures.length()==index)
     {
@@ -71,7 +71,7 @@ bool Move::addSign(QString newSign, int index)
     }
 }
 
-bool Move::overwriteSign(QString newSign, int index)
+bool Move::overwriteSign(const QString & newSign, int index)
 {
     if (signatures.length() <= index)
     {
@@ -83,12 +83,12 @@ bool Move::overwriteSign(QString newSign, int index)
     }
 }
 
-int Move::getPlayerIndex()
+int Move::getPlayerIndex() const
 {
     return playerIndex;
 }
 
-QList<int> Move::getGrid()
+QList<int> Move::getGrid() const
 {
     QList<int> list;
     list.append(x);
@@ -96,12 +96,12 @@ QList<int> Move::getGrid()
     return list;
 }
 
-int Move::getX()
+int Move::getX() const
 {
     return x;
 }
 
-int Move::getY()
+int Move::getY() const
 {
     return y;
 }
