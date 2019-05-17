@@ -12,6 +12,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QtDebug>
+#include "coordinate.h"
 
 // The winner's requirement of consecutive moves(Go).
 
@@ -52,6 +53,20 @@ public:
      */
 
     Move(const QJsonObject & obj);
+
+
+    /*
+     * Construct from Coordinate.
+     * --------------------------
+     * Usage: Move m(coordinate);
+     *
+     */
+
+    Move(const Coordinate & coordinate) {
+        x = coordinate.x;
+        y = coordinate.y;
+        playerIndex = coordinate.playerIndex;
+    }
 
     /*
      * Method: addSign
