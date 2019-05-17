@@ -2,10 +2,10 @@
 #define SENDINVITECONTROLLER_H
 
 
-class sendinvitecontroller
+class sendInviteController
 {
 public:
-    sendinvitecontroller();
+    sendInviteController();
 };
 
 #endif // SENDINVITECONTROLLER_H
