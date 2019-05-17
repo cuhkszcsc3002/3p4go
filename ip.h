@@ -70,6 +70,16 @@ public:
     IP(const QString & addressString) {setAddressFromString(addressString);}
 
     /*
+     * Method: IP(QString addressString, int port)
+     * The constructor of IP Class by initialized with address QString, and its port as int.
+     * -----------------------------------------------------------
+     * Usage: IP ip(addressString, port);
+     *
+     */
+
+    IP(const QString & addressString, const int & port) {setAddressFromString(addressString); setPort(port);}
+
+    /*
      * Method: IP(QList<int>)
      * The constructor of IP Class by initialized with address QList<int>.
      * -----------------------------------------------------------
@@ -119,7 +129,7 @@ public:
      * Usage: bool result = ip.setAddressFromString( QString("1.2.3.4") );
      */
 
-    bool setAddressFromString(QString);
+    bool setAddressFromString(const QString &);
 
 
     /*
@@ -130,7 +140,7 @@ public:
      * Usage: bool result = ip.setAddressFromInt(list);
      */
 
-    bool setAddressFromInt(QList<int>);
+    bool setAddressFromInt(const QList<int> &);
 
 
     /*
@@ -150,7 +160,7 @@ public:
      * Usage: ip.setPort(int newPort);
      */
 
-    void setPort(int newPort);
+    void setPort(const int & newPort);
 
 
     /*
@@ -170,7 +180,7 @@ public:
      */
 
 
-    static bool checkAddressInt(QList<int>);
+    static bool checkAddressInt(const QList<int> &);
 
     /*
      * Method: checkAddressString
@@ -179,7 +189,7 @@ public:
      * Usage: bool result = ip.checkAddressString();
      */
 
-    static bool checkAddressString(QString);
+    static bool checkAddressString(const QString &);
 
 
     /*
@@ -200,11 +210,14 @@ public:
      * Usage: QList<int> addressInt = addressStringToInt(QString, &result);
      */
 
-    static QList<int> addressStringToInt(QString, bool &result = *(new bool));
+    static QList<int> addressStringToInt(const QString &, bool &result = *(new bool));
 
     Key2 getPublicKey() const;
+
     void setPublicKey(const Key2 &value);
+
     Key2 getPrivateKey() const;
+
     void setPrivateKey(const Key2 &value);
 
 
