@@ -5,7 +5,7 @@ MoveChain::MoveChain()
 
 }
 
-MoveChain::MoveChain(QString jsonString)
+MoveChain::MoveChain(const QString & jsonString)
 {
     QJsonDocument json = QJsonDocument::fromJson(jsonString.toUtf8());
     QJsonArray array = json.array();
@@ -15,7 +15,7 @@ MoveChain::MoveChain(QString jsonString)
     }
 }
 
-int MoveChain::nextPlayer()
+int MoveChain::nextPlayer() const
 {
     if (moveList.length()==0)
     {
@@ -26,7 +26,7 @@ int MoveChain::nextPlayer()
     }
 }
 
-bool MoveChain::verifyNewMove(Move newMove)
+bool MoveChain::verifyNewMove(const Move & newMove) const
 {
     if (moveList.isEmpty()) return true;
 
@@ -50,7 +50,7 @@ bool MoveChain::verifyNewMove(Move newMove)
     return true;
 }
 
-bool MoveChain::newMove(Move newMove)
+bool MoveChain::newMove(const Move & newMove)
 {
     if (verifyNewMove(newMove))
     {
@@ -63,7 +63,7 @@ bool MoveChain::newMove(Move newMove)
 
 }
 
-int MoveChain::checkWin()
+int MoveChain::checkWin() const
 {
     if (moveList.length()<9) return -1;
     for (int i=3*3; i<=moveList.length(); i++)
@@ -75,12 +75,12 @@ int MoveChain::checkWin()
     return -1;
 }
 
-bool MoveChain::checkLastWin()
+bool MoveChain::checkLastWin() const
 {
     return checkLastWin(moveList);
 }
 
-bool MoveChain::checkLastWin(QList<Move> & testMoveChain)
+bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
 {
     Move last = testMoveChain.back();
     // directions store the 7-bit lines of 4 directions.
@@ -91,7 +91,7 @@ bool MoveChain::checkLastWin(QList<Move> & testMoveChain)
         directions[i][WINNUM-1] = true;
     }
 
-    for (Move & m:testMoveChain) {
+    for (const Move & m:testMoveChain) {
         if (m == last)
         {
             return false;
@@ -156,16 +156,13 @@ bool MoveChain::checkLastWin(QList<Move> & testMoveChain)
     return false;
 }
 
-bool MoveChain::signLast(QString newSign, int index, bool forceSign)
+bool MoveChain::signLast(QString newSign, int index)
 {
-    // 1. Get the signature from the Game.
-    // 2. Check if the index number is correct.
-    // 3. Sign.
-
+    Q_ASSERT(moveList.length()>0);
     return moveList.last().addSign(newSign, index);
 }
 
-bool MoveChain::checkLastSign(Key2 publicKey, int index)
+bool MoveChain::checkLastSign(const Key2 & publicKey, int index) const
 {
     if (index>=moveList.last().getSignatures().length()) {
         qDebug() << "CheckLastSign: index overflow.";
@@ -176,13 +173,13 @@ bool MoveChain::checkLastSign(Key2 publicKey, int index)
     return RSA2::verify(abstract(), sign, publicKey);
 }
 
-bool MoveChain::checkLastSign(Key2 publicKey)
+bool MoveChain::checkLastSign(const Key2 & publicKey) const
 {
     return checkLastSign(publicKey, moveList.last().getSignatures().length()-1);
 }
 
 
-QJsonArray MoveChain::toJson()
+QJsonArray MoveChain::toJson() const
 {
     QJsonArray jsonArray;
     for (Move m: moveList)
@@ -193,17 +190,17 @@ QJsonArray MoveChain::toJson()
     return jsonArray;
 }
 
-QString MoveChain::toJsonString()
+QString MoveChain::toJsonString() const
 {
     QJsonDocument doc;
     doc.setArray(toJson());
     return QString(doc.toJson());
 }
 
-QString MoveChain::abstract()
+QString MoveChain::abstract() const
 {
     QString absStr;
-    for (Move& m: moveList)
+    for (const Move& m: moveList)
     {
         absStr += QString::number(m.getX()) + QString::number(m.getY()) + QString::number(m.getPlayerIndex());
     }
@@ -211,7 +208,7 @@ QString MoveChain::abstract()
     return absStr;
 }
 
-bool MoveChain::operator<=(MoveChain &mc) const
+bool MoveChain::operator<=(const MoveChain &mc) const
 {
     QList<Move> mc1, mc2;
     if (moveList.length()==mc.moveList.length())
@@ -232,7 +229,7 @@ bool MoveChain::operator<=(MoveChain &mc) const
     return true;
 }
 
-MoveChain MoveChain::jsonToMoveChain(QString jsonString)
+MoveChain MoveChain::jsonToMoveChain(const QString & jsonString)
 {
     QJsonDocument json = QJsonDocument::fromJson(jsonString.toUtf8());
     QJsonArray array = json.array();

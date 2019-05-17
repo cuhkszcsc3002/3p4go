@@ -23,7 +23,7 @@
  *  4.3.1) If you are the host of move:
  *      mc.signLast(newSign, 0);
  *  4.3.2) If you are the guest of move:
- *      int yourIndex = (indexOfGame + indexOfMove) % 3;
+ *      int yourIndex = (indexOfPlayer + indexOfMove) % 3;
  *      mc.signLast(newSign, yourIndex);
  *
  * 5. Generate a json string, which can be sent out.
@@ -75,7 +75,7 @@ public:
 
     MoveChain();
 
-    MoveChain(QString jsonString);
+    MoveChain(const QString & jsonString);
 
 
     /*
@@ -85,7 +85,7 @@ public:
      * Usage: int id = moveChain.nextPlayer();
      */
 
-    int nextPlayer();
+    int nextPlayer() const;
 
 
     /*
@@ -95,7 +95,7 @@ public:
      * Usage: bool check = moveChain.verifyNewMove(move);
      */
 
-    bool verifyNewMove(Move newMove);
+    bool verifyNewMove(const Move & newMove) const;
 
 
     /*
@@ -105,7 +105,7 @@ public:
      * Usage: bool check = moveChain.newMove();
      */
 
-    bool newMove(Move newMove);
+    bool newMove(const Move & newMove);
 
 
     /*
@@ -116,7 +116,7 @@ public:
      * Usage: int winner = moveChain.checkWin();
      */
 
-    int checkWin();
+    int checkWin() const;
 
     /*
      * Method: checkLastWin
@@ -126,18 +126,18 @@ public:
      * Usage: bool result = moveChain.checkLastWin();
      */
 
-    bool checkLastWin(); // default testMoveChain is the moveList.
-    bool checkLastWin(QList<Move>& testMoveChain);
+    bool checkLastWin() const; // default testMoveChain is the moveList.
+    bool checkLastWin(const QList<Move>& testMoveChain) const;
 
-    bool signLast(QString newSign, int index, bool forceSign=false);
+    bool signLast(QString newSign, int index);
 
-    bool checkLastSign(Key2 publicKey, int index);
+    bool checkLastSign(const Key2 & publicKey, int index) const;
 
     /*
      * default index: the last signature.
      */
 
-    bool checkLastSign(Key2 publicKey);
+    bool checkLastSign(const Key2 & publicKey) const;
 
 
 
@@ -148,9 +148,9 @@ public:
      * Usage: QJsonArray jsonArray = moveChain.tojson();
      */
 
-    QJsonArray toJson();
+    QJsonArray toJson() const;
 
-    QString toJsonString();
+    QString toJsonString() const;
 
 
     /*
@@ -161,15 +161,15 @@ public:
      * Usage: QString abstract = moveChain.abstract();
      */
 
-    QString abstract();
+    QString abstract() const;
 
 
-    bool operator<=(MoveChain& mc) const;
+    bool operator<=(const MoveChain & mc) const;
 
-    int length() {return moveList.length();}
+    int length() const {return moveList.length();}
 
 
-    static MoveChain jsonToMoveChain(QString jsonString);
+    static MoveChain jsonToMoveChain(const QString & jsonString);
 };
 
 void testMoveChain();
