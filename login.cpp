@@ -145,7 +145,8 @@ void login::inviteClicked()
     std::string P1ip = P1.toStdString();
     std::string P2ip = P2.toStdString();
 
-    emit showTransfer(myIP, P1, P2);
+    emit showTransfer();
+    emit emitInvit(myIP, P1, P2);
 }
 
 void login::startReceived()

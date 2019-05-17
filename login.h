@@ -9,11 +9,6 @@ namespace Ui {
 class MainWindow;
 }
 
-/*/
-class QLineEdit;
-class QLabel;
-class QPushButton;
-/*/
 
 class login : public QWidget
 {
@@ -23,17 +18,49 @@ public:
     login(QWidget *parent = nullptr);
     ~login();
 
-    //void GetLocalIP(char *ip);
 
+
+    /* SLOT section:
+     *
+     * inviteClicked():
+     * This slot will send the IP addresses that user enter to the processing
+     * method in GAME class. Also, for the host, this slot will emit a signal to
+     * tell the transfer message window to show
+     *
+     * exitClick():
+     * This slot will close the current login window when triggered.
+     *
+     * checkScoreClick():
+     * This slot will emit a signal to tell the check score window to show.
+     *
+     * startReceived():
+     * This slot will hide the login window if the chess game start
+     */
 private slots:
     void inviteClicked();
     void exitClick();
     void checkScoreClick();
     void startReceived();
 
+    /* Signal section:
+     *
+     * showTransfer():
+     * This signal is used together with inviteClicked() slot, trigger the transfer
+     * window.
+     *
+     * showScore():
+     * This signal will close the current login window when triggered.
+     *
+     * checkScoreClick():
+     * This slot will emit a signal to tell the check score window to show.
+     *
+     * startReceived():
+     * This slot will hide the login window if the chess game start
+     */
 signals:
-    void showTransfer(QString myIP, QString p1IP, QString p2IP);
+    void showTransfer();
     void showScore();
+    void emitInvit(QString myIP, QString p1IP, QString p2IP);
 
 private:
     char *ip;
