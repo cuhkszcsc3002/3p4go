@@ -61,10 +61,10 @@ class Game;
 
 class MoveChain
 {
-    QList<Move> moveList;
-
 
 public:
+    QList<Move> moveList;
+
 
     /*
      * Constructor

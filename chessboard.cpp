@@ -178,6 +178,7 @@ void chessBoard::DrawItems()
     for (int i=0; i<localMoveChain.length(); i++)
     {
         /* Reading from the string and get the chess stone information */
+
         unsigned int first, second;
         first = Stone[i].find(',');
         second = Stone[i].find(',', first+1);
@@ -186,9 +187,9 @@ void chessBoard::DrawItems()
         string strY = Stone[i].substr(first+1, second);
         string strPlay = Stone[i].substr(second+1, static_cast<unsigned int>(Stone.size()));
 
-        int x = atoi(strX.c_str());
-        int y = atoi(strY.c_str());
-        int player = atoi(strPlay.c_str());
+        int x = localMoveChain.moveList[i].getX(); //atoi(strX.c_str());
+        int y = localMoveChain.moveList[i].getY(); //atoi(strY.c_str());
+        int player = localMoveChain.moveList[i].getPlayerIndex(); //atoi(strPlay.c_str());
 
         /* Draw the chess stones if it is within the chessboard */
         if( leftBoundAxis->x() <= x && x <= rightBoundAxis->x() && upBoundAxis->y() <= y && y <= downBoundAxis->y())
