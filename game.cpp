@@ -169,7 +169,7 @@ void Game::receiveInvite(IP host_Ip)
 void Game::acceptInvite()
 {
     setAvailableFlag(0);
-    server.replyInvite(IP myIp, IP host_Ip);
+    server.replyInvite(myIp, host_Ip);
 }
 
 void Game::rejectInvite()
@@ -193,41 +193,41 @@ void Game::inviteRejected()
 
 }
 
-//bool Game::check3P()
-//{
-//    if (players.count() == 3){
-//        return true;
-//    }
-//    else{
-//        return false;
-//    }
-//}
+bool Game::check3P()
+{
+    if (players.count() == 3){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 ///* for other players */
 
-//void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
-//{
-//    players[0] = host;
-//    players[1] = B_player;
-//    players[2] = C_player;
-//    for (int i = 0; i < 3; i++){
-//        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
-//            myIndex = i;
-//            players[i] = myIP;
-//            break;
-//        }//如果没有找到 how
-//    }
-//}
+void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
+{
+    players[0] = host;
+    players[1] = B_player;
+    players[2] = C_player;
+    for (int i = 0; i < 3; i++){
+        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
+            myIndex = i;
+            players[i] = myIP;
+            break;
+        }//如果没有找到 how
+    }
+}
 
-//void Game::startGame()
-//{
-//    gui->showGame();
-//}
+void Game::startGame()
+{
+    gui->showGame();
+}
 
-//void Game::newclick()
-//{
+void Game::newclick()
+{
 
-//}
+}
 
 //bool Game::validateForSig()
 //{
