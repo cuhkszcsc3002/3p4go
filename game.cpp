@@ -262,24 +262,24 @@ void Game::newclick()       //rules?!
 
 void Game::validateForSig(QString newmovechain)
 {
-
-    if (){
+    MoveChain newMoveChain;
+    //todo: trans QString newmovechain to  MoveChain newMoveChain
+    if (newMoveChain <= localMoveChain){
         setNewmoveSig(1);
     }else{
         setNewmoveSig(0);
     }
-
 }
 
-//void Game::acceptForSig()
-//{
+void Game::acceptForSig()
+{
+    server.acceptSig();
+}
 
-//}
-
-//void Game::rejectForSig()
-//{
-
-//}
+void Game::rejectForSig()
+{
+    server.rejectSig();
+}
 
 //MoveChain Game::sigAccepted()
 //{

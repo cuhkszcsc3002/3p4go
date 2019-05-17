@@ -190,7 +190,7 @@ int Client::sendForSig()
 
 }
 
-int Client::boardcastNewMove()
+int Client::broadcastNewMove()
 {
     // 1. Fetch the whole MoveChain and enocde.
     MoveChain & mc = game->localMoveChain;
@@ -229,6 +229,6 @@ void testClient()
 {
     Client client;
     qDebug() << client.getLocalIPAddress();
-    client.postRequest("www.cuhkrenter.com/api/login2", QJsonDocument());
+    client.postRequest("127.0.0.1:8080", QJsonDocument());
 
 }
