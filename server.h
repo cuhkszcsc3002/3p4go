@@ -75,6 +75,8 @@ public:
 
     int receiveInvite();
 
+    int replyInvite();
+
 
     /*
      * Method: receivePlayerInfo
@@ -98,13 +100,25 @@ public:
 
 
     /*
-     * Method: sigRequestFromGame
-     * Receive the result after validating the signature in game and return the result to client.
+     * Method: rejectSig
+     * Receive the request from client. If the signature is invalid, pass the reject info
+     * to game class.
      * ---------------------------------------------------------------------------------------
      * Usage: int status = client.boardcastNewMove
      */
 
-    int sigRequestFromGame();
+    int rejectSig();
+
+
+    /*
+     * Method: acceptSig
+     * Receive the request from client. If the signature is valid, pass the accept info
+     * to game class.
+     * ---------------------------------------------------------------------------------------
+     * Usage: int status = client.boardcastNewMove
+     */
+
+    int acceptSig();
 
 
     /*
