@@ -31,13 +31,13 @@ Key2::Key2(mpz_class v, mpz_class n)
     N = n;
 }
 
-QString Key2::encode()
+QString Key2::encode() const
 {
     QString encodeString = QString::fromStdString(keyValue.get_str() + "&" + N.get_str());
     return encodeString;
 }
 
-QString Key2::toString()
+QString Key2::toString() const
 {
     return encode();
 }

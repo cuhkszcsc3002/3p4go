@@ -186,6 +186,7 @@ void testIP()
     Q_ASSERT(qListIP == copyIP);
     qDebug() << "Copy IP from an existing one: Passed.";
 
+    qDebug() << "IP TEST PASSED.";
 
 
 //    int port;
