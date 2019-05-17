@@ -150,10 +150,17 @@ void Game::loginShow()
 }
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
-{//
+{
+    /* Storing guest player address information */
     IP player1, player2;
+    player1.setAddressFromString(p1IP);
+    player1.setPort(p1Port.toInt());
+    player2.setAddressFromString(p2IP);
+    player2.setPort(p2Port.toInt());
     players[1] = player1;
     players[2] = player2;
+
+    /* Sending invite to guest players */
     int result = client.sendInvite(1);
     if (result == 1){
         result = client.sendInvite(2);
@@ -168,6 +175,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 
 }
 
+/* I think this method need a signal from client to trigger */
 void Game::receiveInvite(IP host_Ip)
 {
     gui->receiveInvite();
