@@ -29,6 +29,7 @@ void GUI::init(Game *sgame)
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
     QObject::connect(trans, SIGNAL(comfirmReceived()), chess, SLOT(startReceived()));
     QObject::connect(trans, SIGNAL(comfirmReceived()), log, SLOT(startReceived()));
+    QObject::connect(log, SIGNAL(emitInvite()), sgame, SLOT(sendInvite()));
 
 }
 

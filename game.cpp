@@ -79,10 +79,15 @@ void Game::setRestartF(int value)
 
 Game::Game()
 {
-// NOTE: Game::init(); 不要写在这里!单独调用init();
+    // NOTE: Game::init(); 不要写在这里!单独调用init();
+}
 
+Game::~Game()
+{
 
 }
+
+
 
 void Game::init()
 {
@@ -104,7 +109,10 @@ void Game::init()
     //   server.init(this);
 
     client.init(this);
+
+
 }
+
 
 void Game::restart() //same as init
 {
@@ -141,8 +149,8 @@ void Game::loginShow()
     gui->loginShow();
 }
 
-void Game::sendInvite(int playerIndex1, int playerIndex2)
-{
+void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
+{//
     IP player1, player2;
     players[1] = player1;
     players[2] = player2;

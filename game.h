@@ -13,6 +13,7 @@
 #include <QtNetwork/QtNetwork>
 #include <QString>
 #include <QList>
+#include <QObject>
 #include <iostream>
 #include <string>
 #include <QDebug>
@@ -23,10 +24,12 @@
 #include "server.h"
 #include "GUI.h"
 
+
 using namespace std;
 
-class Game
+class Game : public QObject
 {
+    Q_OBJECT
 
     friend class Client;
     friend class Server;
@@ -142,6 +145,7 @@ class Game
 
 public:
     Game();
+    ~Game();
 
     /*
      * Method: constructor
@@ -219,17 +223,6 @@ public:
      *
      * If the return is true, go to check3P().QQQ问check3P()is called by inviteAccepted()
      * Else, do nothing.
-     */
-
-    void sendInvite(int playerIndex1, int playerIndex2);
-
-    /*
-     * Method: receiveInvite
-     * Usage:
-     * ------------------------------------------------
-     * This method is called by Server.receiveInvite(),
-     * when the users is invited by the host.
-     * It calls GUI.receiveInvite() and change the GUI signal.
      */
 
     void receiveInvite(IP host_Ip);
@@ -543,6 +536,18 @@ public:
      */
 
     void exit();
+
+private slots:
+    void sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
+
+    /*
+     * Method: receiveInvite
+     * Usage:
+     * ------------------------------------------------
+     * This method is called by Server.receiveInvite(),
+     * when the users is invited by the host.
+     * It calls GUI.receiveInvite() and change the GUI signal.
+     */
 
 };
 
