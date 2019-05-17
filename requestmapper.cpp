@@ -11,16 +11,36 @@ void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
     QByteArray path=request.getPath();
     qDebug("RequestMapper: path=%s",path.data());
 
-    if (path=="/" || path=="/hello") {
+    if (path=="/" || path=="/hello")
+    {
         helloWorldController.service(request, response);
     }
-    else if (path=="/list") {
+    else if (path=="/list")
+    {
         listDataController.service(request, response);
     }
-    else if (path=="/login") {
+    else if (path=="/login")
+    {
         loginController.service(request, response);
     }
-    else {
+    else if (path=="/sendInvite")
+    {
+        loginController.service(request,response);
+    }
+    else if (path=="/sendPlayerInfo")
+    {
+        loginController.service(request,response);
+    }
+    else if (path=="/sendForSig")
+    {
+        loginController.service(request,response);
+    }
+    else if (path=="/broadcastNewMove")
+    {
+
+    }
+    else
+    {
         response.setStatus(404,"Not found");
         response.write("The URL is wrong, no such document.");
     }
