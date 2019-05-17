@@ -92,6 +92,7 @@ Game::~Game()
 void Game::init()
 {
     myIndex = -1;
+    setAvailableFlag(1);
     players.append(IP());
     players.append(IP());
     players.append(IP());
@@ -118,6 +119,7 @@ void Game::init()
 void Game::restart() //same as init
 {
     myIndex = -1;
+    setAvailableFlag(1);
     players.append(IP());
     players.append(IP());
     players.append(IP());
@@ -152,6 +154,7 @@ void Game::loginShow()
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
 {
+    setAvailableFlag(0);
     /* Storing guest player address information */
     IP player1, player2;
     player1.setAddressFromString(p1IP);
@@ -194,6 +197,7 @@ void Game::rejectInvite()
     server.replyInvite(myIp, host_Ip);
 }
 
+
 ///* For the host*/
 
 void Game::inviteAccepted()
@@ -206,7 +210,9 @@ void Game::inviteAccepted()
 
 void Game::inviteRejected()
 {                   //player1 accepted, while player2 not.
+    setAvailableFlag(1);
     gui->showReject();
+
 }
 
 bool Game::check3P()
