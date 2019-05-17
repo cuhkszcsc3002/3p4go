@@ -204,7 +204,7 @@ public:
      * Method: sendInvite
      * Usage:
      * -----------------------------------
-     * p can be 1 or 2, 1 represents the
+     * playerIndex can be 1 or 2, 1 represents the
      * nextPlayer, while 2 represents the lastPlayer.
      * This method is called when the host
      * inviting other players through IP at GUI.
@@ -219,10 +219,9 @@ public:
      *
      * If the return is true, go to check3P().QQQ问check3P()is called by inviteAccepted()
      * Else, do nothing.
-     *
      */
 
-    void sendInvite(IP players_Ip, int p);
+    void sendInvite(int playerIndex1, int playerIndex2);
 
     /*
      * Method: receiveInvite
@@ -272,7 +271,7 @@ public:
      * call GUI.showMessage().和check3p以及startgame连起来了
      */
 
-    void inviteAccepted(IP players_Ip, int p, QList<IP> players);
+    void inviteAccepted();
 
     /*
      * Method: inviteRejected
@@ -285,7 +284,7 @@ public:
      * to invite other players instead.
      */
 
-    void inviteRejected(IP players_Ip, int p);
+    void inviteRejected();
 
     /*
      * Method: check3P
