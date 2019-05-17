@@ -29,7 +29,7 @@ private:
     inviteReceive *invite;
     finish *fini;
     chessBoard *chess;
-    timer *counter;
+//    timer *counter;
 
 private slots:
     //void restartReceive();

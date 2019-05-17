@@ -26,6 +26,10 @@ unix {
 
     LIBS -= -LC:/gmpbuild/lib/ -lgmpxx -lgmp
 
+    LIBS += -lgmpxx -lgmp
+
+    INCLUDEPATH += /usr/local/Cellar/gmp/6.1.2_2/include
+
     LIBS += -L$$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/ -lgmpxx
 
     PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/gmp/6.1.2_2/lib/libgmpxx.a

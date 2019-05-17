@@ -64,7 +64,7 @@ void GUI::gameFinish(){
     fini->show();
 }
 
-void GUI::takeCount(){
-    counter = new timer;
-    counter->show();
-}
+//void GUI::takeCount(){
+//    counter = new timer;
+//    counter->show();
+//}

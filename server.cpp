@@ -1,4 +1,4 @@
-#include "server.h"
+#include "game.h"
 
 Server::Server()
 {
@@ -10,18 +10,53 @@ void Server::init(Game * g)
     game = g;
 }
 
-//int Server::receiveInvite(IP players_Ip, int p)
-//{
-
-//}
-
-int testServer(int argc, char *argv[])
+int Server::receiveInvite(IP players_Ip, int p)
 {
-    QCoreApplication app(argc, argv);
+
+}
+
+int Server::receivePlayerInfo()
+{
+
+}
+
+int Server::receiveSigReq(int request)
+{
+
+}
+
+int Server::rejectSig()
+{
+
+}
+
+int Server::acceptSig()
+{
+
+}
+
+int Server::receiveNewMove()
+{
+
+}
+
+void Server::finish()
+{
+
+}
+
+void testServer(QCoreApplication& app)
+{
+//    QCoreApplication app(argc, argv);
 
     // Load the configuration file
-    QString configFileName="/Users/TY/Downloads/QtWebApp/MyFirstWebApp/etc/webapp1.ini";
+    QString runPath = QCoreApplication::applicationDirPath();
+    qDebug()<<runPath;
+    QString configFileName="/Users/TY/Desktop/3p4go 2/webapp1.ini";
+    //    QString configFileName="./webapp1.ini";
+
     qDebug()<<configFileName;
+
     // Session store
     QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     sessionSettings->beginGroup("sessions");
@@ -32,5 +67,5 @@ int testServer(int argc, char *argv[])
     listenerSettings->beginGroup("listener");
     new HttpListener(listenerSettings,new RequestMapper(&app),&app);
 
-    return app.exec();
+//    return app.exec();
 }

@@ -7,11 +7,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    qDebug()<<"Testing...";
+    testServer(a);
+//    qDebug()<<"Testing...";
 //    Game g;
 //    g.init();
 //    testRSA2();
 //    testClient();
-    testIP();
+//    testIP();
+    testClient();
     return a.exec();
 }

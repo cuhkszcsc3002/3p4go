@@ -94,7 +94,7 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    int receiveSigReq();
+    int receiveSigReq(int request);
 
 
     /*
@@ -138,13 +138,8 @@ public:
 
 
     void finish();
-
-    void replyInvite(IP myIp, IP host_Ip);
-    /*Game::acceptInvite()内调用，inform host by
-     * 调用availableFlag， 1-rejected, 0-accepted;
-    */
 };
 
-int testServer(int argc, char *argv[]);
+void testServer(QCoreApplication&);
 
 #endif // SERVER_H
