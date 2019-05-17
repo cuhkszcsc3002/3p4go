@@ -276,7 +276,7 @@ public:
      * call GUI.showMessage().和check3p以及startgame连起来了
      */
 
-    void inviteAccepted(IP players_Ip, int p, Qlist<IP> players);
+    void inviteAccepted(IP players_Ip, int p, QList<IP> players);
 
     /*
      * Method: inviteRejected
