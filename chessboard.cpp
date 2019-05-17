@@ -174,19 +174,33 @@ void chessBoard::DrawItems()
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
 
+    /* These codes are the junping mechanism, do once when receive new move from other player */
+    if(isJump == false)
+    {
+        int lastMove = localMoveChain.length()-1;
+        int x = localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
+        int y = localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
+        leftBoundAxis->setX(x-9);
+        rightBoundAxis->setX(x+9);
+        upBoundAxis->setY(y-9);
+        downBoundAxis->setY(y+9);
+        logLocation->setX(x);
+        logLocation->setY(y);
+        phyLocation->setX(INIT_POSX);
+        phyLocation->setY(INIT_POSY);
+
+        isJump = true;
+
+        drawNewMove(painter);
+
+        cout<<"end player x: "<<x<<" y: "<<y<<endl;
+    }
+
+
     /* Scan all chess stones */
     for (int i=0; i<localMoveChain.length(); i++)
     {
         /* Reading from the string and get the chess stone information */
-
-        unsigned int first, second;
-        first = Stone[i].find(',');
-        second = Stone[i].find(',', first+1);
-
-        string strX = Stone[i].substr(0, first);
-        string strY = Stone[i].substr(first+1, second);
-        string strPlay = Stone[i].substr(second+1, static_cast<unsigned int>(Stone.size()));
-
         int x = localMoveChain.moveList[i].getX(); //atoi(strX.c_str());
         int y = localMoveChain.moveList[i].getY(); //atoi(strY.c_str());
         int player = localMoveChain.moveList[i].getPlayerIndex(); //atoi(strPlay.c_str());
@@ -208,30 +222,6 @@ void chessBoard::DrawItems()
             default:
                 break;
             }
-
-            /* These codes are the prototype of the junping mechanism, very important!!! DON'T DELETE */
-//            if(i == Stone.size()-1 && isJump == false)
-//            {
-//                leftBoundAxis->setX(x-9);
-//                rightBoundAxis->setX(x+9);
-//                upBoundAxis->setY(y-9);
-//                downBoundAxis->setY(y+9);
-//                logLocation->setX(x);
-//                logLocation->setY(y);
-//                phyLocation->setX(INIT_POSX);
-//                phyLocation->setY(INIT_POSY);
-
-//                isJump = true;
-
-//                pen.setColor(Qt::white);
-//                pen.setWidth(50);
-//                painter.setPen(pen);
-//                painter.drawLine(40 + abs(leftBoundAxis->x()-x)*50, 50 + abs(upBoundAxis->y()-y)*50, 60 + abs(leftBoundAxis->x()-x)*50, 50 + abs(upBoundAxis->y()-y)*50);
-//                painter.drawLine(50 + abs(leftBoundAxis->x()-x)*50, 40 + abs(upBoundAxis->y()-y)*50, 50 + abs(leftBoundAxis->x()-x)*50, 60 + abs(upBoundAxis->y()-y)*50);
-
-//                cout<<"end player x: "<<x<<" y: "<<y<<" Player:"<<strPlay<<endl;
-//            }
-
             drawStoneAtPoint(painter, x, y);
         }
         //cout<<"x: "<<x<<" y: "<<y<<" Player:"<<strPlay<<endl;
@@ -246,12 +236,16 @@ void chessBoard::drawStoneAtPoint(QPainter& painter, int logX, int logY)
     //cout<<"x: "<<phyX<<" y: "<<phyY<<endl;
     QPoint ptCenter(phyX, phyY);
     painter.drawEllipse(phyX-25, phyY-25, 50, 50);
+}
 
-//    pen.setColor(Qt::white);
-//    pen.setWidth(50);
-//    painter.setPen(QPen(QColor(Qt::white)));
-//    painter.drawLine(phyX-10, phyY, phyX+10, phyY);
-//    painter.drawLine(phyX, phyY-10, phyX, phyY+10);
+void chessBoard::drawNewMove(QPainter& painter)
+{
+    /* Draw a indicate simbol on the new move chess stone */
+    QPen pen = painter.pen();
+    pen.setColor(Qt::transparent);
+    painter.setPen(pen);
+    painter.setBrush(Qt::white);
+    painter.drawRect(495, 495, 10, 10);
 }
 
 
@@ -344,17 +338,25 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
     else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         Move newMove(myIndex, logLocation->x(), logLocation->y());
-        if(localMoveChain.verifyNewMove(newMove) == true)
+
+        /* Check if is player's turn */
+        if(localMoveChain.length()%3 == myIndex)
         {
-            localMoveChain.newMove(newMove);
-            emit pushMoveChain(localMoveChain);
+            /* Check if player's location had been occupied */
+            if(localMoveChain.verifyNewMove(newMove) == true)
+            {
+                localMoveChain.newMove(newMove);
+                emit pushMoveChain(localMoveChain);
+            }
+            else
+                std::cout<<"New move error!"<<endl;
         }
         else
-            std::cout<<"New move error!";
+            std::cout<<"Not your turn!!!"<<endl;
 
-            /*need to check with network*/
-            isJump = false;
-            //cout << "info: "<< stoneInfo<<endl;
+        /*need to check with network*/
+        isJump = false;
+        //cout << "info: "<< stoneInfo<<endl;
      }
 }
 

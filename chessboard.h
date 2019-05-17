@@ -101,6 +101,8 @@ private:
      */
     void drawStoneAtPoint(QPainter& painter, int x, int y);
 
+    void drawNewMove(QPainter& painter);
+
     Ui::MainWindow *ui;
 
 
