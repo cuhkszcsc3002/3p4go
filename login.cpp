@@ -1,29 +1,6 @@
 #include "login.h"
 #include <winsock2.h>
-//#include <QtWidgets>
-//#include <QString>
-//#include <string>
 
-/*/
-void GetLocalIP(char *ip)
-{
-    WSADATA wsaData;                                        //initialize WSA
-    int ret = WSAStartup(MAKEWORD(2, 2), &wsaData);
-    if (ret == 0)
-    {
-        char hostname[256];                                 //get mainframe name
-        ret = gethostname(hostname, sizeof(hostname));
-        if (ret != SOCKET_ERROR)
-        {
-            HOSTENT* host = gethostbyname(hostname);        //get mainframe ip
-            if (host != nullptr)
-                strcpy(ip, inet_ntoa(*(in_addr*)*host->h_addr_list));   //return the result
-        }
-    }
-}
-/*/
-
-//void GetLocalIP(char* ip)
 char* getLocalIP(void)
 {
     WSADATA wsaDataqq;
@@ -50,14 +27,13 @@ char* getLocalIP(void)
 }
 
 
-
 login::login(QWidget *parent) : QWidget (parent)
 {
-    //ipAddress = "";
     ip = new char[16];
     //GetLocalIP(ip);
     ip = getLocalIP();
     ipAddress = ip;
+    myIP = ip;
 
     this->resize(QSize(600,400));
 
@@ -73,7 +49,7 @@ login::login(QWidget *parent) : QWidget (parent)
     player1IP = new QLineEdit(tr("Enter P1 IP address..."));
     player2IP = new QLineEdit(tr("Enter P2 IP address..."));
     hostIP = new QLineEdit();
-    hostIP->setText(QString::fromStdString(ipAddress));
+    hostIP->setText(myIP); //alternate: QString::fromStdString(ipAddress)
 
     player1IP->setMaxLength(25);
     player1IP->setAlignment(Qt::AlignLeft);
@@ -169,9 +145,7 @@ void login::inviteClicked()
     std::string P1ip = P1.toStdString();
     std::string P2ip = P2.toStdString();
 
-
-    //this->hide();
-    emit showTransfer();
+    emit showTransfer(myIP, P1, P2);
 }
 
 void login::startReceived()

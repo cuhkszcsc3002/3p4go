@@ -32,12 +32,13 @@ private slots:
     void startReceived();
 
 signals:
-    void showTransfer();
+    void showTransfer(QString myIP, QString p1IP, QString p2IP);
     void showScore();
 
 private:
     char *ip;
     std::string ipAddress = "";
+    QString myIP;
 
     QLineEdit *player1IP;
     QLineEdit *player2IP;

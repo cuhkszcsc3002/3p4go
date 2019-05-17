@@ -14,7 +14,7 @@ GUI::GUI(QWidget *parent) : QWidget (parent){}
 GUI::~GUI(){}
 
 
-void GUI::init()
+void GUI::init(Game *sgame)
 {
     log = new login;
     scor = new score;
@@ -23,7 +23,7 @@ void GUI::init()
     invite = new inviteReceive;
     fini = new finish;
     chess = new chessBoard;
-    counter = new timer;
+
 
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
@@ -44,7 +44,7 @@ void GUI::receiveInvite(){
     invite->show();
 }
 
-void GUI::showMessage(){
+void GUI::showReject(){
     rej->show();
 }
 
@@ -65,5 +65,6 @@ void GUI::gameFinish(){
 }
 
 void GUI::takeCount(){
+    counter = new timer;
     counter->show();
 }

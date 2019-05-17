@@ -15,6 +15,10 @@ class GUI : public QWidget
 {
     Q_OBJECT
 
+/* Private section:
+ * ---------------------------------
+ * Declaration of all Widget Windows
+ */
 private:
     login *log;
     score *scor;
@@ -36,7 +40,7 @@ public:
     void init();
     void loginShow();
     void receiveInvite();
-    void showMessage();
+    void showReject();
     void showGame();
     void newClicked();  //not complete yet
     void updateNewMovel();  //not complete yet
