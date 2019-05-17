@@ -73,7 +73,7 @@ public:
      * Usage: server.receivite();
      */
 
-    int receiveInvite(IP players_Ip, int p);
+    int receiveInvite();
 
 
     /*
@@ -84,7 +84,7 @@ public:
      */
 
 
-    int receivePlayerInfo();
+    QString receivePlayerInfo();
 
 
     /*
@@ -94,7 +94,7 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    int receiveSigReq(int request);
+    QString receiveSigReq();
 
 
     /*
