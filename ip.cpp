@@ -20,6 +20,20 @@ void IP::setPrivateKey(const Key2 &value)
     privateKey = value;
 }
 
+bool IP::operator==(const IP &ip) const
+{
+    return address==ip.address && port==ip.port;
+}
+
+IP &IP::operator=(const IP &ip)
+{
+    address = ip.address;
+    port = ip.port;
+    publicKey = ip.publicKey;
+    privateKey = ip.privateKey;
+    return *this;
+}
+
 IP::IP()
 {
     address = QString();

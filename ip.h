@@ -11,12 +11,13 @@
 #include <iostream>
 #include <string>
 #include <QDebug>
+#include <QtCore>
 #include "key2.h"
 
 class IP
 {
     /*
-     * IP.address stores the IPv4 address.
+     * IP.address: the IPv4 address in QString format.
      * Format: "XXX.XXX.XXX.XXX"
      * Note: The intermediate number may not be 3 digits.
      */
@@ -24,14 +25,23 @@ class IP
     QString address;
 
 
+    /*
+     * IP.publicKey: the public key pair of the IP.
+     * For both the current player and the other players.
+     */
+
     Key2 publicKey;
 
+
+    /*
+     * IP.privateKey: the private key pair of the IP.
+     * For only the current player.
+     */
 
     Key2 privateKey;
 
     /*
-     * IP.port stores the port of the player's server.
-     * It is stored as an int.
+     * IP.port: the port of the player's server in int format.
      */
 
     int port;
@@ -47,6 +57,17 @@ public:
      */
 
     IP();
+
+
+    /*
+     * Method: IP(ip)
+     * Copy the ip to a new object.
+     * ---------------------------
+     * Usage: IP newIP(ip);
+     *
+     */
+
+    IP(const IP & ip) {*this = ip;}
 
 
     /*
@@ -164,6 +185,26 @@ public:
     void setPublicKey(const Key2 &value);
     Key2 getPrivateKey() const;
     void setPrivateKey(const Key2 &value);
+
+
+    /*
+     * Method: operator==
+     * Compare only the address and the port. No compare with the key.
+     * ---------------------------------------------------------------
+     * Usage: ip1==ip2
+     */
+
+    bool operator==(const IP & ip) const;
+
+
+    /*
+     * Method: operator=
+     * Copy the whole ip and return the result.
+     * ----------------------------------------
+     * Usage: IP newIP = ip;
+     */
+
+    IP & operator=(const IP& ip);
 };
 
 

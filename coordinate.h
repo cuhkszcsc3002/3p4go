@@ -21,7 +21,6 @@ public:
      */
 
     int playerIndex;
-
     int x;
     int y;
 
