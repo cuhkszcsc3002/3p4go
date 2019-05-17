@@ -10,6 +10,15 @@ mpz_class Key2::getN() const
     return N;
 }
 
+QDebug operator<<(QDebug dbg, const Key2 &key)
+{
+    dbg << "---------------------\n"
+        << "Key value: " << QString::fromStdString(key.keyValue.get_str()) << endl
+        << "Key N: " << QString::fromStdString(key.N.get_str()) << endl;
+    return dbg;
+
+}
+
 Key2::Key2()
 {
     keyValue = 0;

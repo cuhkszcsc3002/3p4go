@@ -16,6 +16,7 @@
 
 class IP
 {
+
     /*
      * IP.address: the IPv4 address in QString format.
      * Format: "XXX.XXX.XXX.XXX"
@@ -44,7 +45,7 @@ class IP
      * IP.port: the port of the player's server in int format.
      */
 
-    int port;
+    int port = 0;
 
 public:
 
@@ -56,7 +57,27 @@ public:
      *
      */
 
-    IP();
+    IP() {}
+
+    /*
+     * Method: IP(QString)
+     * The constructor of IP Class by initialized with address QString.
+     * -----------------------------------------------------------
+     * Usage: IP ip(addressString);
+     *
+     */
+
+    IP(const QString & addressString) {setAddressFromString(addressString);}
+
+    /*
+     * Method: IP(QList<int>)
+     * The constructor of IP Class by initialized with address QList<int>.
+     * -----------------------------------------------------------
+     * Usage: IP ip(addressInt);
+     *
+     */
+
+    IP(const QList<int> & addressInt) {Q_ASSERT(setAddressFromInt(addressInt));}
 
 
     /*
@@ -77,7 +98,7 @@ public:
      * Usage: QList<int> address = ip.addressToInt();
      */
 
-    QList<int> adressToInt();
+    QList<int> addressToInt() const;
 
 
     /*
@@ -87,7 +108,7 @@ public:
      * Usage: QString address = ip.getAddress();
      */
 
-    QString getAddress();
+    QString getAddress() const;
 
 
     /*
@@ -119,7 +140,7 @@ public:
      * Usage: int port = ip.getPort();
      */
 
-    int getPort();
+    int getPort() const;
 
 
     /*
@@ -139,7 +160,7 @@ public:
      * Usage: QString fullAddress = ip.getFullAddress();
      */
 
-    QString getFullAddress();
+    QString getFullAddress() const;
 
     /*
      * Method: checkAddressInt
@@ -169,7 +190,7 @@ public:
      * Usage: QString addressString = addressintToString(QList<int>, &result);
      */
 
-    static QString addressIntToString(QList<int>, bool &result = *(new bool));
+    static QString addressIntToString(const QList<int> & intList, bool &result = *(new bool));
 
     /*
      * Method: addressStringToInt
@@ -205,7 +226,11 @@ public:
      */
 
     IP & operator=(const IP& ip);
+
+    friend QDebug operator<<(QDebug dbg, const IP & ip);
+
 };
+
 
 
 /*

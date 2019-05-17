@@ -20,6 +20,7 @@
 #include <QString>
 #include <QStringList>
 #include <gmpxx.h>
+#include <QDebug>
 
 class Key2
 {
@@ -44,6 +45,8 @@ public:
     static Key2 decode(QString keyString);
     mpz_class getKeyValue() const;
     mpz_class getN() const;
+
+    friend QDebug operator<<(QDebug dbg, const Key2 & key);
 };
 
 #endif // KEY2_H
