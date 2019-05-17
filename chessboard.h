@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMap>
 #include <string>
+#include "movechain.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,6 +38,10 @@ public:
     QPoint *rightBoundAxis;
     QPoint *upBoundAxis;
     QPoint *downBoundAxis;
+
+    MoveChain localMoveChain;
+
+    void updateMoveChain(MoveChain localMoveChain);
 
 protected:
     void paintEvent(QPaintEvent *);
