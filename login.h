@@ -60,7 +60,7 @@ private slots:
 signals:
     void showTransfer();
     void showScore();
-    void emitInvit(QString myIP, QString p1IP, QString p2IP);
+    void emitInvit(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 
 private:
     char *ip;
@@ -68,11 +68,15 @@ private:
     QString myIP;
 
     QLineEdit *player1IP;
+    QLineEdit *player1Port;
     QLineEdit *player2IP;
+    QLineEdit *player2Port;
     QLineEdit *hostIP;
 
-    QLabel *p1;
-    QLabel *p2;
+    QLabel *p1ip;
+    QLabel *p1port;
+    QLabel *p2ip;
+    QLabel *p2port;
     QLabel *host;
 
     QPushButton *invite;
@@ -82,16 +86,22 @@ private:
     QHBoxLayout *p1Layout;
     QHBoxLayout *p2Layout;
     QHBoxLayout *hostLayout;
+    QHBoxLayout *port1Layout;
+    QHBoxLayout *port2Layout;
 
     QHBoxLayout *p1IPLayout;
     QHBoxLayout *p2IPLayout;
+    QHBoxLayout *p1PortLayout;
+    QHBoxLayout *p2PortLayout;
     QHBoxLayout *hostIPLayout;
 
     QHBoxLayout *editorLayout;
     QHBoxLayout *buttonLayout;
 
     QVBoxLayout *ipLayout;
+    QVBoxLayout *portLayout;
     QVBoxLayout *userLayout;
+    QVBoxLayout *userPortlayout;
     QVBoxLayout *mainLayout;
 
 };
