@@ -45,7 +45,7 @@ public:
     void showReject();
     void showGame();
     void newClicked();  //not complete yet
-    void updateNewMovel();  //not complete yet
+    void updateNewMovel(MoveChain localMoveChain);  //not complete yet
     void gameFinish();
     void takeCount();
 };

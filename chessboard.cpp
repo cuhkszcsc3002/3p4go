@@ -174,7 +174,6 @@ void chessBoard::DrawItems()
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
 
-    localM
     /* Scan all chess stones */
     for (int i=0; i<Stone.size(); i++)
     {
@@ -378,6 +377,11 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
             //cout << "info: "<< stoneInfo<<endl;
         }
     }
+}
+
+void chessBoard::updateMoveChain(MoveChain localMoveChain)
+{
+    this->localMoveChain = localMoveChain;
 }
 
 

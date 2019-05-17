@@ -61,8 +61,9 @@ void GUI::newClicked(){
 
 }
 
-void GUI::updateNewMovel(){
-
+void GUI::updateNewMovel(MoveChain localMoveChain){
+    chess->updateMoveChain(localMoveChain);
+    chess->update();
 }
 
 void GUI::gameFinish(){
