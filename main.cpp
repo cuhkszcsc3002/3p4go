@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 //    Game g;
 //    g.init();
 //    testRSA2();
-    testClient();
+//    testClient();
+    testIP();
     return a.exec();
 }

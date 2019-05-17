@@ -99,7 +99,7 @@ void Game::init()
     myIP.setPrivateKey(keys.at(1));
 
     /* Initialization of the child class: GUI, Client, Server */
-    gui->init();
+    gui->init(this);
 
     //   server.init(this);
 

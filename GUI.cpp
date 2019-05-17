@@ -7,7 +7,7 @@
 #include "score.h"
 #include "transfer.h"
 /*/
-#include "GUI.h"
+#include "game.h"
 
 GUI::GUI(QWidget *parent) : QWidget (parent){}
 

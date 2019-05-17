@@ -11,6 +11,8 @@
 #include "finish.h"
 #include "timer.h"
 
+class Game;
+
 class GUI : public QWidget
 {
     Q_OBJECT
@@ -37,7 +39,7 @@ public:
     GUI(QWidget *parent = nullptr);
     ~GUI();
 
-    void init();
+    void init(Game*);
     void loginShow();
     void receiveInvite();
     void showReject();
