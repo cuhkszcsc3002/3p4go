@@ -93,6 +93,7 @@ QString Server::receiveSigReq()
     eventLoop.exec();
 
     QByteArray arraySig = reply->readAll();
+
     QString stringSig=arraySig;
 
     qDebug()<<stringSig;
@@ -101,18 +102,38 @@ QString Server::receiveSigReq()
 
 }
 
-int Server::rejectSig()
+int sigRequestFromGame()
 {
 
 }
 
-int Server::acceptSig()
-{
 
-}
 
-int Server::receiveNewMove()
+QString Server::receiveNewMove()
 {
+    QString url="http://127.0.0.1:8080/boardcastNewMove";
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    QUrl qurl = QUrl(url);
+
+    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
+
+    request.setUrl(url);
+
+    QNetworkReply * reply = manager->post(request, dataArray);
+
+    QEventLoop eventLoop;
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    QByteArray arrayMove = reply->readAll();
+    QString stringMove=arrayMove;
+
+    qDebug()<<stringMove;
+
+    return stringMove;
 
 }
 
