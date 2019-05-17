@@ -1,37 +1,11 @@
 #include "login.h"
-#include <winsock2.h>
 
-char* getLocalIP(void)
-{
-    WSADATA wsaDataqq;
-    PHOSTENT hostinfo;
-    in_addr dest;
-
-    WSAStartup(MAKEWORD(1,1), &wsaDataqq);
-    char name[256];
-    char *ipAddr= new char[16];
-
-    if(gethostname(name, sizeof(name)) == SOCKET_ERROR || (hostinfo = gethostbyname(name)) == nullptr)
-        return nullptr;
-    else
-    {
-        for(int a = 0; hostinfo->h_addr_list[a] != nullptr; a++)                    //multiple wangka, can get multiple ip iterately
-        {
-            memcpy(&dest, hostinfo->h_addr_list[a], hostinfo->h_length);
-            if (a==1)
-                ipAddr=inet_ntoa(dest);
-        }
-        WSACleanup();
-        return ipAddr;
-    }
-}
 
 
 login::login(QWidget *parent) : QWidget (parent)
 {
     ip = new char[16];
     //GetLocalIP(ip);
-    ip = getLocalIP();
     ipAddress = ip;
     myIP = ip;
 

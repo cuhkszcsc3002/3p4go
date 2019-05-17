@@ -177,7 +177,7 @@ void Game::rejectInvite()
     server.replyInvite(IP myIp, IP host_Ip);
 }
 
-/* For the host*/
+///* For the host*/
 
 void Game::inviteAccepted()
 {
@@ -193,113 +193,113 @@ void Game::inviteRejected()
 
 }
 
-bool Game::check3P()
-{
-    if (players.count() == 3){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
+//bool Game::check3P()
+//{
+//    if (players.count() == 3){
+//        return true;
+//    }
+//    else{
+//        return false;
+//    }
+//}
 
-/* for other players */
+///* for other players */
 
-void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
-{
-    players[0] = host;
-    players[1] = B_player;
-    players[2] = C_player;
-    for (int i = 0; i < 3; i++){
-        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
-            myIndex = i;
-            players[i] = myIP;
-            break;
-        }//如果没有找到 how
-    }
-}
+//void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
+//{
+//    players[0] = host;
+//    players[1] = B_player;
+//    players[2] = C_player;
+//    for (int i = 0; i < 3; i++){
+//        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
+//            myIndex = i;
+//            players[i] = myIP;
+//            break;
+//        }//如果没有找到 how
+//    }
+//}
 
-void Game::startGame()
-{
-    gui->showGame();
-}
+//void Game::startGame()
+//{
+//    gui->showGame();
+//}
 
-void Game::newclick()
-{
+//void Game::newclick()
+//{
 
-}
+//}
 
-bool Game::validateForSig()
-{
+//bool Game::validateForSig()
+//{
 
-}
+//}
 
-void Game::acceptForSig()
-{
+//void Game::acceptForSig()
+//{
 
-}
+//}
 
-void Game::rejectForSig()
-{
+//void Game::rejectForSig()
+//{
 
-}
+//}
 
-MoveChain Game::sigAccepted()
-{
+//MoveChain Game::sigAccepted()
+//{
 
-}
+//}
 
-MoveChain Game::sigRejected(IP ones_IP)
-{
+//MoveChain Game::sigRejected(IP ones_IP)
+//{
 
-}
+//}
 
-bool Game::collectAllSig()
-{
+//bool Game::collectAllSig()
+//{
 
-}
+//}
 
-void Game::broadcastNewmove(MoveChain newMoveChain)
-{
+//void Game::broadcastNewmove(MoveChain newMoveChain)
+//{
 
-}
+//}
 
-  /* For the others */
+//  /* For the others */
 
-bool Game::checkNewmove(MoveChain newMoveChain)
-{
+//bool Game::checkNewmove(MoveChain newMoveChain)
+//{
 
-}
+//}
 
-void Game::acceptNewmove()
-{
+//void Game::acceptNewmove()
+//{
 
-}
+//}
 
-void Game::rejectNewmove()
-{
+//void Game::rejectNewmove()
+//{
 
-}
+//}
 
-MoveChain Game::updateNewmove(MoveChain newMoveChain)
-{
+//MoveChain Game::updateNewmove(MoveChain newMoveChain)
+//{
 
-}
+//}
 
-bool Game::checkFinish()
-{
+//bool Game::checkFinish()
+//{
 
-}
+//}
 
-void Game::finish()
-{
+//void Game::finish()
+//{
 
-}
+//}
 
-void Game::history()
-{
+//void Game::history()
+//{
 
-}
+//}
 
 
 
