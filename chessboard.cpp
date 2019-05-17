@@ -345,7 +345,10 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
     {
         Move newMove(myIndex, logLocation->x(), logLocation->y());
         if(localMoveChain.verifyNewMove(newMove) == true)
+        {
             localMoveChain.newMove(newMove);
+            emit pushMoveChain(localMoveChain);
+        }
         else
             std::cout<<"New move error!";
 
@@ -355,7 +358,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
      }
 }
 
-void chessBoard::updateMoveChain(MoveChain localMoveChain)
+void chessBoard::pullMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
 }

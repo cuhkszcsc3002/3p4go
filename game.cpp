@@ -252,11 +252,12 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
 
 void Game::startGame()
 {
-    gui->showGame();
+    gui->showGame(myIndex);
 }
 
-void Game::newclick()       //rules?!
+void Game::newclick(MoveChain localMoveChain)       //rules?!
 {
+    this->localMoveChain = localMoveChain;
     client.sendForSig();
 }
 

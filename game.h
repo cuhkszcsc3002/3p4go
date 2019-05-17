@@ -287,22 +287,7 @@ public:
     void startGame();
 
 
-    /*
-     * Method: newclick
-     * Usage:
-     * ---------------------------------------
-     * This method is triggered by GUI.newclick(),
-     * which has checked whether the coordinate
-     * is available or not, and Game.newclick() is
-     * used to call client.sendForSig().
-     */
-
-    void newclick();
-
-
-
     /* for those who are not the owner of a newmove */
-
 
     /*
      * Method: validateForSig
@@ -544,6 +529,18 @@ private slots:
      * It also calls Server.replyInvite(), to inform the host.
      */
     void rejectInvite();
+
+    /*
+     * Method: newclick
+     * Usage:
+     * ---------------------------------------
+     * This method is triggered by GUI.newclick(),
+     * which has checked whether the coordinate
+     * is available or not, and Game.newclick() is
+     * used to call client.sendForSig().
+     */
+
+    void newclick(MoveChain localMoveChain);
 };
 
 #endif // GAME_H

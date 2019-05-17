@@ -42,12 +42,17 @@ public:
     MoveChain localMoveChain;
     int myIndex;
 
-    void updateMoveChain(MoveChain localMoveChain);
+    void pullMoveChain(MoveChain localMoveChain);
     void setMyIndex(int myIndex);
+
 
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *);
+
+signals:
+    void pushMoveChain(MoveChain localMoveChian);
+
 
 private:
 
