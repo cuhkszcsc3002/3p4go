@@ -25,15 +25,18 @@ QString Client::getLocalIPAddress()
     QHostInfo info = QHostInfo::fromName(localHostName);
     qDebug() << info.addresses();
     QString localIPAddress = "";
-      QList<QHostAddress> listAddress = QNetworkInterface::allAddresses();
-      for(int j = 0; j < listAddress.size(); j++){
-          if(!listAddress.at(j).isNull()
-              && listAddress.at(j).protocol() == QAbstractSocket::IPv4Protocol
-              && listAddress.at(j) != QHostAddress::LocalHost){
-                  localIPAddress = listAddress.at(j).toString();
-                  return localIPAddress;
-          }
+    QList<QHostAddress> listAddress = QNetworkInterface::allAddresses();
+    for(int j = 0; j < listAddress.size(); j++){
+      if(!listAddress.at(j).isNull()
+          && listAddress.at(j).protocol() == QAbstractSocket::IPv4Protocol
+          && listAddress.at(j) != QHostAddress::LocalHost){
+              localIPAddress = listAddress.at(j).toString();
+              return localIPAddress;
       }
+    }
+    qDebug() << "Get local IP address fail.";
+    return NULL;
+
 //    foreach(QHostAddress address, info.addresses())
 
 //    {
@@ -50,9 +53,6 @@ QString Client::getLocalIPAddress()
 void Client::init(Game * g)
 {
     game = g;
-
-    // 1. Use getLocalIP and set the local IP and keys.
-
 }
 
 QString Client::postRequest(QString url, QJsonDocument data)
@@ -62,7 +62,7 @@ QString Client::postRequest(QString url, QJsonDocument data)
      * If http:// is lacked, add it automatically as default.
      */
 
-    if (!url.startsWith("http"))
+    if (!url.startsWith("http") || !url.startsWith("https"))
     {
         url = "http://" + url;
     }
