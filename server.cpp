@@ -104,7 +104,17 @@ QString Server::receiveSigReq()
 
 int sigRequestFromGame()
 {
+//   todo
+    int result = 1;
 
+    if (result==1)
+    {
+        //return to client
+    }
+    else
+    {
+        //return to client
+    }
 }
 
 
