@@ -343,47 +343,29 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
     /* Dealing with the case that user press "ENTER" key */
     else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        bool isRepeat = false;
-        string strX, strY;
-        for (int i=0; i<Stone.size(); i++)
-        {
-            unsigned int first, second;
-            first = Stone[i].find(',');
-            second = Stone[i].find(',', first+1);
-
-            strX = Stone[i].substr(0, first);
-            strY = Stone[i].substr(first+1, second);
-
-            int x = atoi(strX.c_str());
-            int y = atoi(strY.c_str());
-
-            if (logLocation->x() == x && logLocation->y() == y)
-                isRepeat = true;
-        }
-        if (isRepeat == false)
-        {
-            string stoneInfo;
-            stringstream ssX, ssY;
-            ssX<<logLocation->x();
-            ssY<<logLocation->y();
-            stoneInfo.append(ssX.str());
-            stoneInfo.append(",");
-            stoneInfo.append(ssY.str());
-            stoneInfo.append(",2");
-
+        Move newMove(myIndex, logLocation->x(), logLocation->y());
+        if(localMoveChain.verifyNewMove(newMove) == true)
+            localMoveChain.newMove(newMove);
+        else
+            std::cout<<"New move error!";
 
             /*need to check with network*/
-            Stone.append(stoneInfo);
             isJump = false;
             //cout << "info: "<< stoneInfo<<endl;
-        }
-    }
+     }
 }
 
 void chessBoard::updateMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
 }
+
+void chessBoard::setMyIndex(int myIndex)
+{
+    this->myIndex = myIndex;
+}
+
+
 
 
 

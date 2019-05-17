@@ -53,7 +53,8 @@ void GUI::showReject(){
     rej->show();
 }
 
-void GUI::showGame(){
+void GUI::showGame(int myIndex){
+    chess->setMyIndex(myIndex);
     chess->show();
 }
 

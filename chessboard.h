@@ -40,8 +40,10 @@ public:
     QPoint *downBoundAxis;
 
     MoveChain localMoveChain;
+    int myIndex;
 
     void updateMoveChain(MoveChain localMoveChain);
+    void setMyIndex(int myIndex);
 
 protected:
     void paintEvent(QPaintEvent *);

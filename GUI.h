@@ -43,7 +43,7 @@ public:
     void loginShow();
     void receiveInvite();
     void showReject();
-    void showGame();
+    void showGame(int myIndex);
     void newClicked();  //not complete yet
     void updateNewMovel(MoveChain localMoveChain);  //not complete yet
     void gameFinish();
