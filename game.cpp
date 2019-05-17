@@ -98,7 +98,8 @@ void Game::init()
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
-    //    gui.init(this);
+    /* Initialization of the child class: GUI, Client, Server */
+    gui->init();
 
     //   server.init(this);
 
@@ -137,6 +138,7 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server.receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
+    gui->loginShow();
 }
 
 void Game::sendInvite(IP players_Ip, int p)
@@ -147,7 +149,7 @@ void Game::sendInvite(IP players_Ip, int p)
 
 void Game::receiveInvite(IP host_Ip)
 {
-    gui.receiveInvite();
+    gui->receiveInvite();
     //change gui signal?
 }
 
@@ -167,7 +169,7 @@ void Game::rejectInvite()
 void Game::inviteAccepted(IP players_Ip, int p, Qlist players)
 {
     players.append(players_Ip);
-    gui.showMessage();
+    gui->showReject();
     if (check3P() == true){
         client.sendPlayerInfo();
         game.startGame();
@@ -176,7 +178,7 @@ void Game::inviteAccepted(IP players_Ip, int p, Qlist players)
 
 void Game::inviteRejected(IP players_Ip, int p)
 {
-    gui.showMessage();
+    gui->showReject();
 }
 
 bool Game::check3P()
@@ -207,7 +209,7 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
 
 void Game::startGame()
 {
-
+    gui->showGame();
 }
 
 void Game::newclick()

@@ -21,13 +21,9 @@
 #include "movechain.h"
 #include "client.h"
 #include "server.h"
+#include "GUI.h"
 
 using namespace std;
-
-
-class GUI {
-
-};
 
 class Game
 {
@@ -38,7 +34,7 @@ class Game
 
     Client client;
     Server server;
-    GUI gui;
+    GUI *gui;
 
     /*
      * Game.availableFlag stores the state of the player.

@@ -54,11 +54,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp 
+    mainwindow.cpp \  
+    invite.cpp \
+    score.cpp \
+    transfer.cpp \
+    reject.cpp \
+    login.cpp \
+    finish.cpp \
+    chessboard.cpp \
+    timer.cpp \
+    GUI.cpp
 
 
 HEADERS += \
-    mainwindow.h 
+    mainwindow.h \ 
+    invite.h \
+    login.h \
+    score.h \
+    transfer.h \
+    reject.h \
+    finish.h \
+    GUI.h \
+    timer.h \
+    chessboard.h
 
 
 #HEADERS += client.h
