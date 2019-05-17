@@ -203,9 +203,14 @@ void Game::rejectInvite()
 void Game::inviteAccepted()
 {
     if (check3P() == true){
-        client.sendPlayerInfo();
+        int count = 0;
+        while(client.sendPlayerInfo() == 0)
+        {
+            /* need to sleep and try again or rollback when too many fails*/
+        }
         startGame();
     }
+    /* Might need to deal with false case */
 }
 
 void Game::inviteRejected()
@@ -217,10 +222,12 @@ void Game::inviteRejected()
 
 bool Game::check3P()
 {
-    if (players.count() == 3){
+    if (players.count() == 3)
+    {
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }
@@ -232,8 +239,9 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
     players[0] = host;
     players[1] = B_player;
     players[2] = C_player;
-    for (int i = 0; i < 3; i++){
-        if (players[i].getAddress() == myIP.getAddress() && players[i].getPort() == myIP.getPort()){
+    for (int i = 0; i < 3; i++)
+    {
+        if (players[i] == myIP){
             myIndex = i;
             players[i] = myIP;
             break;
