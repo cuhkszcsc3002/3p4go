@@ -260,9 +260,14 @@ void Game::newclick()       //rules?!
     client.sendForSig();
 }
 
-bool Game::validateForSig()
+void Game::validateForSig(QString newmovechain)
 {
-    if ()
+
+    if (){
+        setNewmoveSig(1);
+    }else{
+        setNewmoveSig(0);
+    }
 
 }
 

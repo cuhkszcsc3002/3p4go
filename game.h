@@ -309,13 +309,14 @@ public:
      * Usage:
      * ---------------------------------------
      * This method is called by Server.receiveSigReq(),
-     * and used to prevent cheating. It will check whether
+     * and used to prevent cheating. It will change the newmovechain
+     * from QString to movechain class, and check whether
      * there are differences on the signatures of the newmove.
      * It will change the Game.newmoveSig() to trigger other
      * methods.
      */
 
-    bool validateForSig();
+    void validateForSig(QString newmovechain);
 
     /*
      * Method: acceptForSig
