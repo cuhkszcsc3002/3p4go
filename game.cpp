@@ -247,6 +247,7 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
             break;
         }//如果没有找到 how
     }
+    startGame();
 }
 
 void Game::startGame()
@@ -256,7 +257,7 @@ void Game::startGame()
 
 void Game::newclick()
 {
-
+    client.sendForSig();
 }
 
 //bool Game::validateForSig()

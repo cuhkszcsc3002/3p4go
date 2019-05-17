@@ -224,7 +224,7 @@ public:
      * This method is called when a player has
      * accepted the invite from the host.
      * It will store the IP of the player, and
-     * call 和check3p以及startgame连起来了
+     * call check3p以及startgame连起来了
      */
 
     void inviteAccepted();
