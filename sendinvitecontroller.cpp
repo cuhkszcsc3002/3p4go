@@ -1,6 +1,6 @@
 #include "sendinvitecontroller.h"
 
-sendinvitecontroller::sendinvitecontroller()
+sendInviteController::sendInviteController()
 {
 
 }
