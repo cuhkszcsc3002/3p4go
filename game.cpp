@@ -111,6 +111,7 @@ void Game::init()
     client.init(this);
 
 
+
 }
 
 
@@ -190,7 +191,7 @@ void Game::acceptInvite()
 
 void Game::rejectInvite()
 {
-    server.replyInvite(IP myIp, IP host_Ip);
+    server.replyInvite(myIp, host_Ip);
 }
 
 ///* For the host*/
@@ -204,9 +205,8 @@ void Game::inviteAccepted()
 }
 
 void Game::inviteRejected()
-{
+{                   //player1 accepted, while player2 not.
     gui->showReject();
-
 }
 
 bool Game::check3P()

@@ -205,51 +205,14 @@ public:
     void loginShow();
 
     /*
-     * Method: sendInvite
+     * Method: receiveInvite
      * Usage:
-     * -----------------------------------
-     * playerIndex can be 1 or 2, 1 represents the
-     * nextPlayer, while 2 represents the lastPlayer.
-     * This method is called when the host
-     * inviting other players through IP at GUI.
-     * It calls Client.sendInvite() respectively.
-     *
-     * ----------------------------------------------------------
-     * Called by GUI, when the player pushes the "invite" button.
-     *
-     * Then, call client.sendInvite(players_IP).
-     * Note: DON'T modify players[p]! This will be done by client
-     * because client will receive the privateKey.???
-     *
-     * If the return is true, go to check3P().QQQ问check3P()is called by inviteAccepted()
-     * Else, do nothing.
+     * ------------------------------------------------
+     * This method is called by Server.receiveInvite(),
+     * when the users is invited by the host.
+     * It calls GUI.receiveInvite() and change the GUI signal.
      */
-
     void receiveInvite(IP host_Ip);
-
-    /*
-     * Method: acceptInvite
-     * Usage: Game::acceptInvite()
-     * ---------------------------------------------------------
-     * This method is triggered by signal acceptInvite in invite.h.
-     * It change "availableFlag" from 1 to 0, so that other hosts
-     * can not invite him again and he can not invite others as a host.
-     * It also calls Server.replyInvite(), to inform the host.
-     */
-
-    void acceptInvite();
-
-    /*
-     * Method: rejectInvite
-     * Usage:
-     * ---------------------------------------
-     * This method is triggered by signal rejectInvite in invite.h.
-     * It represents that the player reject the invite from the host.
-     * It also calls Server.replyInvite(), to inform the host.
-     */
-
-    void rejectInvite();
-
 
     /* For the host*/
 
@@ -538,17 +501,48 @@ public:
     void exit();
 
 private slots:
+    /*
+     * Method: sendInvite
+     * Usage:
+     * -----------------------------------
+     * playerIndex can be 1 or 2, 1 represents the
+     * nextPlayer, while 2 represents the lastPlayer.
+     * This method is called when the host
+     * inviting other players through IP at GUI.
+     * It calls Client.sendInvite() respectively.
+     *
+     * ----------------------------------------------------------
+     * Called by GUI, when the player pushes the "invite" button.
+     *
+     * Then, call client.sendInvite(players_IP).
+     * Note: DON'T modify players[p]! This will be done by client
+     * because client will receive the privateKey.???
+     *
+     * If the return is true, go to check3P().QQQ问check3P()is called by inviteAccepted()
+     * Else, do nothing.
+     */
     void sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 
     /*
-     * Method: receiveInvite
-     * Usage:
-     * ------------------------------------------------
-     * This method is called by Server.receiveInvite(),
-     * when the users is invited by the host.
-     * It calls GUI.receiveInvite() and change the GUI signal.
+     * Method: acceptInvite
+     * Usage: Game::acceptInvite()
+     * ---------------------------------------------------------
+     * This method is triggered by signal acceptInvite in invite.h.
+     * It change "availableFlag" from 1 to 0, so that other hosts
+     * can not invite him again and he can not invite others as a host.
+     * It also calls Server.replyInvite(), to inform the host.
      */
+    void acceptInvite();
 
+    /*
+     * Method: rejectInvite
+     * Usage:
+     * ---------------------------------------
+     * This method is triggered by signal rejectInvite in invite.h.
+     * It represents that the player reject the invite from the host.
+     * It also calls Server.replyInvite(), to inform the host.
+     */
+    void rejectInvite();
 };
 
 #endif // GAME_H
