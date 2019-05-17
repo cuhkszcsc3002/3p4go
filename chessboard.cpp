@@ -187,7 +187,7 @@ void chessBoard::DrawItems()
         string strPlay = Stone[i].substr(second+1, static_cast<unsigned int>(Stone.size()));
 
         int x = atoi(strX.c_str());
-   /     int y = atoi(strY.c_str());
+        int y = atoi(strY.c_str());
         int player = atoi(strPlay.c_str());
 
         /* Draw the chess stones if it is within the chessboard */
