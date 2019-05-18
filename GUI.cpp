@@ -12,16 +12,18 @@
 GUI::GUI(QWidget *parent) : QWidget (parent){}
 
 GUI::~GUI(){
-    delete log;     delete scor;
-    delete trans;   delete rej;
-    delete invite;  delete fini;
-    delete chess;
+//    delete log;     delete scor;
+//    delete trans;   delete rej;
+//    delete invite;  delete fini;
+//    delete chess;
 }
 
 
 void GUI::init(Game *sgame)
 {
+    qDebug() <<endl<< "GUI.init: gui initialization start...";
     log = new login;
+    qDebug() << "Middle";
     scor = new score;
     trans = new transfer;
     rej = new reject;
@@ -29,6 +31,9 @@ void GUI::init(Game *sgame)
     fini = new finish;
     chess = new chessBoard;
 
+    //myPort = new port;
+
+    qDebug() << "GUI.init: signal and slot connection start...";
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
@@ -80,4 +85,9 @@ void GUI::gameFinish(){
 //void GUI::takeCount(){
 //    counter = new timer;
 //    counter->show();
+//}
+
+//void GUI::showPort()
+//{
+//    myPort->show();
 //}

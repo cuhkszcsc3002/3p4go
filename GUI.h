@@ -10,6 +10,7 @@
 #include "reject.h"
 #include "finish.h"
 #include "timer.h"
+#include "port.h"
 
 class Game;
 
@@ -30,6 +31,7 @@ private:
     finish *fini;
     chessBoard *chess;
 //    timer *counter;
+    port *myPort;
 
 private slots:
     //void restartReceive();
@@ -48,6 +50,8 @@ public:
     void updateNewMovel(MoveChain localMoveChain);  //not complete yet
     void gameFinish();
     void takeCount();
+
+    void showPort();
 };
 
 #endif // GAME_INIT_H

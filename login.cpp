@@ -4,6 +4,7 @@
 
 login::login(QWidget *parent) : QWidget (parent)
 {
+    qDebug()<<"login.login: constructing login class...";
     this->resize(QSize(600,500));
 
     invite = new QPushButton(tr("Start 3P4GO (Alt+&s)"));
@@ -128,6 +129,7 @@ login::login(QWidget *parent) : QWidget (parent)
 
     setLayout(mainLayout);
     setWindowTitle(tr("Starting a new 3P4GO..."));
+    qDebug()<<"login.login: constructing login class complete.";
 }
 
 login::~login()

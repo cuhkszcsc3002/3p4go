@@ -7,11 +7,14 @@ port::port(QWidget *parent) : QWidget(parent)
     message = new QLabel(tr("Enter your port here: "));
     lineEdit = new QLineEdit;
     labelLayout = new QHBoxLayout;
+    lineEditLayout = new QHBoxLayout;
     buttonLayout = new QHBoxLayout;
     mainLayout = new QVBoxLayout;
 
     labelLayout->addWidget(message);
     labelLayout->addStretch();
+
+    lineEditLayout->addWidget(lineEdit);
 
     buttonLayout->addStretch();
     buttonLayout->addWidget(save);
@@ -19,11 +22,12 @@ port::port(QWidget *parent) : QWidget(parent)
     buttonLayout->addWidget(exit);
 
     mainLayout->addLayout(labelLayout);
-    mainLayout->addWidget(lineEdit);
+    mainLayout->addLayout(lineEditLayout);
     mainLayout->addLayout(buttonLayout);
 
 
     connect(exit, SIGNAL(clicked()), this, SLOT(exitClicked()));
+    connect(save, SIGNAL(clicked()), this, SLOT(savePortClicked()));
 
     setLayout(mainLayout);
     setFixedWidth(sizeHint().width()+300);
@@ -40,6 +44,7 @@ port::~port()
     delete labelLayout;
     delete buttonLayout;
     delete mainLayout;
+    delete lineEditLayout;
 }
 
 void port::exitClicked(){
