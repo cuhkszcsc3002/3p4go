@@ -21,9 +21,9 @@ GUI::~GUI(){
 
 void GUI::init(Game *sgame)
 {
-    qDebug() << "GUI.init: gui initialization start..."<<endl;
-    qDebug() << "Middle"<<endl;
+    qDebug() << "GUI.init: gui initialization start...";
     log = new login;
+    qDebug() << "Middle";
     scor = new score;
     trans = new transfer;
     rej = new reject;
@@ -33,7 +33,7 @@ void GUI::init(Game *sgame)
 
     //myPort = new port;
 
-    qDebug() << "GUI.init: signal and slot connection start..."<<endl;
+    qDebug() << "GUI.init: signal and slot connection start...";
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
