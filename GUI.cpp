@@ -27,7 +27,6 @@ void GUI::init(Game *sgame)
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
-    QObject::connect(trans, SIGNAL(comfirmReceived()), chess, SLOT(startReceived()));
     QObject::connect(trans, SIGNAL(comfirmReceived()), log, SLOT(startReceived()));
 
     /* Connecting GUI class and its subclass to GAME class */
