@@ -6,5 +6,5 @@ SendForSigController::SendForSigController(QObject* parent)
 }
 
 void SendForSigController::service(HttpRequest &request, HttpResponse &response) {
-    response.write("Hello World",true);
+    response.write("sendforsig",true);
 }
