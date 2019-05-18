@@ -21,7 +21,7 @@ GUI::~GUI(){
 
 void GUI::init(Game *sgame)
 {
-    qDebug() << "GUI.init: gui initialization start...";
+    qDebug() <<endl<< "GUI.init: gui initialization start...";
     log = new login;
     qDebug() << "Middle";
     scor = new score;
