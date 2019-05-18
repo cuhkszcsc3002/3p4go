@@ -523,7 +523,7 @@ private slots:
      * can not invite him again and he can not invite others as a host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void acceptInvite();
+    void acceptInvite(HttpResponse &response);
 
     /*
      * Method: rejectInvite
@@ -533,7 +533,7 @@ private slots:
      * It represents that the player reject the invite from the host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void rejectInvite();
+    void rejectInvite(HttpResponse &response);
 
     /*
      * Method: newclick
