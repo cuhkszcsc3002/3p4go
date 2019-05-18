@@ -86,9 +86,10 @@ Game::~Game()
 
 void Game::init()
 {
-    int port;
-    std::cout << "Your PORT: ";
-    std::cin >> port;
+    qDebug() << "GUI init started.";
+
+    //    setPort(&myPort);
+
     myIndex = -1;
     setAvailableFlag(1);
 
@@ -100,7 +101,7 @@ void Game::init()
     Q_ASSERT(localIP != NULL);
 
     myIP.setAddressFromString(localIP);
-    myIP.setPort(port);
+    myIP.setPort(Port);
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
@@ -114,6 +115,14 @@ void Game::init()
 
     loginShow();
 
+}
+
+void Game::setPort(port *myPort)
+{
+
+    Port = -1;
+//    while (Port == -1)
+//    {}
 }
 
 
@@ -150,7 +159,11 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server.receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
-    gui->loginShow();
+    //gui->loginShow();
+
+    port myPort;
+    QObject::connect(&myPort, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
+    myPort.show();
 }
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
@@ -184,21 +197,25 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 }
 
 /* I think this method need a signal from client to trigger */
-void Game::receiveInvite(IP host_Ip)
+void Game::receiveInvite(IP host_Ip, HttpResponse &response)
 {
+    receiveInviteRes = &response;
     gui->receiveInvite();
-    //change gui signal?
+    //change gui signal? store host_IP in players[0]?
 }
 
+// TO DO: need to store "response" into receiveInviteRes!
 void Game::acceptInvite()
 {
+    HttpResponse &response = *receiveInviteRes;
     setAvailableFlag(0);
-//    server.replyInvite(myIp, host_Ip);
+    server.replyInvite(response, 1);
 }
 
 void Game::rejectInvite()
 {
-//    server.replyInvite(myIp, host_Ip);
+    HttpResponse &response = *receiveInviteRes;
+    server.replyInvite(response, 0);
 }
 
 
@@ -442,6 +459,10 @@ void Game::history()
 
 }
 
-
+void Game::getPort(int port)
+{
+    this->Port = port;
+    qDebug() << "Game.getPort: receive user enter port: " << port << endl;
+}
 
 

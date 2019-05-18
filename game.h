@@ -23,6 +23,7 @@
 #include "client.h"
 #include "server.h"
 #include "GUI.h"
+#include "port.h"
 
 
 using namespace std;
@@ -39,6 +40,8 @@ class Game : public QObject
     Server server;
     GUI *gui;
     QCoreApplication * app;
+
+    int Port;
 
     /*
      * Game.availableFlag stores the state of the player.
@@ -170,7 +173,7 @@ public:
     /*
      * The set, get methods.
      */
-
+    void setPort(port *port);
     int getMyIndex() const;
     void setMyIndex(int value);
     bool getAvailableFlag() const;
@@ -520,7 +523,7 @@ private slots:
      * can not invite him again and he can not invite others as a host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void acceptInvite();
+    void acceptInvite(HttpResponse &response);
 
     /*
      * Method: rejectInvite
@@ -530,7 +533,7 @@ private slots:
      * It represents that the player reject the invite from the host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void rejectInvite();
+    void rejectInvite(HttpResponse &response);
 
     /*
      * Method: newclick
@@ -543,6 +546,9 @@ private slots:
      */
 
     void newclick(MoveChain localMoveChain);
+
+
+    void getPort(int port);
 
 
 
