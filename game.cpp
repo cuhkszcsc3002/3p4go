@@ -291,6 +291,7 @@ void Game::acceptForSig(MoveChain newMoveChain)
     {
 
         client.sendForSig(newMoveChain, myIndex);
+        server.acceptSig();
     }
     server.acceptSig();
 }
