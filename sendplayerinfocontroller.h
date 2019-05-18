@@ -1,11 +1,15 @@
 #ifndef SENDPLAYERINFOCONTROLLER_H
 #define SENDPLAYERINFOCONTROLLER_H
 
+#include "httprequesthandler.h"
 
-class sendPlayerInfoController
-{
+using namespace stefanfrings;
+
+class SendPlayerInfoController : public HttpRequestHandler {
+    Q_OBJECT
 public:
-    sendPlayerInfoController();
+    SendPlayerInfoController(QObject* parent=0);
+    void service(HttpRequest& request, HttpResponse& response);
 };
 
 #endif // SENDPLAYERINFOCONTROLLER_H

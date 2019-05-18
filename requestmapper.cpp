@@ -25,19 +25,19 @@ void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
     }
     else if (path=="/sendInvite")
     {
-        loginController.service(request,response);
+        sendInviteController.service(request,response);
     }
     else if (path=="/sendPlayerInfo")
     {
-        loginController.service(request,response);
+        sendPlayerInfoController.service(request,response);
     }
     else if (path=="/sendForSig")
     {
-        loginController.service(request,response);
+        sendForSigController.service(request,response);
     }
     else if (path=="/broadcastNewMove")
     {
-
+        broadcastNewMoveController.service(request,response);
     }
     else
     {
