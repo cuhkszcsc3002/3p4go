@@ -238,9 +238,10 @@ void chessBoard::drawStoneAtPoint(QPainter& painter, int logX, int logY)
     painter.drawEllipse(phyX-25, phyY-25, 50, 50);
 }
 
+
+/* Draw a indicate simbol on the new move chess stone */
 void chessBoard::drawNewMove(QPainter& painter)
 {
-    /* Draw a indicate simbol on the new move chess stone */
     QPen pen = painter.pen();
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
@@ -356,7 +357,6 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
 
         /*need to check with network*/
         isJump = false;
-        //cout << "info: "<< stoneInfo<<endl;
      }
 }
 
