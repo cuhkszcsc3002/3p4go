@@ -105,12 +105,6 @@ void Game::init()
 
     //   server.init(this);
 
-
-
-
-    //signal
-    QObject::connect(this, SIGNAL(newmoveSig(int)), this, SLOT(respondToSig(int)));
-
 }
 
 
