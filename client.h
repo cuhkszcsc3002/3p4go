@@ -171,7 +171,7 @@ public:
      * 0. Rejected.
      */
 
-    int boardcastNewMove();
+    int broadcastNewMove();
 
 
     /*
