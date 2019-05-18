@@ -1,4 +1,5 @@
 #include "broadcastnewmovecontroller.h"
+#include "game.h"
 
 BroadcastNewMoveController::BroadcastNewMoveController(QObject* parent)
     : HttpRequestHandler(parent) {
@@ -6,5 +7,11 @@ BroadcastNewMoveController::BroadcastNewMoveController(QObject* parent)
 }
 
 void BroadcastNewMoveController::service(HttpRequest &request, HttpResponse &response) {
-    response.write("broadcastmove",true);
+    QByteArray data = request.getBody();
+    QJsonDocument doc= QJsonDocument::fromJson(data);
+    QJsonObject obj = doc.object();
+
+    QString newMoveChainStr=obj.take("moveChain").toString();
+    MoveChain newMoveChain (newMoveChainStr);
+
 }

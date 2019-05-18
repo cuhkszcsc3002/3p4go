@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include "QDir"
 Server::Server()
 {
 
@@ -8,11 +8,29 @@ Server::Server()
 void Server::init(Game * g)
 {
     game = g;
+
 }
 
 void Server::run()
 {
+    QString runPath = QCoreApplication::applicationDirPath();
 
+    qDebug()<<runPath;
+
+    QString configFileName="/Users/TY/3p4go/webapp1.ini";
+//    QString configFileName="./3p4go/webapp1.ini";
+
+    qDebug()<<configFileName;
+
+    // Session store
+    QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,game->app);
+    sessionSettings->beginGroup("sessions");
+    RequestMapper::sessionStore=new HttpSessionStore(sessionSettings, game->app);
+
+    // Start the HTTP server
+    QSettings* listenerSettings=new QSettings(configFileName, QSettings::IniFormat, game->app);
+    listenerSettings->beginGroup("listener");
+    new HttpListener(listenerSettings,new RequestMapper(game->app, game),game->app);
 };
 
 
@@ -83,7 +101,7 @@ QString Server::receivePlayerInfo()
 
 MoveChain Server::receiveSigReq()
 {
-    QString url="http://127.0.0.1:8080/sendPlayerInfo";
+    QString url="http://127.0.0.1:8080/sendForSig";
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 
@@ -107,7 +125,9 @@ MoveChain Server::receiveSigReq()
 
     MoveChain chainSig=stringSig;
 
-    qDebug()<<stringSig;
+    qDebug()<<stringSig<<"move";
+
+//    qDebug()<<"hellohahah";
 
     return chainSig;
 
@@ -176,22 +196,7 @@ void Server::finish()
 void testServer(QCoreApplication& app)
 {
     // Load the configuration file
-    QString runPath = QCoreApplication::applicationDirPath();
-    qDebug()<<runPath;
-    QString configFileName="/Users/TY/3p4go/webapp1.ini";
-    //    QString configFileName="./webapp1.ini";
 
-    qDebug()<<configFileName;
-
-    // Session store
-    QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
-    sessionSettings->beginGroup("sessions");
-    RequestMapper::sessionStore=new HttpSessionStore(sessionSettings,&app);
-
-    // Start the HTTP server
-    QSettings* listenerSettings=new QSettings(configFileName, QSettings::IniFormat, &app);
-    listenerSettings->beginGroup("listener");
-    new HttpListener(listenerSettings,new RequestMapper(&app),&app);
 
 //    return app.exec();
 }

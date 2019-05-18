@@ -2,6 +2,8 @@
 #define BROADCASTNEWMOVE_H
 
 #include "httprequesthandler.h"
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace stefanfrings;
 

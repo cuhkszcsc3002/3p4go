@@ -11,19 +11,21 @@
 #include "sendplayerinfocontroller.h"
 #include "broadcastnewmovecontroller.h"
 
+
 using namespace stefanfrings;
 
-class RequestMapper : public HttpRequestHandler {
+    /*This Class is a mapper*/
+class RequestMapper : public HttpRequestHandler
+{
     Q_OBJECT
 public:
-    RequestMapper(QObject* parent=0);
+    RequestMapper(QObject* parent, Game * game);
     void service(HttpRequest& request, HttpResponse& response);
     static HttpSessionStore* sessionStore;
 private:
     HelloWorldController helloWorldController;
     ListDataController listDataController;
     LoginController loginController;
-
     SendForSigController sendForSigController;
     SendInviteController sendInviteController;
     SendPlayerInfoController sendPlayerInfoController;
