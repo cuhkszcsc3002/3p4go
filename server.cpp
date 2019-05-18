@@ -10,12 +10,15 @@ void Server::init(Game * g)
     game = g;
 }
 
+void Server::run()
+{
+
+};
+
+
 int Server::receiveInvite()
 {
-    /*
-     * A smart handler:
-     * If http:// is lacked, add it automatically as default.
-     */
+
     QString url="http://127.0.0.1:8080/sendInvite";
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
@@ -42,6 +45,11 @@ int Server::receiveInvite()
     return result;
 
 //    return replyData;
+}
+
+int Server::replyInvite()
+{
+
 }
 
 QString Server::receivePlayerInfo()
@@ -96,30 +104,28 @@ MoveChain Server::receiveSigReq()
 
     QString stringSig=arraySig;
 
+    MoveChain chainSig=stringSig;
+
     qDebug()<<stringSig;
 
-    return stringSig;
+    return chainSig;
 
 }
 
-int sigRequestFromGame()
+void Server::rejectSig(HttpResponse & response)
 {
-//   todo
-    int result = 1;
+    response.write("0", true);
 
-    if (result==1)
-    {
-        //return to client
-    }
-    else
-    {
-        //return to client
-    }
+}
+
+void Server::acceptSig(HttpResponse &response)
+{
+    response.write("1",true);
 }
 
 
 
-QString Server::receiveNewMove()
+MoveChain Server::receiveNewMove()
 {
     QString url="http://127.0.0.1:8080/boardcastNewMove";
 
@@ -139,12 +145,26 @@ QString Server::receiveNewMove()
     eventLoop.exec();
 
     QByteArray arrayMove = reply->readAll();
+
     QString stringMove=arrayMove;
+
+    MoveChain chainMove=stringMove;
 
     qDebug()<<stringMove;
 
-    return stringMove;
+    return chainMove;
 
+}
+
+
+void Server::acceptNewMove(HttpResponse &response)
+{
+    response.write("1",true);
+}
+
+void Server::rejectNewMove(HttpResponse &response)
+{
+    response.write("0",true);
 }
 
 void Server::finish()
@@ -154,12 +174,10 @@ void Server::finish()
 
 void testServer(QCoreApplication& app)
 {
-//    QCoreApplication app(argc, argv);
-
     // Load the configuration file
     QString runPath = QCoreApplication::applicationDirPath();
     qDebug()<<runPath;
-    QString configFileName="/Users/TY/Desktop/3p4go 2/webapp1.ini";
+    QString configFileName="/Users/TY/3p4go/webapp1.ini";
     //    QString configFileName="./webapp1.ini";
 
     qDebug()<<configFileName;
