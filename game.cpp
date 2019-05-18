@@ -309,52 +309,52 @@ MoveChain Game::sigRejected(IP ones_IP)
 
 }
 
-//bool Game::collectAllSig()
-//{
+bool Game::collectAllSig()
+{
 
-//}
+}
 
-//void Game::broadcastNewmove(MoveChain newMoveChain)
-//{
+void Game::broadcastNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//  /* For the others */
+  /* For the others */
 
-//bool Game::checkNewmove(MoveChain newMoveChain)
-//{
+bool Game::checkNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//void Game::acceptNewmove()
-//{
+void Game::acceptNewmove()
+{
 
-//}
+}
 
-//void Game::rejectNewmove()
-//{
+void Game::rejectNewmove()
+{
 
-//}
+}
 
-//MoveChain Game::updateNewmove(MoveChain newMoveChain)
-//{
+MoveChain Game::updateNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//bool Game::checkFinish()
-//{
+bool Game::checkFinish()
+{
 
-//}
+}
 
-//void Game::finish()
-//{
+void Game::finish()
+{
 
-//}
+}
 
-//void Game::history()
-//{
+void Game::history()
+{
 
-//}
+}
 
 
 
