@@ -300,7 +300,7 @@ public:
      * history chain with his signature to next player.
      */
 
-    void acceptForSig();
+    void acceptForSig(MoveChain newMoveChain);
 
     /*
      * Method: rejectForSig

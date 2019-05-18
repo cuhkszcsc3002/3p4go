@@ -278,15 +278,21 @@ void Game::respondToSig(int sigFlag)//sigFlag = NewmoveSig
 void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
 {
     Key2 publicKey = players[myIndex - 1].getPublicKey();
-    if (newMoveChain.checkLastSign(publicKey,lastSigIndex)){
-        setNewmoveSig(1);
+    if (newMoveChain.checkLastSign(publicKey, lastSigIndex)){
+        acceptForSig(newMoveChain);
     }else{
         setNewmoveSig(0);
     }
 }
 
-void Game::acceptForSig()
+void Game::acceptForSig(MoveChain newMoveChain)
 {
+    if (myIndex == 1)
+    {
+
+        client.sendForSig(newMoveChain, myIndex);
+        server.acceptSig();
+    }
     server.acceptSig();
 }
 
@@ -309,52 +315,52 @@ MoveChain Game::sigRejected(IP ones_IP)
 
 }
 
-//bool Game::collectAllSig()
-//{
+bool Game::collectAllSig()
+{
 
-//}
+}
 
-//void Game::broadcastNewmove(MoveChain newMoveChain)
-//{
+void Game::broadcastNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//  /* For the others */
+  /* For the others */
 
-//bool Game::checkNewmove(MoveChain newMoveChain)
-//{
+bool Game::checkNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//void Game::acceptNewmove()
-//{
+void Game::acceptNewmove()
+{
 
-//}
+}
 
-//void Game::rejectNewmove()
-//{
+void Game::rejectNewmove()
+{
 
-//}
+}
 
-//MoveChain Game::updateNewmove(MoveChain newMoveChain)
-//{
+MoveChain Game::updateNewmove(MoveChain newMoveChain)
+{
 
-//}
+}
 
-//bool Game::checkFinish()
-//{
+bool Game::checkFinish()
+{
 
-//}
+}
 
-//void Game::finish()
-//{
+void Game::finish()
+{
 
-//}
+}
 
-//void Game::history()
-//{
+void Game::history()
+{
 
-//}
+}
 
 
 
