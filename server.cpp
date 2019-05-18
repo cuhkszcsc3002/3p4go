@@ -26,14 +26,14 @@ void Server::run(int avaliablePort=8080)
     settings.setValue("readTimeout",60000);
     settings.setValue("maxRequestSize",16000);
     settings.setValue("maxMultiPartSize",10000000);
-
+    settings.endGroup();
     settings.beginGroup("sessions");
     settings.setValue("expirationTime",3600000);
     settings.setValue("cookieName","sessionid");
     settings.setValue("cookiePath","/");
     settings.setValue("cookieComment","Identifies the user");
+    settings.endGroup();
 
-//    QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,game->app);
 
     QSettings* sessionSettings=&settings;
 
@@ -42,11 +42,7 @@ void Server::run(int avaliablePort=8080)
 
     RequestMapper::sessionStore=new HttpSessionStore(sessionSettings, game->app);
 
-    // Start the HTTP server
-//    QSettings* listenerSettings=new QSettings(configFileName, QSettings::IniFormat, game->app);
-
     QSettings* listenerSettings=&settings;
-
 
     listenerSettings->beginGroup("listener");
 
@@ -97,11 +93,3 @@ void Server::finish()
 
 }
 
-
-void testServer(QCoreApplication& app)
-{
-    // Load the configuration file
-
-
-//    return app.exec();
-}
