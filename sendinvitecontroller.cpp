@@ -1,10 +1,10 @@
 #include "sendinvitecontroller.h"
 
 SendInviteController::SendInviteController(QObject* parent)
-    : HttpRequestHandler(parent) {
-    qDebug()<<"12";
+    : HttpRequestHandler(parent)
+{
 }
 
 void SendInviteController::service(HttpRequest &request, HttpResponse &response) {
-    response.write("Hello World",true);
+    response.write("sendinvite",true);
 }

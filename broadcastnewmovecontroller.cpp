@@ -6,5 +6,5 @@ BroadcastNewMoveController::BroadcastNewMoveController(QObject* parent)
 }
 
 void BroadcastNewMoveController::service(HttpRequest &request, HttpResponse &response) {
-    response.write("Hello World",true);
+    response.write("broadcastmove",true);
 }
