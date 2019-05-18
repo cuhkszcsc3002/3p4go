@@ -197,21 +197,24 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 }
 
 /* I think this method need a signal from client to trigger */
-void Game::receiveInvite(IP host_Ip)
+void Game::receiveInvite(IP host_Ip, HttpResponse &response)
 {
+    receiveInviteRes = &response;
     gui->receiveInvite();
     //change gui signal? store host_IP in players[0]?
 }
 
-// can these methods (triggered by signal) find "response"?
-void Game::acceptInvite(HttpResponse &response)
+// TO DO: need to store "response" into receiveInviteRes!
+void Game::acceptInvite()
 {
+    HttpResponse &response = *receiveInviteRes;
     setAvailableFlag(0);
     server.replyInvite(response, 1);
 }
 
-void Game::rejectInvite(HttpResponse &response)
+void Game::rejectInvite()
 {
+    HttpResponse &response = *receiveInviteRes;
     server.replyInvite(response, 0);
 }
 

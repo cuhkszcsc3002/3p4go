@@ -26,8 +26,8 @@ port::port(QWidget *parent) : QWidget(parent)
     connect(exit, SIGNAL(clicked()), this, SLOT(exitClicked()));
 
     setLayout(mainLayout);
-    setFixedWidth(sizeHint().width());
-    setFixedHeight(sizeHint().height());
+    setFixedWidth(sizeHint().width()+300);
+    setFixedHeight(sizeHint().height()+300);
     setWindowTitle(tr("Please proveide your port"));
 }
 
