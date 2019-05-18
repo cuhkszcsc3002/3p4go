@@ -21,23 +21,29 @@ login::login(QWidget *parent) : QWidget (parent)
     host = new QLabel(tr("Host"));
 
 
-    player1IP = new QLineEdit();
-    player2IP = new QLineEdit();
-    player1Port = new QLineEdit();
-    player2Port = new QLineEdit();
-    hostIP = new QLineEdit();
+    player1IP = new QLineEdit;
+    player2IP = new QLineEdit;
+    player1Port = new QLineEdit;
+    player2Port = new QLineEdit;
+    hostIP = new QLineEdit;
     hostIP->setText(myIP); //alternate: QString::fromStdString(ipAddress)
 
-//    player1IP->setMaxLength(25);
+    QFont font("Arial", 8, 50, false);
+    player1IP->setMaxLength(25);
     player1IP->setAlignment(Qt::AlignLeft);
-//    player1IP->setFixedWidth(250);
+    player1IP->setFont(font);
 
-//    player2IP->setMaxLength(25);
+    player2IP->setMaxLength(25);
     player2IP->setAlignment(Qt::AlignLeft);
-//    player2IP->setFixedWidth(250);
+    player2IP->setFont(font);
 
+    player1Port->setMaxLength(25);
     player1Port->setAlignment(Qt::AlignLeft);
+    player1Port->setFont(font);
+
+    player2Port->setMaxLength(25);
     player2Port->setAlignment(Qt::AlignLeft);
+    player2Port->setFont(font);
 
     hostIP->setMaxLength(25);
     hostIP->setAlignment(Qt::AlignLeft);
