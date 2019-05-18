@@ -345,7 +345,7 @@ void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
             /* TO DO might need to wait for a wile*/
 //            QTimer timer;
 //            timer.
-            collectAllSig();
+            broadcastNewmove();
     }
 }
 
@@ -381,13 +381,12 @@ MoveChain Game::sigRejected()
 
 }
 
-bool Game::collectAllSig()
+void Game::broadcastNewmove()
 {
-
-}
-
-void Game::broadcastNewmove(MoveChain newMoveChain)
-{
+    if (client.broadcastNewMove() == false)
+    {
+        //TO DO: if other don't accept your moveChain, you need to broadcast again
+    }
 
 }
 
@@ -395,12 +394,18 @@ void Game::broadcastNewmove(MoveChain newMoveChain)
 
 bool Game::checkNewmove(MoveChain newMoveChain)
 {
-
+    if ((this->localMoveChain <= newMoveChain) && (localMoveChain.verifyNewMove(newMoveChain.moveList[newMoveChain.length()-1])))
+    {
+        acceptNewmove(newMoveChain);
+    }else{
+        rejectNewmove();
+    }
 }
 
-void Game::acceptNewmove()
+void Game::acceptNewmove(MoveChain newMoveChain)
 {
-
+    server.acceptNewMove()
+    updateNewmove(newMoveChain);
 }
 
 void Game::rejectNewmove()
@@ -408,9 +413,9 @@ void Game::rejectNewmove()
 
 }
 
-MoveChain Game::updateNewmove(MoveChain newMoveChain)
+void Game::updateNewmove(MoveChain newMoveChain)
 {
-
+    this->localMoveChain = newMoveChain;
 }
 
 bool Game::checkFinish()

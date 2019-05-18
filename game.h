@@ -372,7 +372,7 @@ public:
      * broadcastTimes equal to 2.
      */
 
-    void broadcastNewmove(MoveChain newMoveChain);
+    void broadcastNewmove();
 
   /* For the others */
 
@@ -400,7 +400,7 @@ public:
      * returns 1, and used to call Server.acceptNewmove().
      */
 
-    void acceptNewmove();
+    void acceptNewmove(MoveChain newMoveChain);
 
     /*
      * Method: rejectNewmove
@@ -422,7 +422,7 @@ public:
      * newmoveSig will be changed back to 0.
      */
 
-    MoveChain updateNewmove(MoveChain newMoveChain);
+    void updateNewmove(MoveChain newMoveChain);
 
 
     /*
