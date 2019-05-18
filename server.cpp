@@ -34,82 +34,19 @@ void Server::run()
 };
 
 
-int Server::receiveInvite()
+int Server::replyInvite(HttpResponse & response,int result)
 {
-
-    QString url="http://127.0.0.1:8080/sendInvite";
-
-//    SendInviteController();
+    if (result==1)
+    {
+        response.write("1",true);
+    }
+    else
+    {
+        response.write("0",true);
+    }
 
 }
 
-int Server::replyInvite()
-{
-
-}
-
-QString Server::receivePlayerInfo()
-{
-    QString url="http://127.0.0.1:8080/sendPlayerInfo";
-
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QNetworkRequest request;
-    QUrl qurl = QUrl(url);
-
-    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
-
-    request.setUrl(url);
-
-    QNetworkReply * reply = manager->post(request, dataArray);
-
-    QEventLoop eventLoop;
-
-    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
-
-    QByteArray playerInfo = reply->readAll();
-    QString stringInfo=playerInfo;
-
-    qDebug()<<stringInfo;
-
-    return stringInfo;
-
-
-}
-
-MoveChain Server::receiveSigReq()
-{
-    QString url="http://127.0.0.1:8080/sendForSig";
-
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-
-    QNetworkRequest request;
-    QUrl qurl = QUrl(url);
-
-    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
-
-    request.setUrl(url);
-
-    QNetworkReply * reply = manager->post(request, dataArray);
-
-    QEventLoop eventLoop;
-
-    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
-
-    QByteArray arraySig = reply->readAll();
-
-    QString stringSig=arraySig;
-
-    MoveChain chainSig=stringSig;
-
-    qDebug()<<stringSig<<"move";
-
-//    qDebug()<<"hellohahah";
-
-    return chainSig;
-
-}
 
 void Server::rejectSig(HttpResponse & response)
 {
@@ -117,42 +54,10 @@ void Server::rejectSig(HttpResponse & response)
 
 }
 
+
 void Server::acceptSig(HttpResponse &response)
 {
     response.write("1",true);
-}
-
-
-
-MoveChain Server::receiveNewMove()
-{
-    QString url="http://127.0.0.1:8080/boardcastNewMove";
-
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QNetworkRequest request;
-    QUrl qurl = QUrl(url);
-
-    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
-
-    request.setUrl(url);
-
-    QNetworkReply * reply = manager->post(request, dataArray);
-
-    QEventLoop eventLoop;
-
-    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
-
-    QByteArray arrayMove = reply->readAll();
-
-    QString stringMove=arrayMove;
-
-    MoveChain chainMove=stringMove;
-
-    qDebug()<<stringMove;
-
-    return chainMove;
-
 }
 
 
@@ -161,15 +66,18 @@ void Server::acceptNewMove(HttpResponse &response)
     response.write("1",true);
 }
 
+
 void Server::rejectNewMove(HttpResponse &response)
 {
     response.write("0",true);
 }
 
+
 void Server::finish()
 {
 
 }
+
 
 void testServer(QCoreApplication& app)
 {
