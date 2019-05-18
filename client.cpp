@@ -7,23 +7,26 @@ Client::Client()
 
 IP Client::getLocalIP()
 {
+    qDebug() << "Getting Local IP. . .";
     QString ipAddress = getLocalIPAddress();
     IP local;
     local.setAddressFromString(ipAddress);
     QList<Key2> keys = RSA2::generateKey();
     local.setPublicKey(keys[0]);
     local.setPrivateKey(keys[1]);
+    qDebug() << "Local IP:" << local;
     return local;
 }
 
 QString Client::getLocalIPAddress()
 {
+    qDebug() << "Getting Local IP Address . . .";
     QList<QNetworkInterface> allInterfaces = QNetworkInterface::allInterfaces();
     QNetworkInterface eth;
 
     QString localHostName = QHostInfo::localHostName();
     QHostInfo info = QHostInfo::fromName(localHostName);
-    qDebug() << info.addresses();
+//    qDebug() << info.addresses();
     QString localIPAddress = "";
     QList<QHostAddress> listAddress = QNetworkInterface::allAddresses();
     for(int j = 0; j < listAddress.size(); j++){
@@ -31,6 +34,7 @@ QString Client::getLocalIPAddress()
           && listAddress.at(j).protocol() == QAbstractSocket::IPv4Protocol
           && listAddress.at(j) != QHostAddress::LocalHost){
               localIPAddress = listAddress.at(j).toString();
+              qDebug() << "Local IP Address Received: "<< localIPAddress;
               return localIPAddress;
       }
     }
@@ -52,6 +56,7 @@ QString Client::getLocalIPAddress()
 
 void Client::init(Game * g)
 {
+    qDebug() << "Client init.";
     game = g;
 }
 
@@ -102,6 +107,7 @@ int Client::sendInvite(int playerIndex)
     data.insert("port", myIP.getPort());
 
     qDebug() << "Send Invite: url:" << url << endl << "data:" << data;
+
     QJsonDocument document(data);
 
     // 3. Received feedback, and save the publicKey in ip.
@@ -132,6 +138,8 @@ int Client::sendInvite(int playerIndex)
 
 int Client::sendPlayerInfo()
 {
+    qDebug() << "Send Player Info . . .";
+
     // 1. Encode the playerInfo in a json.
     QJsonArray array;
     for (IP &player: game->players) {
@@ -152,20 +160,23 @@ int Client::sendPlayerInfo()
         QString resultString = postRequest(url, document);
         if (resultString=="1")
         {
+            qDebug() << "Send Player Info 1: Success";
             continue; // To the next player.
         }
         else {
+            qDebug() << "Send Player Info 1: Fail";
             return 0;
         }
     }
 
     // 3. Return
-
+    qDebug() << "Send Player Info Success.";
     return 1;
 }
 
 int Client::sendForSig()
 {
+    qDebug() << "Send For Sig . . .";
     // 1. Fetch the whole MoveChain and encode.
     MoveChain & mc = game->localMoveChain;
     QString moveChainString = mc.toJsonString();
@@ -182,9 +193,11 @@ int Client::sendForSig()
     // 3. Return
     if (resultString=="1")
     {
+        qDebug() << "Send For Sig Success.";
         return 1;
     }
     else {
+        qDebug() << "Send For Sig Fail.";
         return 0;
     }
 
@@ -192,6 +205,7 @@ int Client::sendForSig()
 
 int Client::sendForSig(const MoveChain &mc, int playerIndex)
 {
+    qDebug() << "Send For Sig . . .";
     // 1. Fetch the whole MoveChain and encode.
     QString moveChainString = mc.toJsonString();
 
@@ -207,15 +221,18 @@ int Client::sendForSig(const MoveChain &mc, int playerIndex)
     // 3. Return
     if (resultString=="1")
     {
+        qDebug() << "Send For Sig Success.";
         return 1;
     }
     else {
+        qDebug() << "Send For Sig Fail.";
         return 0;
     }
 }
 
 int Client::broadcastNewMove()
 {
+    qDebug() << "Broadcast New Move . . .";
     // 1. Fetch the whole MoveChain and enocde.
     MoveChain & mc = game->localMoveChain;
     QString moveChainString = mc.toJsonString();
@@ -232,15 +249,18 @@ int Client::broadcastNewMove()
             QString resultString = postRequest(url, document);
             if (resultString=="1")
             {
+                qDebug() << "Broadcast New Move 1 Success.";
                 continue;
             }
             else {
+                qDebug() << "Broadcast New Move Fail.";
                 return 0;
             }
         }
     }
 
     // 3. Return
+    qDebug() << "Broadcast New Move Success.";
     return 1;
 }
 

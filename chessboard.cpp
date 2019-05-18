@@ -18,7 +18,7 @@ chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
 {
     isJump = false;
     this->resize(1050, 990);            //set the size of the window
-    this->grabKeyboard();               //catch the input of keyboard
+    //this->grabKeyboard();               //catch the input of keyboard
 
 
     /* Initialization of some parameters of the chessbaord:

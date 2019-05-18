@@ -5,11 +5,6 @@
 #include <QtWidgets>
 #include <string>
 
-namespace Ui {
-class MainWindow;
-}
-
-
 class login : public QWidget
 {
     Q_OBJECT
@@ -17,8 +12,6 @@ class login : public QWidget
 public:
     login(QWidget *parent = nullptr);
     ~login();
-
-
 
     /* SLOT section:
      *
@@ -63,10 +56,6 @@ signals:
     void emitInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 
 private:
-    char *ip;
-    std::string ipAddress = "";
-    QString myIP;
-
     QLineEdit *player1IP;
     QLineEdit *player1Port;
     QLineEdit *player2IP;

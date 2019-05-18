@@ -4,11 +4,7 @@
 
 login::login(QWidget *parent) : QWidget (parent)
 {
-    ip = new char[16];
-    ipAddress = ip;
-    myIP = ip;
-
-    this->resize(QSize(600,400));
+    this->resize(QSize(600,500));
 
     invite = new QPushButton(tr("Start 3P4GO (Alt+&s)"));
     exit = new QPushButton(tr("Exit (Alt+&e)"));
@@ -26,29 +22,28 @@ login::login(QWidget *parent) : QWidget (parent)
     player1Port = new QLineEdit;
     player2Port = new QLineEdit;
     hostIP = new QLineEdit;
-    hostIP->setText(myIP); //alternate: QString::fromStdString(ipAddress)
+//    hostIP->setText(myIP); //alternate: QString::fromStdString(ipAddress)
 
-    QFont font("Arial", 8, 50, false);
     player1IP->setMaxLength(25);
     player1IP->setAlignment(Qt::AlignLeft);
-    player1IP->setFont(font);
+    player1IP->setReadOnly(false);
 
     player2IP->setMaxLength(25);
     player2IP->setAlignment(Qt::AlignLeft);
-    player2IP->setFont(font);
+    player2IP->setReadOnly(false);
 
     player1Port->setMaxLength(25);
     player1Port->setAlignment(Qt::AlignLeft);
-    player1Port->setFont(font);
+    player1Port->setReadOnly(false);
 
     player2Port->setMaxLength(25);
     player2Port->setAlignment(Qt::AlignLeft);
-    player2Port->setFont(font);
+    player2Port->setReadOnly(false);
 
     hostIP->setMaxLength(25);
     hostIP->setAlignment(Qt::AlignLeft);
     hostIP->setFixedWidth(250);
-    hostIP->setReadOnly(true);
+//    hostIP->setReadOnly(true);
 
     p1Layout = new QHBoxLayout;
     p2Layout = new QHBoxLayout;
@@ -137,14 +132,14 @@ login::login(QWidget *parent) : QWidget (parent)
 
 login::~login()
 {
-    delete ip;          delete invite;      delete exit;        delete check;
+    delete mainLayout;  delete invite;      delete exit;        delete check;
     delete p1ip;        delete p2ip;        delete p1port;      delete p2port;
     delete host;        delete player1IP;   delete player2IP;   delete player1Port;
     delete player2Port; delete hostIP;      delete p1Layout;    delete p2Layout;
     delete hostLayout;  delete port1Layout; delete port2Layout; delete p1IPLayout;
     delete p2IPLayout;  delete p1PortLayout;delete p2PortLayout;delete hostIPLayout;
     delete editorLayout;delete buttonLayout;delete ipLayout;    delete portLayout;
-    delete userLayout;  delete userPortlayout;delete mainLayout;
+    delete userLayout;  delete userPortlayout;
 }
 
 void login::exitClick()
@@ -166,7 +161,7 @@ void login::inviteClicked()
 
     emit showTransfer();
     emit emitInvite(p1IP, p2IP, p1Port, p2Port);
-    qDebug() << "Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
+    qDebug() << "GUI.Login: Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
 }
 
 void login::startReceived()
