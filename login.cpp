@@ -5,7 +5,6 @@
 login::login(QWidget *parent) : QWidget (parent)
 {
     ip = new char[16];
-    //GetLocalIP(ip);
     ipAddress = ip;
     myIP = ip;
 
@@ -131,7 +130,16 @@ login::login(QWidget *parent) : QWidget (parent)
 }
 
 login::~login()
-{}
+{
+    delete ip;          delete invite;      delete exit;        delete check;
+    delete p1ip;        delete p2ip;        delete p1port;      delete p2port;
+    delete host;        delete player1IP;   delete player2IP;   delete player1Port;
+    delete player2Port; delete hostIP;      delete p1Layout;    delete p2Layout;
+    delete hostLayout;  delete port1Layout; delete port2Layout; delete p1IPLayout;
+    delete p2IPLayout;  delete p1PortLayout;delete p2PortLayout;delete hostIPLayout;
+    delete editorLayout;delete buttonLayout;delete ipLayout;    delete portLayout;
+    delete userLayout;  delete userPortlayout;delete mainLayout;
+}
 
 void login::exitClick()
 {

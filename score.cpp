@@ -19,20 +19,20 @@ score::score(QWidget *parent) : QDialog (parent)
 
     back = new QPushButton("Back (Alt+&b)");
 
-    QLabel *WinShow = new QLabel(tr("Wins: "));
-    QLabel *LoseShow = new QLabel(tr("Lose: "));
-    QLabel *TotalShow = new QLabel(tr("Total Socre: "));
+    WinShow = new QLabel(tr("Wins: "));
+    LoseShow = new QLabel(tr("Lose: "));
+    TotalShow = new QLabel(tr("Total Socre: "));
 
-    QLabel *WinSocre = new QLabel(getWin());
-    QLabel *LoseScore = new QLabel(getLose());
-    QLabel *TotalScore = new QLabel(getTotalScore());
+    WinSocre = new QLabel(getWin());
+    LoseScore = new QLabel(getLose());
+    TotalScore = new QLabel(getTotalScore());
 
-    QHBoxLayout *Win = new QHBoxLayout();
-    QHBoxLayout *Lose = new QHBoxLayout();
-    QHBoxLayout *Total = new QHBoxLayout();
-    QHBoxLayout *Button = new QHBoxLayout();
+    Win = new QHBoxLayout();
+    Lose = new QHBoxLayout();
+    Total = new QHBoxLayout();
+    Button = new QHBoxLayout();
 
-    QVBoxLayout *MainLayout = new QVBoxLayout();
+    MainLayout = new QVBoxLayout();
 
     Win->addStretch();
     Win->addWidget(WinShow);
@@ -62,7 +62,11 @@ score::score(QWidget *parent) : QDialog (parent)
 }
 
 score::~score()
-{}
+{
+    delete back;    delete WinShow;     delete LoseShow;    delete TotalShow;
+    delete WinSocre;delete LoseScore;   delete TotalScore;  delete Win;
+    delete Lose;    delete Total;       delete Button;      delete MainLayout;
+}
 
 void score::readScore()
 {

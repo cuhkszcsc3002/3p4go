@@ -42,20 +42,12 @@ chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
     palette.setColor(QPalette::Background, QColor("#B1723C"));
     this->setPalette(palette);
     setMouseTracking(true);
-
-    /* Testing case of chess stones */
-    Stone.push_back("0,0,1");
-    Stone.push_back("10,10,2");
-    Stone.push_back("9,-9,3");
-    Stone.push_back("9,-10,1");
-//    Stone.push_back("0,0,1");
-//    Stone.push_back("0,0,1");
-//    Stone.push_back("0,0,1");
-//    Stone.push_back("0,0,1");
-
 }
 
-chessBoard::~chessBoard(){
+chessBoard::~chessBoard()
+{
+    delete phyLocation;     delete logLocation; delete leftBoundAxis;
+    delete rightBoundAxis;  delete upBoundAxis; delete downBoundAxis;
 }
 
 
@@ -369,8 +361,4 @@ void chessBoard::setMyIndex(int myIndex)
 {
     this->myIndex = myIndex;
 }
-
-
-
-
 

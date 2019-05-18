@@ -22,7 +22,8 @@ signals:
 
 private:
     QPushButton *comfirm;
+    QLabel *message;
+    QVBoxLayout *layout;
 };
-
 
 #endif // TRANSFER_H

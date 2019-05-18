@@ -36,7 +36,11 @@ inviteReceive::inviteReceive(QWidget *parent) : QDialog (parent)
 }
 
 inviteReceive::~inviteReceive()
-{}
+{
+    delete acceptInvite;    delete rejectInvite;
+    delete info;            delete button;
+    delete information;     delete mainLayout;
+}
 
 //
 void inviteReceive::receiveInvite(const QString ipAddress)

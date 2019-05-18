@@ -20,6 +20,8 @@ private slots:
 private:
     QPushButton *exit;
     QLabel *message;
+    QHBoxLayout *layout1;
+    QVBoxLayout *layout2;
 };
 
 #endif // REJECT_H

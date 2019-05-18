@@ -36,6 +36,9 @@ private:
     QPushButton *again;
     QPushButton *exit;
     QLabel *message;
+    QHBoxLayout *layout1;
+    QHBoxLayout *layout2;
+    QVBoxLayout *layout3;
 };
 
 #endif // FINISH_H

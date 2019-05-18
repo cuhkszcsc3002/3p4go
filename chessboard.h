@@ -45,7 +45,6 @@ public:
     void pullMoveChain(MoveChain localMoveChain);
     void setMyIndex(int myIndex);
 
-
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *);
@@ -104,9 +103,6 @@ private:
 
     Ui::MainWindow *ui;
 
-
-    /* test stones*/
-    QVector<std::string> Stone;
     bool isJump;
 
 

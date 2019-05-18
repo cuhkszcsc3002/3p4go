@@ -32,6 +32,20 @@ private:
     int totalScore;
 
     QPushButton *back;
+    QLabel *WinShow;
+    QLabel *LoseShow;
+    QLabel *TotalShow;
+
+    QLabel *WinSocre;
+    QLabel *LoseScore;
+    QLabel *TotalScore ;
+
+    QHBoxLayout *Win;
+    QHBoxLayout *Lose;
+    QHBoxLayout *Total;
+    QHBoxLayout *Button;
+
+    QVBoxLayout *MainLayout;
 
 };
 

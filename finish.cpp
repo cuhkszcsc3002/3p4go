@@ -6,9 +6,9 @@ finish::finish(QWidget *parent) : QDialog (parent)
     again = new QPushButton();
     message = new QLabel();
 
-    QHBoxLayout *layout1 = new QHBoxLayout();
-    QHBoxLayout *layout2 = new QHBoxLayout();
-    QVBoxLayout *layout3 = new QVBoxLayout();
+    layout1 = new QHBoxLayout();
+    layout2 = new QHBoxLayout();
+    layout3 = new QVBoxLayout();
 
     exit->setText(tr("Exit (Alt+&b)"));
     again->setText(tr("Restart (Alt+&r)"));
@@ -33,7 +33,12 @@ finish::finish(QWidget *parent) : QDialog (parent)
     setWindowTitle(tr("Game over!"));
 }
 
-finish::~finish(){}
+finish::~finish()
+{
+    delete exit;    delete again;
+    delete message; delete layout1;
+    delete layout2; delete layout3;
+}
 
 void finish::exitClicked(){
     emit gameEixt();
