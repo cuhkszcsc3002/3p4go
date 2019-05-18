@@ -23,8 +23,8 @@ void GUI::init(Game *sgame)
 {
     qDebug() << "GUI.init: gui initialization start..."<<endl;
     log = new login;
-    scor = new score;
     qDebug() << "Middle"<<endl;
+    scor = new score;
     trans = new transfer;
     rej = new reject;
     invite = new inviteReceive;
