@@ -1,25 +1,19 @@
 
 HEADERS += server.h \
-    helloworldcontroller.h \
-    listdatacontroller.h \
-    logincontroller.h \
     requestmapper.h \
-    sendinvitecontroller.h \
-    sendplayerinfocontroller.h \
-    sendforsigcontroller.h \
-    $$PWD/broadcastnewmovecontroller.h
+    $$PWD/receiveforsigcontroller.h \
+    $$PWD/receiveinvitecontroller.h \
+    $$PWD/receiveplayerinfocontroller.h \
+    $$PWD/receivenewmovecontroller.h
 
 
 
 
 SOURCES += server.cpp \
-    helloworldcontroller.cpp \
-    listdatacontroller.cpp \
-    logincontroller.cpp \
     requestmapper.cpp \
-    sendinvitecontroller.cpp \
-    sendplayerinfocontroller.cpp \
-    sendforsigcontroller.cpp \
-    $$PWD/broadcastnewmovecontroller.cpp
+    $$PWD/receiveforsigcontroller.cpp \
+    $$PWD/receiveplayerinfocontroller.cpp \
+    $$PWD/receiveinvitecontroller.cpp \
+    $$PWD/receivenewmovecontroller.cpp
 
-OTHER_FILES += webapp1.ini
+OTHER_FILES += $$PWD/webapp1.ini

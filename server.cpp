@@ -39,30 +39,8 @@ int Server::receiveInvite()
 
     QString url="http://127.0.0.1:8080/sendInvite";
 
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QNetworkRequest request;
-    QUrl qurl = QUrl(url);
+//    SendInviteController();
 
-    QByteArray dataArray = QJsonDocument().toJson(QJsonDocument::Compact);
-
-    request.setUrl(url);
-//    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QNetworkReply * reply = manager->post(request, dataArray);
-
-    QEventLoop eventLoop;
-
-    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
-
-    QByteArray ipAddress = reply->readAll();
-
-    qDebug()<<ipAddress;
-    bool ok;
-    int result=ipAddress.toInt(&ok,10);
-    return result;
-
-//    return replyData;
 }
 
 int Server::replyInvite()
