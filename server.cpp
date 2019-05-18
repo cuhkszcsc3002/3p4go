@@ -86,6 +86,7 @@ MoveChain Server::receiveSigReq()
     QString url="http://127.0.0.1:8080/sendPlayerInfo";
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+
     QNetworkRequest request;
     QUrl qurl = QUrl(url);
 
