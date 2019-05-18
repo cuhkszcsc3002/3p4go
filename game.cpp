@@ -87,9 +87,8 @@ Game::~Game()
 void Game::init()
 {
     qDebug() << "GUI init started.";
-    port myPort;
-    QObject::connect(&myPort, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
-    setPort(&myPort);
+
+    //    setPort(&myPort);
 
     myIndex = -1;
     setAvailableFlag(1);
@@ -160,7 +159,11 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server.receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
-    gui->loginShow();
+    //gui->loginShow();
+
+    port myPort;
+    QObject::connect(&myPort, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
+    myPort.show();
 }
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
@@ -204,12 +207,12 @@ void Game::receiveInvite(IP host_Ip)
 void Game::acceptInvite(HttpResponse &response)
 {
     setAvailableFlag(0);
-//    server.replyInvite(response, 1);
+    server.replyInvite(response, 1);
 }
 
 void Game::rejectInvite(HttpResponse &response)
 {
-//    server.replyInvite(response, 0);
+    server.replyInvite(response, 0);
 }
 
 
