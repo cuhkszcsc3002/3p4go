@@ -12,10 +12,10 @@
 GUI::GUI(QWidget *parent) : QWidget (parent){}
 
 GUI::~GUI(){
-    delete log;     delete scor;
-    delete trans;   delete rej;
-    delete invite;  delete fini;
-    delete chess;
+//    delete log;     delete scor;
+//    delete trans;   delete rej;
+//    delete invite;  delete fini;
+//    delete chess;
 }
 
 
