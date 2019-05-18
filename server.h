@@ -55,7 +55,7 @@ public:
      * Usage: client.init(&game);
      */
 
-    void init(Game*);
+    void init(Game*,int avaliablePort);
 
 
     /*
@@ -65,7 +65,7 @@ public:
      * Usage: server.run();
      */
 
-    void run();
+    void run(int avaliablePort);
 
 
     /*
