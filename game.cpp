@@ -102,8 +102,11 @@ void Game::init()
     client.init(this);
     /* Initialization of the child class: GUI, Client, Server */
     gui->init(this);
+    qDebug() << "GUI init succeed.";
 
     //   server.init(this);
+
+    loginShow();
 
 }
 

@@ -34,7 +34,7 @@ void GUI::init(Game *sgame)
     QObject::connect(invite, SIGNAL(inviteAccept()), sgame, SLOT(acceptInvite()));
     QObject::connect(invite, SIGNAL(inviteReject()), sgame, SLOT(rejectInvite()));
     QObject::connect(chess, SIGNAL(pushMoveChain(MoveChain)), sgame, SLOT(newclick(MoveChain)));
-
+    qDebug() << "GUI init finish";
 }
 
 //void GUI::restartReceive(){

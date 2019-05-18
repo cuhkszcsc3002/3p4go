@@ -21,9 +21,15 @@ timer::timer(QWidget *parent) : QWidget (parent)
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 
-    QFont font1("Microsoft YaHei", 20, 20); //first arrtibute is the word style, second is word size, third is B
+    qDebug() << "Font1 test.";
+    QFont font1;
+    font1.setPointSize(20);
+    font1.setBold(true);
     message->setText(tr("The time remaining: "));
-    QFont font2("Microsoft YaHei", 20, 75);
+    qDebug() << "Font2 test.";
+    QFont font2;
+    font1.setPointSize(40);
+    font1.setBold(true);
     separator->setText(tr(":"));
     separator->setFrameShape (QFrame::Box);
     separator->setStyleSheet("border-width:1px; border-style:solid; border-color:rgb(255, 170, 0);");
@@ -36,6 +42,7 @@ timer::timer(QWidget *parent) : QWidget (parent)
     minute->setFrameShape (QFrame::Box);
     minute->setStyleSheet("border-width:1px; border-style:solid; border-color:rgb(255, 170, 0);");
     minute->setFont(font2);
+    qDebug() << "Font3 test.";
 
     hLayout->addStretch();
     hLayout->addWidget(minute);
