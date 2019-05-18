@@ -16,6 +16,7 @@
 #include "requestmapper.h"
 #include "movechain.h"
 
+
 class Game;
 
 class Server: public QObject
@@ -107,7 +108,7 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    int rejectSig();
+    void rejectSig(HttpResponse & response);
 
 
     /*
@@ -118,7 +119,7 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    int acceptSig();
+    void acceptSig(HttpResponse & response);
 
 
     /*
@@ -128,13 +129,13 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    QString receiveNewMove();
+    MoveChain receiveNewMove();
 
-//    TODO
-    int acceptNewMove();
 
-//    TODO
-    int rejectNewMove();
+    void acceptNewMove(HttpResponse & response);
+
+
+    void rejectNewMove(HttpResponse & response);
 
 
     /*
