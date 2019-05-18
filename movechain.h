@@ -129,6 +129,7 @@ public:
     bool checkLastWin() const; // default testMoveChain is the moveList.
     bool checkLastWin(const QList<Move>& testMoveChain) const;
 
+    bool signLast(QString newSign);
     bool signLast(QString newSign, int index);
 
     bool checkLastSign(const Key2 & publicKey, int index) const;

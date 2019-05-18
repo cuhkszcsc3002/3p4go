@@ -156,6 +156,12 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
     return false;
 }
 
+bool MoveChain::signLast(QString newSign)
+{
+    Q_ASSERT(moveList.length()>0);
+    return moveList.last().addSign(newSign, moveList.last().getSignatures().length());
+}
+
 bool MoveChain::signLast(QString newSign, int index)
 {
     Q_ASSERT(moveList.length()>0);
