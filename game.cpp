@@ -86,6 +86,9 @@ Game::~Game()
 
 void Game::init()
 {
+    int port;
+    std::cout << "Your PORT: ";
+    std::cin >> port;
     myIndex = -1;
     setAvailableFlag(1);
 
@@ -97,7 +100,7 @@ void Game::init()
     Q_ASSERT(localIP != NULL);
 
     myIP.setAddressFromString(localIP);
-//    myIP.setPort(Server::getPort());
+    myIP.setPort(port);
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
