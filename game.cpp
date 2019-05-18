@@ -77,11 +77,6 @@ void Game::setRestartF(int value)
     restartF = value;
 }
 
-Game::Game()
-{
-    // NOTE: Game::init(); 不要写在这里!单独调用init();
-}
-
 Game::~Game()
 {
 
@@ -191,12 +186,12 @@ void Game::receiveInvite(IP host_Ip)
 void Game::acceptInvite()
 {
     setAvailableFlag(0);
-    server.replyInvite(myIp, host_Ip);
+//    server.replyInvite(myIp, host_Ip);
 }
 
 void Game::rejectInvite()
 {
-    server.replyInvite(myIp, host_Ip);
+//    server.replyInvite(myIp, host_Ip);
 }
 
 
@@ -385,6 +380,7 @@ void Game::broadcastNewmove()
 {
     if (client.broadcastNewMove() == false)
     {
+
         //TO DO: if other don't accept your moveChain, you need to broadcast again
     }
 
@@ -392,25 +388,25 @@ void Game::broadcastNewmove()
 
   /* For the others */
 
-bool Game::checkNewmove(MoveChain newMoveChain)
+bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
 {
     if ((this->localMoveChain <= newMoveChain) && (localMoveChain.verifyNewMove(newMoveChain.moveList[newMoveChain.length()-1])))
     {
-        acceptNewmove(newMoveChain);
+        acceptNewmove(newMoveChain, response);
     }else{
-        rejectNewmove();
+        rejectNewmove(response);
     }
 }
 
-void Game::acceptNewmove(MoveChain newMoveChain)
+void Game::acceptNewmove(MoveChain newMoveChain, HttpResponse &response)
 {
-    server.acceptNewMove()
+    server.acceptNewMove(response);
     updateNewmove(newMoveChain);
 }
 
-void Game::rejectNewmove()
+void Game::rejectNewmove(HttpResponse &response)
 {
-
+    server.acceptNewMove(response);
 }
 
 void Game::updateNewmove(MoveChain newMoveChain)
@@ -420,12 +416,18 @@ void Game::updateNewmove(MoveChain newMoveChain)
 
 bool Game::checkFinish()
 {
-
+    if (this->localMoveChain.checkLastWin() == true)
+    {
+        finish();
+    }
 }
 
 void Game::finish()
 {
-
+    gui->gameFinish();
+    server.finish();
+    client.finish();
+    history();
 }
 
 void Game::history()
