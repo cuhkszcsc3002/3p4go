@@ -6,6 +6,10 @@
 #include "listdatacontroller.h"
 #include "logincontroller.h"
 #include "httpsessionstore.h"
+#include "sendforsigcontroller.h"
+#include "sendinvitecontroller.h"
+#include "sendplayerinfocontroller.h"
+#include "broadcastnewmovecontroller.h"
 
 using namespace stefanfrings;
 
@@ -19,6 +23,12 @@ private:
     HelloWorldController helloWorldController;
     ListDataController listDataController;
     LoginController loginController;
+
+    SendForSigController sendForSigController;
+    SendInviteController sendInviteController;
+    SendPlayerInfoController sendPlayerInfoController;
+    BroadcastNewMoveController broadcastNewMoveController;
+
 };
 
 #endif // REQUESTMAPPER_H

@@ -14,6 +14,7 @@
 #include "httplistener.h"
 #include "httprequesthandler.h"
 #include "requestmapper.h"
+#include "movechain.h"
 
 class Game;
 
@@ -85,7 +86,6 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-
     QString receivePlayerInfo();
 
 
@@ -96,7 +96,7 @@ public:
      * Usage: int status = client.boardcastNewMove
      */
 
-    QString receiveSigReq();
+    MoveChain receiveSigReq();
 
 
     /*

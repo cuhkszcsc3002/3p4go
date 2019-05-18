@@ -1,15 +1,15 @@
-#ifndef HELLOWORLDCONTROLLER_H
-#define HELLOWORLDCONTROLLER_H
+#ifndef BROADCASTNEWMOVE_H
+#define BROADCASTNEWMOVE_H
 
 #include "httprequesthandler.h"
 
 using namespace stefanfrings;
 
-class HelloWorldController : public HttpRequestHandler {
+class BroadcastNewMoveController : public HttpRequestHandler {
     Q_OBJECT
 
 public:
-    HelloWorldController(QObject* parent=0);
+    BroadcastNewMoveController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 
