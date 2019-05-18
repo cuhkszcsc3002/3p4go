@@ -11,12 +11,25 @@ void ReceiveForSigController::service(HttpRequest &request, HttpResponse &respon
 {
 
     QByteArray data = request.getBody();
+
+    qDebug()<<data;
+
     QJsonDocument doc= QJsonDocument::fromJson(data);
+
+    qDebug()<<doc;
+
     QJsonObject obj = doc.object();
+
+    qDebug()<<obj;
+
     QString newMoveChainStr=obj.take("moveChain").toString();
+
+    qDebug()<<newMoveChainStr;
+
     MoveChain newMoveChain (newMoveChainStr);
+
     qDebug()<<"receive movechain: "<<newMoveChain.toJsonString();
-//    game->checkNewmove(newMoveChain,response);
-//    game->checkNewMove(newMoveChain, response);
+
+    game->validateForSig(newMoveChain,1,response);
 
 }

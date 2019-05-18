@@ -10,11 +10,15 @@ class Game;
 using namespace stefanfrings;
 
 class ReceiveNewMoveController : public HttpRequestHandler {
+
     Q_OBJECT
 
 public:
+
     Game *game;
+
     ReceiveNewMoveController(QObject* parent=0);
+
     void service(HttpRequest& request, HttpResponse& response);
 };
 
