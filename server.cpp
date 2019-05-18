@@ -73,7 +73,7 @@ QString Server::receivePlayerInfo()
 
 }
 
-QString Server::receiveSigReq()
+MoveChain Server::receiveSigReq()
 {
     QString url="http://127.0.0.1:8080/sendPlayerInfo";
 

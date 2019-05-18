@@ -225,7 +225,7 @@ int Client::broadcastNewMove()
         if (i != game->myIndex){
             IP & player = game->players[i];
             QString url = player.getAddress() + ":" + QString(player.getPort())
-                    + "/boardcastNewMove";
+                    + "/broadcastNewMove";
             QJsonObject obj;
             obj.insert("moveChain", moveChainString);
             QJsonDocument document(obj);

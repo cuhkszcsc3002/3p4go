@@ -92,20 +92,6 @@ class Game : public QObject
 //    IP lastPlayer;
 
     /*
-     * Game.newmoveSig stores the signature state of a newmove.
-     * Note: 0 represents the movechain has not passed to the player.
-     * 1 represents the signatures of newmove in the movechain
-     * are right, and it will trigger Game.acceptForSig().
-     * 2 represents there is something wrong with the signatures of
-     * newmove in the movechain, and it will trigger Game.rejectForSig().
-     * It will turn back to 0 in Game.updateNewmove().
-     * Order: You -> the next player -> the last player -> You
-     */
-
-    int newmoveSig = 0;
-
-
-    /*
      * Game.sendSigTimes stores how many times did the player send
      * history chain to others and be rejected.
      * Note: 0 represents the movechain has not passed to the player.
@@ -294,14 +280,15 @@ public:
      * Usage:
      * ---------------------------------------
      * This method is called by Server.receiveSigReq(),
-     * and used to prevent cheating. It will change the newmovechain
-     * from QString to movechain class, and check whether
-     * there are differences on the signatures of the newmove.
-     * It will change the Game.newmoveSig() to trigger other
-     * methods.
+     * and used to prevent cheating. It will call
+     * moveChain.checkLastSign(publicKey,lastSigIndex)
+     * to check whether there are differences on the
+     * signatures of the newmove until now.
+     * It will change the Game.newmoveSig() to trigger
+     * other methods.
      */
 
-    void validateForSig(QString newmovechain);
+    void validateForSig(MoveChain newMoveChain, int lastSigIndex);
 
     /*
      * Method: acceptForSig
@@ -326,6 +313,7 @@ public:
      */
 
     void rejectForSig();
+
 
 
  /* For players who have sent movechain with signatures to others */
@@ -541,7 +529,22 @@ private slots:
      */
 
     void newclick(MoveChain localMoveChain);
-};
+
+    void respondToSig(int sigFlag);
+
+signals:
+    /*
+     * Game.newmoveSig stores the signature state of a newmove.
+     * Note:
+     * 1 represents the signatures of newmove in the movechain
+     * are right, and it will trigger Game.acceptForSig().
+     * 0 represents there is something wrong with the signatures of
+     * newmove in the movechain, and it will trigger Game.rejectForSig().
+     * It will turn back to 0 in Game.updateNewmove().
+     * Order: You -> the next player -> the last player -> You
+     */
+
+    void newmoveSig(int sigFlag);
 
 #endif // GAME_H
 
@@ -554,4 +557,4 @@ ostream & operator<<(ostream & os, GameModel & rhs);
 string ReverseColor(string color);
 Player ReversePlayer(Player player);
 */
-
+};

@@ -112,6 +112,8 @@ void Game::init()
     client.init(this);
 
 
+    //signal
+    QObject::connect(this, SIGNAL(newmoveSig(int)), this, SLOT(respondToSig(int)));
 
 }
 
@@ -261,11 +263,22 @@ void Game::newclick(MoveChain localMoveChain)       //rules?!
     client.sendForSig();
 }
 
-void Game::validateForSig(QString newmovechain)
+void Game::respondToSig(int sigFlag)//sigFlag = NewmoveSig
 {
-    MoveChain newMoveChain;
-    //todo: trans QString newmovechain to  MoveChain newMoveChain
-    if (newMoveChain <= localMoveChain){
+    if (sigFlag == 0){
+        rejectForSig();
+    }else if(sigFlag == 1){
+        acceptForSig();
+    }else{
+        qDebug() << "Signatures Wrong!" <<endl;
+    }
+
+}
+
+void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
+{
+    Key2 publicKey = players[myIndex - 1].getPublicKey();
+    if (newMoveChain.checkLastSign(publicKey,lastSigIndex)){
         setNewmoveSig(1);
     }else{
         setNewmoveSig(0);
@@ -277,20 +290,24 @@ void Game::acceptForSig()
     server.acceptSig();
 }
 
+
+
 void Game::rejectForSig()
 {
     server.rejectSig();
 }
 
-//MoveChain Game::sigAccepted()
-//{
 
-//}
 
-//MoveChain Game::sigRejected(IP ones_IP)
-//{
+MoveChain Game::sigAccepted()
+{
 
-//}
+}
+
+MoveChain Game::sigRejected(IP ones_IP)
+{
+
+}
 
 //bool Game::collectAllSig()
 //{
