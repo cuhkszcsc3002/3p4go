@@ -40,6 +40,7 @@ class Game : public QObject
     Server server;
     GUI *gui;
     QCoreApplication * app;
+    port port;
 
     int Port;
 
@@ -94,6 +95,8 @@ class Game : public QObject
 //     */
 
 //    IP lastPlayer;
+
+    HttpResponse *receiveInviteRes;
 
     /*
      * Game.newmoveSig stores the signature state of a newmove.
@@ -173,7 +176,7 @@ public:
     /*
      * The set, get methods.
      */
-    void setPort(port *port);
+    void setPort();
     int getMyIndex() const;
     void setMyIndex(int value);
     bool getAvailableFlag() const;
@@ -215,7 +218,7 @@ public:
      * when the users is invited by the host.
      * It calls GUI.receiveInvite() and change the GUI signal.
      */
-    void receiveInvite(IP host_Ip);
+    void receiveInvite(IP host_Ip, HttpResponse &response);
 
     /* For the host*/
 
@@ -523,7 +526,7 @@ private slots:
      * can not invite him again and he can not invite others as a host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void acceptInvite(HttpResponse &response);
+    void acceptInvite();
 
     /*
      * Method: rejectInvite
@@ -533,7 +536,7 @@ private slots:
      * It represents that the player reject the invite from the host.
      * It also calls Server.replyInvite(), to inform the host.
      */
-    void rejectInvite(HttpResponse &response);
+    void rejectInvite();
 
     /*
      * Method: newclick
