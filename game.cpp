@@ -278,15 +278,20 @@ void Game::respondToSig(int sigFlag)//sigFlag = NewmoveSig
 void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
 {
     Key2 publicKey = players[myIndex - 1].getPublicKey();
-    if (newMoveChain.checkLastSign(publicKey,lastSigIndex)){
-        setNewmoveSig(1);
+    if (newMoveChain.checkLastSign(publicKey, lastSigIndex)){
+        acceptForSig(newMoveChain);
     }else{
         setNewmoveSig(0);
     }
 }
 
-void Game::acceptForSig()
+void Game::acceptForSig(MoveChain newMoveChain)
 {
+    if (myIndex == 1)
+    {
+
+        client.sendForSig(newMoveChain, myIndex);
+    }
     server.acceptSig();
 }
 
