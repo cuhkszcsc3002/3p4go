@@ -48,6 +48,7 @@ void GUI::init(Game *sgame)
 
 void GUI::loginShow(){
     log->show();
+
 }
 
 void GUI::receiveInvite(){
