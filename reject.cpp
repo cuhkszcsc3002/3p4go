@@ -4,8 +4,8 @@ reject::reject(QWidget *parent) : QDialog (parent)
 {
     exit = new QPushButton();
     message = new QLabel();
-    QHBoxLayout *layout1 = new QHBoxLayout;
-    QVBoxLayout *layout2 = new QVBoxLayout;
+    layout1 = new QHBoxLayout;
+    layout2 = new QVBoxLayout;
 
     exit->setText(tr("Exit (Alt+&b)"));
     message->setText(tr("PlayXXX reject you invite!"));
@@ -23,7 +23,10 @@ reject::reject(QWidget *parent) : QDialog (parent)
     setWindowTitle(tr("Oupps..."));
 }
 
-reject::~reject(){}
+reject::~reject()
+{
+    delete exit;    delete message; delete layout1; delete layout2;
+}
 
 void reject::exitClicked(){
     this->close();

@@ -63,7 +63,11 @@ timer::timer(QWidget *parent) : QWidget (parent)
     setWindowTitle(tr("Cautions! Timer is on..."));
 }
 
-timer::~timer(){}
+timer::~timer()
+{
+    delete tinyTimer;   delete message; delete separator;   delete second;
+    delete minute;      delete hLayout; delete vLayout;
+}
 
 void timer::onCount()
 {

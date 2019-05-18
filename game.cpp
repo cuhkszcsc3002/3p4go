@@ -88,11 +88,14 @@ void Game::init()
 {
     myIndex = -1;
     setAvailableFlag(1);
+
     players.append(IP());
     players.append(IP());
     players.append(IP());
+
     QString localIP = Client::getLocalIPAddress();
     Q_ASSERT(localIP != NULL);
+
     myIP.setAddressFromString(localIP);
 //    myIP.setPort(Server::getPort());
     QList<Key2> keys = RSA2::generateKey();

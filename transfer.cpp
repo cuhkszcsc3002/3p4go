@@ -1,14 +1,10 @@
 #include "transfer.h"
 #include <QtWidgets>
-//#include <QDialog>
-//#include <QLayout>
-//#include <QPushButton>
 
-transfer::transfer(QWidget *parent) : QDialog (parent)
-{
+transfer::transfer(QWidget *parent) : QDialog (parent){
     comfirm = new QPushButton;
-    QLabel *message = new QLabel;
-    QVBoxLayout *layout = new QVBoxLayout;
+    message = new QLabel;
+    layout = new QVBoxLayout;
 
     comfirm->setText(tr("Comfirm"));
     message->setText(tr("Waiting other user to start a new game. Please wait..."));
@@ -23,7 +19,10 @@ transfer::transfer(QWidget *parent) : QDialog (parent)
     setWindowTitle(tr("Strating a new 3P4GO..."));
 }
 
-transfer::~transfer(){}
+transfer::~transfer()
+{
+    delete comfirm;delete message;delete layout;
+}
 
 void transfer::receiveInvite(){
     this->show();
