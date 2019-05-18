@@ -149,6 +149,7 @@ void Game::loginShow()
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
 {
+    qDebug() << "Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
     setAvailableFlag(0);
     /* Storing guest player address information */
     IP player1, player2;

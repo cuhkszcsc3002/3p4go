@@ -152,6 +152,7 @@ void login::inviteClicked()
 
     emit showTransfer();
     emit emitInvite(p1IP, p2IP, p1Port, p2Port);
+    qDebug() << "Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
 }
 
 void login::startReceived()
