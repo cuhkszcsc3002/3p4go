@@ -289,7 +289,7 @@ void Game::acceptForSig(MoveChain newMoveChain)
 {
     if (myIndex == 1)
     {
-
+        newMoveChain.signLast();
         client.sendForSig(newMoveChain, myIndex);
         server.acceptSig();
     }
