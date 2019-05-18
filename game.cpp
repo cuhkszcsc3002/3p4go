@@ -86,6 +86,9 @@ Game::~Game()
 
 void Game::init()
 {
+    int port;
+    std::cout << "Your PORT: ";
+    std::cin >> port;
     myIndex = -1;
     setAvailableFlag(1);
 
@@ -97,7 +100,7 @@ void Game::init()
     Q_ASSERT(localIP != NULL);
 
     myIP.setAddressFromString(localIP);
-//    myIP.setPort(Server::getPort());
+    myIP.setPort(port);
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
@@ -155,6 +158,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     qDebug() << "Game.sendInvite: Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
     setAvailableFlag(0);
     /* Storing guest player address information */
+    players[0] = myIP;
     IP player1, player2;
     player1.setAddressFromString(p1IP);
     player1.setPort(p1Port.toInt());
@@ -162,6 +166,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     player2.setPort(p2Port.toInt());
     players[1] = player1;
     players[2] = player2;
+//    qDebug() << "Game.sendInvite: all IP are: " << players[0] << players[1] << players[2] << endl;
 
     /* Sending invite to guest players */
     int result = client.sendInvite(1);
