@@ -343,7 +343,7 @@ public:
      * If Game.sendSigTimes is 4, it will alarm.
      */
 
-    MoveChain sigRejected(IP ones_IP);
+    MoveChain sigRejected();
 
 
    /* For the one who own the newmove*/
