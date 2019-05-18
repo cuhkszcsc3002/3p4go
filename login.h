@@ -60,7 +60,7 @@ private slots:
 signals:
     void showTransfer();
     void showScore();
-    void emitInvit(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
+    void emitInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 
 private:
     char *ip;

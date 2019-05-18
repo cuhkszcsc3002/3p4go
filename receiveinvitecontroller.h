@@ -2,14 +2,19 @@
 #define SENDINVITECONTROLLER_H
 
 #include "httprequesthandler.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+
+class Game;
 
 using namespace stefanfrings;
 
-class SendInviteController: public HttpRequestHandler
+class ReceiveInviteController: public HttpRequestHandler
 {
     Q_OBJECT
 public:
-    SendInviteController(QObject* parent=0);
+    Game *game;
+    ReceiveInviteController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

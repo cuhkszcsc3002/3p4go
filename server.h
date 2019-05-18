@@ -15,6 +15,7 @@
 #include "httprequesthandler.h"
 #include "requestmapper.h"
 #include "movechain.h"
+//#include "game.h"
 
 
 class Game;
@@ -68,36 +69,13 @@ public:
 
 
     /*
-     * Method: receiveInvite
-     * Receive invite from client. The method will not return the response before the invite
-     * is allowed.
+     * Method: replyInvite
+     * After game response to the invite (accept or reject), get the result and pass it to client.
      * -------------------------------------------------------------------
      * Usage: server.receivite();
      */
 
-    int receiveInvite();
-
-    int replyInvite();
-
-
-    /*
-     * Method: receivePlayerInfo
-     * Receive the player's information from client and pass the information to game class.
-     * ---------------------------------------------------------------------------------------
-     * Usage: int status = client.boardcastNewMove
-     */
-
-    QString receivePlayerInfo();
-
-
-    /*
-     * Method: receiveSigReq
-     * Receive the signature request from client and pass to game for validation.
-     * ---------------------------------------------------------------------------------------
-     * Usage: int status = client.boardcastNewMove
-     */
-
-    MoveChain receiveSigReq();
+    int replyInvite(HttpResponse & response,int result);
 
 
     /*
@@ -123,17 +101,21 @@ public:
 
 
     /*
-     * Method: receiveNewMove
-     * Receive the move instruction from game after validated by Game.
+     * Method: acceptNewMove
+     * Return the accept response to client.
      * ---------------------------------------------------------------------------------------
-     * Usage: int status = client.boardcastNewMove
+     * Usage: void acceptNewMove(response);
      */
-
-    MoveChain receiveNewMove();
-
 
     void acceptNewMove(HttpResponse & response);
 
+
+    /*
+     * Method: rejectNewMove
+     * Return the accept response to client.
+     * ---------------------------------------------------------------------------------------
+     * Usage: void rejectNewMove(response);
+     */
 
     void rejectNewMove(HttpResponse & response);
 
@@ -144,7 +126,6 @@ public:
      * -------------------------------------------------------------------------------
      * Usage: server.finish();
      */
-
 
     void finish();
 };

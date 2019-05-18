@@ -151,7 +151,8 @@ void login::inviteClicked()
     QString p2Port = player2Port->text();
 
     emit showTransfer();
-    emit emitInvit(p1IP, p2IP, p1Port, p2Port);
+    emit emitInvite(p1IP, p2IP, p1Port, p2Port);
+    qDebug() << "Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
 }
 
 void login::startReceived()

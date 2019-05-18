@@ -2,14 +2,21 @@
 #define SENDFORSIGCONTROLLER_H
 
 #include "httprequesthandler.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+
+class Game;
+
 
 using namespace stefanfrings;
 
-class SendForSigController : public HttpRequestHandler {
+class ReceiveForSigController : public HttpRequestHandler
+{
     Q_OBJECT
 
 public:
-    SendForSigController(QObject* parent=0);
+    Game * game;
+    ReceiveForSigController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

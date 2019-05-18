@@ -2,14 +2,19 @@
 #define BROADCASTNEWMOVE_H
 
 #include "httprequesthandler.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+
+class Game;
 
 using namespace stefanfrings;
 
-class BroadcastNewMoveController : public HttpRequestHandler {
+class ReceiveNewMoveController : public HttpRequestHandler {
     Q_OBJECT
 
 public:
-    BroadcastNewMoveController(QObject* parent=0);
+    Game *game;
+    ReceiveNewMoveController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

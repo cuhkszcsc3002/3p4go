@@ -2,13 +2,21 @@
 #define SENDPLAYERINFOCONTROLLER_H
 
 #include "httprequesthandler.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+
+class Game;
+
 
 using namespace stefanfrings;
 
-class SendPlayerInfoController : public HttpRequestHandler {
+class ReceivePlayerInfoController : public HttpRequestHandler
+{
     Q_OBJECT
+
 public:
-    SendPlayerInfoController(QObject* parent=0);
+    Game * game;
+    ReceivePlayerInfoController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 
