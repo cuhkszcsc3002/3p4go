@@ -23,7 +23,7 @@
  *  4.3.1) If you are the host of move:
  *      mc.signLast(newSign, 0);
  *  4.3.2) If you are the guest of move:
- *      int yourIndex = (indexOfPlayer + indexOfMove) % 3;
+ *      int (my objective Index) = (3 + myIndex - playerIndex) % 3;
  *      mc.signLast(newSign, yourIndex);
  *
  * 5. Generate a json string, which can be sent out.

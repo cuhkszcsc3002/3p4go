@@ -260,68 +260,133 @@ void Game::startGame()
 void Game::newclick(MoveChain localMoveChain)       //rules?!
 {
     this->localMoveChain = localMoveChain;
-    client.sendForSig();
-}
-
-void Game::respondToSig(int sigFlag)//sigFlag = NewmoveSig
-{
-    if (sigFlag == 0){
-        rejectForSig();
-    }else if(sigFlag == 1){
-        acceptForSig();
-    }else{
-        qDebug() << "Signatures Wrong!" <<endl;
+    if (myIndex + 1 <= 2)
+    {
+        if (client.sendForSig(localMoveChain, myIndex+1) == false)
+            sigRejected();
     }
-
+    else
+    {
+        if (client.sendForSig(localMoveChain, 0) == false)
+            sigRejected();
+    }
 }
 
-void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
+void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex, HttpResponse & response)
 {
     Key2 publicKey = players[myIndex - 1].getPublicKey();
     if (newMoveChain.checkLastSign(publicKey, lastSigIndex)){
-        acceptForSig(newMoveChain);
+        acceptForSig(newMoveChain, response);
     }else{
-        setNewmoveSig(0);
+        rejectForSig(newMoveChain, response);
     }
 }
 
-void Game::acceptForSig(MoveChain newMoveChain)
+void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
 {
-    if (myIndex == 1)
+    /* If I am the first player right after the movel */
+    if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 1)
     {
+        QString absStr = newMoveChain.abstract();
+        QString newSign = RSA2::generateSign(absStr, myIP.getPrivateKey());
 
-        client.sendForSig(newMoveChain, myIndex);
-        server.acceptSig();
+        /* If the signature is successfully appended */
+        if(newMoveChain.signLast(newSign))
+        {
+            /* Send the new signature to the next player for check */
+            if(myIndex+1 <= 2)
+            {
+                if (client.sendForSig(newMoveChain, myIndex+1))
+                {
+                    /* Return the new signature back to the privious movel if I get the respond from next player */
+                    server.acceptSig(response);
+                }
+            }
+            else
+            {
+                if (client.sendForSig(newMoveChain, 0))
+                {
+                    /* Return the new signature back to the privious movel if I get the respond from next player */
+                    server.acceptSig(response);
+                }
+            }
+        }
+        else
+            qDebug()<<"Append Signature Fail! "<<endl;
     }
-    server.acceptSig();
+    /* If I am the second player right after the movel */
+    else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 2)
+    {
+        QString absStr = newMoveChain.abstract();
+        QString newSign = RSA2::generateSign(absStr, myIP.getPrivateKey());
+
+        if(newMoveChain.signLast(newSign))
+        {
+            /* Return the new signature back to the privious movel */
+            server.acceptSig(response);
+            /* Send the new signature to the next player for check */
+            /* TO DO might need to wait for a wile*/
+//            QTimer timer;
+//            timer.
+            if(myIndex+1 <= 2)
+                client.sendForSig(newMoveChain, myIndex+1);
+            else
+                client.sendForSig(newMoveChain, 0);
+        }
+        else
+            qDebug()<<"Append Signature Fail! "<<endl;
+    }
+    /* If I am the third player (back to myself) right after the movel */
+    else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 0)
+    {
+            /* Return the new signature back to the privious movel */
+            server.acceptSig(response);
+            /* Since the signature go back to movel itself and nothing is wrong, hence the movel can broadcast now */
+            /* TO DO might need to wait for a wile*/
+//            QTimer timer;
+//            timer.
+            broadcastNewmove();
+    }
 }
 
 
 
-void Game::rejectForSig()
+void Game::rejectForSig(MoveChain newMoveChain, HttpResponse &response)
 {
-    server.rejectSig();
+    /* If I am the first player right after the movel */
+    if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 1)
+    {
+        server.rejectSig(response);
+    }
+    /* If I am the second player right after the movel */
+    else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 2)
+    {
+        server.rejectSig(response);
+    }
+    /* If I am the third player (back to myself) right after the movel */
+    else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 2)
+    {
+        server.rejectSig(response);
+    }
+
 }
 
-
-
-MoveChain Game::sigAccepted()
+MoveChain Game::sigAccepted()//
 {
 
 }
 
-MoveChain Game::sigRejected(IP ones_IP)
+MoveChain Game::sigRejected()
 {
 
 }
 
-bool Game::collectAllSig()
+void Game::broadcastNewmove()
 {
-
-}
-
-void Game::broadcastNewmove(MoveChain newMoveChain)
-{
+    if (client.broadcastNewMove() == false)
+    {
+        //TO DO: if other don't accept your moveChain, you need to broadcast again
+    }
 
 }
 
@@ -329,12 +394,18 @@ void Game::broadcastNewmove(MoveChain newMoveChain)
 
 bool Game::checkNewmove(MoveChain newMoveChain)
 {
-
+    if ((this->localMoveChain <= newMoveChain) && (localMoveChain.verifyNewMove(newMoveChain.moveList[newMoveChain.length()-1])))
+    {
+        acceptNewmove(newMoveChain);
+    }else{
+        rejectNewmove();
+    }
 }
 
-void Game::acceptNewmove()
+void Game::acceptNewmove(MoveChain newMoveChain)
 {
-
+    server.acceptNewMove()
+    updateNewmove(newMoveChain);
 }
 
 void Game::rejectNewmove()
@@ -342,9 +413,9 @@ void Game::rejectNewmove()
 
 }
 
-MoveChain Game::updateNewmove(MoveChain newMoveChain)
+void Game::updateNewmove(MoveChain newMoveChain)
 {
-
+    this->localMoveChain = newMoveChain;
 }
 
 bool Game::checkFinish()

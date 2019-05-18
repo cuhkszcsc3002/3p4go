@@ -288,7 +288,7 @@ public:
      * other methods.
      */
 
-    void validateForSig(MoveChain newMoveChain, int lastSigIndex);
+    void validateForSig(MoveChain newMoveChain, int lastSigIndex, HttpResponse &response);
 
     /*
      * Method: acceptForSig
@@ -300,7 +300,7 @@ public:
      * history chain with his signature to next player.
      */
 
-    void acceptForSig(MoveChain newMoveChain);
+    void acceptForSig(MoveChain newMoveChain, HttpResponse &response);
 
     /*
      * Method: rejectForSig
@@ -312,7 +312,7 @@ public:
      * chain to him.
      */
 
-    void rejectForSig();
+    void rejectForSig(MoveChain newMoveChain, HttpResponse &response);
 
 
 
@@ -343,7 +343,7 @@ public:
      * If Game.sendSigTimes is 4, it will alarm.
      */
 
-    MoveChain sigRejected(IP ones_IP);
+    MoveChain sigRejected();
 
 
    /* For the one who own the newmove*/
@@ -372,7 +372,7 @@ public:
      * broadcastTimes equal to 2.
      */
 
-    void broadcastNewmove(MoveChain newMoveChain);
+    void broadcastNewmove();
 
   /* For the others */
 
@@ -400,7 +400,7 @@ public:
      * returns 1, and used to call Server.acceptNewmove().
      */
 
-    void acceptNewmove();
+    void acceptNewmove(MoveChain newMoveChain);
 
     /*
      * Method: rejectNewmove
@@ -422,7 +422,7 @@ public:
      * newmoveSig will be changed back to 0.
      */
 
-    MoveChain updateNewmove(MoveChain newMoveChain);
+    void updateNewmove(MoveChain newMoveChain);
 
 
     /*
@@ -530,7 +530,6 @@ private slots:
 
     void newclick(MoveChain localMoveChain);
 
-    void respondToSig(int sigFlag);
 
 signals:
     /*
