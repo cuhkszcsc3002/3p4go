@@ -261,11 +261,10 @@ void Game::newclick(MoveChain localMoveChain)       //rules?!
     client.sendForSig();
 }
 
-void Game::validateForSig(QString newmovechain)
+void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
 {
-    MoveChain newMoveChain;
-    //todo: trans QString newmovechain to  MoveChain newMoveChain
-    if (newMoveChain <= localMoveChain){
+    Key2 publicKey = players[myIndex - 1].getPublicKey();
+    if (newMoveChain.checkLastSign(publicKey,lastSigIndex)){
         setNewmoveSig(1);
     }else{
         setNewmoveSig(0);
