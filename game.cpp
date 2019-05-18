@@ -88,8 +88,8 @@ void Game::init()
 {
     qDebug() << "GUI init started.";
 
-    QObject::connect(&port, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
     port.show();
+    QObject::connect(&port, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
     //    setPort(&myPort);
 
 
@@ -109,8 +109,8 @@ void Game::init()
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
-    client.init(this);
     /* Initialization of the child class: GUI, Client, Server */
+    client.init(this);
     gui->init(this);
     qDebug() << "GUI init succeed.";
 
@@ -162,7 +162,7 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server.receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
-    //gui->loginShow();
+    gui->loginShow();
 
 }
 

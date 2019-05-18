@@ -28,6 +28,7 @@ private:
     QPushButton *save;
 
     QHBoxLayout *labelLayout;
+    QHBoxLayout *lineEditLayout;
     QHBoxLayout *buttonLayout;
     QVBoxLayout *mainLayout;
 };
