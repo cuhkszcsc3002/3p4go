@@ -15,6 +15,7 @@
 #include "httprequesthandler.h"
 #include "requestmapper.h"
 #include "movechain.h"
+//#include "game.h"
 
 
 class Game;
@@ -77,6 +78,14 @@ public:
 
     int receiveInvite();
 
+
+    /*
+     * Method: replyInvite
+     * After game response to the invite (accept or reject), get the result and pass it to client.
+     * -------------------------------------------------------------------
+     * Usage: server.receivite();
+     */
+
     int replyInvite();
 
 
@@ -132,8 +141,22 @@ public:
     MoveChain receiveNewMove();
 
 
+    /*
+     * Method: acceptNewMove
+     * Return the accept response to client.
+     * ---------------------------------------------------------------------------------------
+     * Usage: void acceptNewMove(response);
+     */
+
     void acceptNewMove(HttpResponse & response);
 
+
+    /*
+     * Method: rejectNewMove
+     * Return the accept response to client.
+     * ---------------------------------------------------------------------------------------
+     * Usage: void rejectNewMove(response);
+     */
 
     void rejectNewMove(HttpResponse & response);
 
@@ -144,7 +167,6 @@ public:
      * -------------------------------------------------------------------------------
      * Usage: server.finish();
      */
-
 
     void finish();
 };

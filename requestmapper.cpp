@@ -1,10 +1,11 @@
-#include "requestmapper.h"
+#include "game.h"
 
 HttpSessionStore* RequestMapper::sessionStore=0;
 
-RequestMapper::RequestMapper(QObject* parent)
+RequestMapper::RequestMapper(QObject* parent, Game* game)
     : HttpRequestHandler(parent) {
     // empty
+    sendForSigController.game = game;
 }
 
 void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
