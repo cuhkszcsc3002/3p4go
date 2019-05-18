@@ -7,11 +7,17 @@
 #include "receiveinvitecontroller.h"
 #include "receiveplayerinfocontroller.h"
 #include "receivenewmovecontroller.h"
-
+#include "helloworldcontroller.h"
 
 using namespace stefanfrings;
 
-    /*This Class is a mapper*/
+/*
+ * class: RequestMapper
+ * The class set the mapper of the controller used in server. It is inheritanced
+ * from HttpRequestHandler to post and get request.
+ * -------------------------------------
+ */
+
 class RequestMapper : public HttpRequestHandler
 {
     Q_OBJECT
@@ -24,6 +30,7 @@ private:
     ReceiveInviteController receiveInviteController;
     ReceivePlayerInfoController receivePlayerInfoController;
     ReceiveNewMoveController receiveNewMoveController;
+    HelloworldController helloworldController;
 
 };
 

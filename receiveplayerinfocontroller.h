@@ -10,6 +10,13 @@ class Game;
 
 using namespace stefanfrings;
 
+/*
+ * class: ReceivePlayerInfoController
+ * The ReceivePlayerInfoController is used for receive player information from client and post it to
+ * game. It is inheritanced from HttpRequestHandler to implementpost and get request.
+ * -------------------------------------
+ */
+
 class ReceivePlayerInfoController : public HttpRequestHandler
 {
     Q_OBJECT

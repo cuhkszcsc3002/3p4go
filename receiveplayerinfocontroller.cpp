@@ -7,6 +7,14 @@ ReceivePlayerInfoController::ReceivePlayerInfoController(QObject* parent)
 
 }
 
+/*
+ * Method: ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &response)
+ * Usage: Called automatically
+ * ------------------------------------------------
+ * This method is use to decode the Json from client and pass the data after decode to
+ * the game by calling updatePlayerInfo function with the required parameter type.
+ */
+
 void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &response)
 {
     QByteArray data = request.getBody();
@@ -34,6 +42,7 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
 
     qDebug()<<inviteKey;
 
+//    TODO
     game->updatePlayerInfo(inviteIP,inviteIP,inviteIP);
 
 

@@ -7,6 +7,14 @@ ReceiveInviteController::ReceiveInviteController(QObject* parent)
 
 }
 
+/*
+ * Method: ReceiveInviteController::service(HttpRequest &request, HttpResponse &response)
+ * Usage: Called automatically
+ * ------------------------------------------------
+ * This method is use to decode the Json from client and pass the data after decode to
+ * the game by calling receiveInvite function with the required parameter type.
+ */
+
 void ReceiveInviteController::service(HttpRequest &request, HttpResponse &response)
 {
     QByteArray data = request.getBody();

@@ -6,6 +6,14 @@ ReceiveNewMoveController::ReceiveNewMoveController(QObject* parent)
     // empty
 }
 
+/*
+ * Method: ReceiveNewMoveController::service(HttpRequest &request, HttpResponse &response)
+ * Usage: Called automatically
+ * ------------------------------------------------
+ * This method is use to decode the Json from client and pass the data after decode to
+ * the game by calling checkNewmove function with the required parameter type.
+ */
+
 void ReceiveNewMoveController::service(HttpRequest &request, HttpResponse &response) {
 
     QByteArray data = request.getBody();

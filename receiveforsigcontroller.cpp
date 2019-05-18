@@ -7,6 +7,14 @@ ReceiveForSigController::ReceiveForSigController(QObject* parent)
     // empty
 }
 
+/*
+ * Method: ReceiveForSigController::service(HttpRequest &request, HttpResponse &response)
+ * Usage: Called automatically
+ * ------------------------------------------------
+ * This method is use to decode the Json from client and pass the data after decode to
+ * the game by calling validateForSig function with the required parameter type.
+ */
+
 void ReceiveForSigController::service(HttpRequest &request, HttpResponse &response)
 {
 
@@ -30,6 +38,8 @@ void ReceiveForSigController::service(HttpRequest &request, HttpResponse &respon
 
     qDebug()<<"receive movechain: "<<newMoveChain.toJsonString();
 
+
+    //TODO
     game->validateForSig(newMoveChain,1,response);
 
 }

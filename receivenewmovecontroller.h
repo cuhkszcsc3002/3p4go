@@ -9,6 +9,13 @@ class Game;
 
 using namespace stefanfrings;
 
+/*
+ * class: ReceiveNewMoveController
+ * The ReceiveNewMoveController is used for receive new move from client and post it to
+ * game. It is inheritanced from HttpRequestHandler to implementpost and get request.
+ * -------------------------------------
+ */
+
 class ReceiveNewMoveController : public HttpRequestHandler {
 
     Q_OBJECT

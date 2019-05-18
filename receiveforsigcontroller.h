@@ -7,8 +7,14 @@
 
 class Game;
 
-
 using namespace stefanfrings;
+
+/*
+ * class: ReceiveForSigController
+ * The ReceiveForSigController is used for receiveSignature from game and post it to
+ * client. It is inheritanced from HttpRequestHandler to implementpost and get request.
+ * -------------------------------------
+ */
 
 class ReceiveForSigController : public HttpRequestHandler
 {
