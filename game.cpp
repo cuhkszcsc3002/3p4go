@@ -86,9 +86,11 @@ Game::~Game()
 
 void Game::init()
 {
-    int port;
-    std::cout << "Your PORT: ";
-    std::cin >> port;
+    qDebug() << "GUI init started.";
+    port myPort;
+    QObject::connect(&myPort, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
+    setPort(&myPort);
+
     myIndex = -1;
     setAvailableFlag(1);
 
@@ -100,7 +102,7 @@ void Game::init()
     Q_ASSERT(localIP != NULL);
 
     myIP.setAddressFromString(localIP);
-    myIP.setPort(port);
+    myIP.setPort(Port);
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
@@ -114,6 +116,14 @@ void Game::init()
 
     loginShow();
 
+}
+
+void Game::setPort(port *myPort)
+{
+
+    Port = -1;
+//    while (Port == -1)
+//    {}
 }
 
 
@@ -442,6 +452,10 @@ void Game::history()
 
 }
 
-
+void Game::getPort(int port)
+{
+    this->Port = port;
+    qDebug() << "Game.getPort: receive user enter port: " << port << endl;
+}
 
 
