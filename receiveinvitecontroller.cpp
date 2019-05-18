@@ -31,6 +31,6 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
 
     QString inviteKey=obj.take("key").toString();
 
-    game->receiveInvite(inviteIP);
+    game->receiveInvite(inviteIP,response);
 
 }
