@@ -21,14 +21,19 @@ GUI::~GUI(){
 
 void GUI::init(Game *sgame)
 {
+    qDebug() << "GUI.init: gui initialization start..."<<endl;
     log = new login;
     scor = new score;
+    qDebug() << "Middle"<<endl;
     trans = new transfer;
     rej = new reject;
     invite = new inviteReceive;
     fini = new finish;
     chess = new chessBoard;
 
+    //myPort = new port;
+
+    qDebug() << "GUI.init: signal and slot connection start..."<<endl;
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
     QObject::connect(log, SIGNAL(showTransfer()), trans, SLOT(receiveInvite()));
@@ -80,4 +85,9 @@ void GUI::gameFinish(){
 //void GUI::takeCount(){
 //    counter = new timer;
 //    counter->show();
+//}
+
+//void GUI::showPort()
+//{
+//    myPort->show();
 //}

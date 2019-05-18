@@ -79,18 +79,20 @@ void Game::setRestartF(int value)
 
 Game::~Game()
 {
-
+    delete gui;
+//    delete port;
 }
 
 
 
 void Game::init()
 {
-    qDebug() << "GUI init started.";
+    qDebug() << "Game.init: game initialize started.";
 
-    port.show();
-    QObject::connect(&port, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
-    //    setPort(&myPort);
+//    port->show();
+//    QObject::connect(port, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
+//    setPort(&myPort);
+    qDebug()<< "Game.init: port received."<< endl;
 
 
     myIndex = -1;
@@ -163,6 +165,7 @@ void Game::loginShow()
     // 1. Wait for the server.receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
     gui->loginShow();
+    //gui->showPort();
 
 }
 

@@ -23,7 +23,7 @@
 #include "client.h"
 #include "server.h"
 #include "GUI.h"
-#include "port.h"
+//#include "port.h"
 
 
 using namespace std;
@@ -35,12 +35,13 @@ class Game : public QObject
     friend class Client;
     friend class Server;
     friend class GUI;
+//    friend class port;
 
     Client client;
     Server server;
     GUI *gui;
     QCoreApplication * app;
-    port port;
+//    port *port;
 
     int Port;
 
