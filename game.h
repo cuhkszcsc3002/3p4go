@@ -312,7 +312,7 @@ public:
      * chain to him.
      */
 
-    void rejectForSig();
+    void rejectForSig(MoveChain newMoveChain);
 
 
 
@@ -530,7 +530,6 @@ private slots:
 
     void newclick(MoveChain localMoveChain);
 
-    void respondToSig(int sigFlag);
 
 signals:
     /*

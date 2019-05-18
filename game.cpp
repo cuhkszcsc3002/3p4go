@@ -263,49 +263,76 @@ void Game::newclick(MoveChain localMoveChain)       //rules?!
     client.sendForSig();
 }
 
-void Game::respondToSig(int sigFlag)//sigFlag = NewmoveSig
-{
-    if (sigFlag == 0){
-        rejectForSig();
-    }else if(sigFlag == 1){
-        acceptForSig();
-    }else{
-        qDebug() << "Signatures Wrong!" <<endl;
-    }
-
-}
-
 void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex)
 {
     Key2 publicKey = players[myIndex - 1].getPublicKey();
     if (newMoveChain.checkLastSign(publicKey, lastSigIndex)){
         acceptForSig(newMoveChain);
     }else{
-        setNewmoveSig(0);
+        rejectForSig(newMoveChain);
     }
 }
 
 void Game::acceptForSig(MoveChain newMoveChain)
 {
-    if (myIndex == 1)
+    /* If I am the first player right after the movel */
+    if (3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex() == 1)
     {
-        newMoveChain.signLast();
-        client.sendForSig(newMoveChain, myIndex);
-        server.acceptSig();
+        QString absStr = newMoveChain.abstract();
+        QString newSign = RSA2::generateSign(absStr, myIP.getPrivateKey());
+
+        if(newMoveChain.signLast(newSign))
+        {
+            /* Return the new signature back to the privious movel */
+            server.acceptSig();
+            /* Send the new signature to the next player for check */
+            if(myIndex+1 <= 2)
+                client.sendForSig(newMoveChain, myIndex+1);
+            else
+                client.sendForSig(newMoveChain, 0);
+        }
+        else
+            qDebug()<<"Append Signature Fail! "<<endl;
     }
-    server.acceptSig();
+    /* If I am the second player right after the movel */
+    else if (3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex() == 2)
+    {
+        QString absStr = newMoveChain.abstract();
+        QString newSign = RSA2::generateSign(absStr, myIP.getPrivateKey());
+
+        if(newMoveChain.signLast(newSign))
+        {
+            /* Return the new signature back to the privious movel */
+            server.acceptSig();
+            /* Send the new signature to the next player for check */
+            if(myIndex+1 <= 2)
+                client.sendForSig(newMoveChain, myIndex+1);
+            else
+                client.sendForSig(newMoveChain, 0);
+        }
+        else
+            qDebug()<<"Append Signature Fail! "<<endl;
+    }
 }
 
 
 
-void Game::rejectForSig()
+void Game::rejectForSig(MoveChain newMoveChain)
 {
-    server.rejectSig();
+    /* If I am the first player right after the movel */
+    if (3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex() == 1)
+    {
+        server.rejectSig();//TO DO
+    }
+    /* If I am the second player right after the movel */
+    else if (3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex() == 2)
+    {
+        server.rejectSig();//TO DO
+    }
+
 }
 
-
-
-MoveChain Game::sigAccepted()
+MoveChain Game::sigAccepted()//
 {
 
 }
