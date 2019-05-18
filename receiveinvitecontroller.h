@@ -9,12 +9,12 @@ class Game;
 
 using namespace stefanfrings;
 
-class SendInviteController: public HttpRequestHandler
+class ReceiveInviteController: public HttpRequestHandler
 {
     Q_OBJECT
 public:
     Game *game;
-    SendInviteController(QObject* parent=0);
+    ReceiveInviteController(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

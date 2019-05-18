@@ -2,14 +2,11 @@
 #define REQUESTMAPPER_H
 
 #include "httprequesthandler.h"
-#include "helloworldcontroller.h"
-#include "listdatacontroller.h"
-#include "logincontroller.h"
 #include "httpsessionstore.h"
-#include "sendforsigcontroller.h"
-#include "sendinvitecontroller.h"
-#include "sendplayerinfocontroller.h"
-#include "broadcastnewmovecontroller.h"
+#include "receiveforsigcontroller.h"
+#include "receiveinvitecontroller.h"
+#include "receiveplayerinfocontroller.h"
+#include "receivenewmovecontroller.h"
 
 
 using namespace stefanfrings;
@@ -23,13 +20,10 @@ public:
     void service(HttpRequest& request, HttpResponse& response);
     static HttpSessionStore* sessionStore;
 private:
-    HelloWorldController helloWorldController;
-    ListDataController listDataController;
-    LoginController loginController;
-    SendForSigController sendForSigController;
-    SendInviteController sendInviteController;
-    SendPlayerInfoController sendPlayerInfoController;
-    BroadcastNewMoveController broadcastNewMoveController;
+    ReceiveForSigController receiveForSigController;
+    ReceiveInviteController receiveInviteController;
+    ReceivePlayerInfoController receivePlayerInfoController;
+    ReceiveNewMoveController receiveNewMoveController;
 
 };
 

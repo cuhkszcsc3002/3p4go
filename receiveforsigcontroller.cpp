@@ -1,13 +1,13 @@
-#include "sendforsigcontroller.h"
+#include "receiveforsigcontroller.h"
 #include "game.h"
 
-SendForSigController::SendForSigController(QObject* parent)
+ReceiveForSigController::ReceiveForSigController(QObject* parent)
     : HttpRequestHandler(parent)
 {
     // empty
 }
 
-void SendForSigController::service(HttpRequest &request, HttpResponse &response)
+void ReceiveForSigController::service(HttpRequest &request, HttpResponse &response)
 {
 
     QByteArray data = request.getBody();
