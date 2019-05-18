@@ -89,3 +89,8 @@ void timer::onCount()
         this->update();
     }
 }
+
+void timer::countStart()
+{
+
+}

@@ -99,12 +99,13 @@ void Game::init()
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
+    client.init(this);
     /* Initialization of the child class: GUI, Client, Server */
     gui->init(this);
 
     //   server.init(this);
 
-    client.init(this);
+
 
 
     //signal
