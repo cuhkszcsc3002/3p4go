@@ -288,7 +288,7 @@ public:
      * other methods.
      */
 
-    void validateForSig(MoveChain newMoveChain, int lastSigIndex);
+    void validateForSig(MoveChain newMoveChain, int lastSigIndex, HttpResponse &response);
 
     /*
      * Method: acceptForSig
@@ -300,7 +300,7 @@ public:
      * history chain with his signature to next player.
      */
 
-    void acceptForSig(MoveChain newMoveChain);
+    void acceptForSig(MoveChain newMoveChain, HttpResponse &response);
 
     /*
      * Method: rejectForSig
@@ -312,7 +312,7 @@ public:
      * chain to him.
      */
 
-    void rejectForSig(MoveChain newMoveChain);
+    void rejectForSig(MoveChain newMoveChain, HttpResponse &response);
 
 
 
