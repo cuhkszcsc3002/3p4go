@@ -20,6 +20,7 @@
 #include <QString>
 #include "ip.h"
 #include "rsa2.h"
+#include "movechain.h"
 
 class Game;
 
@@ -152,6 +153,30 @@ public:
 
     int sendForSig();
 
+    /*
+     * Method: sendForSig
+     * Send the whole history chain and the signiture chain to the next player for signature.
+     * Return 1 if success; return 0 if rejected; return -1 if connection fails.
+     * --------------------------------------------------------------------------------------
+     * Usage: int status = client.sendForSig();
+     *
+     * ----------------------------------------
+     * POST FORMAT:
+     * A JSON OBJECT.
+     * { moveChain: moveChain.toJsonString() }
+     *
+     * SERVER's WORK:
+     * 1. decode moveChainString
+     * 2. Send to game.
+     *
+     *
+     * EXCEPPTED FEEDBACK:
+     * 1. I accept, sign, and send to the next player, while the next player also replies 1.
+     * 0. I reject, or the next player rejects.
+     */
+
+    int sendForSig(const MoveChain & mc, int playerIndex);
+
 
     /*
      * Method: boardcastNewMove
@@ -171,7 +196,7 @@ public:
      * 0. Rejected.
      */
 
-    int boardcastNewMove();
+    int broadcastNewMove();
 
 
     /*

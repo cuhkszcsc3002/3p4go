@@ -190,6 +190,30 @@ int Client::sendForSig()
 
 }
 
+int Client::sendForSig(const MoveChain &mc, int playerIndex)
+{
+    // 1. Fetch the whole MoveChain and encode.
+    QString moveChainString = mc.toJsonString();
+
+    // 2. Send the whole MoveChain to the next player.
+    IP & nextPlayer = game->players[playerIndex];
+    QString url = nextPlayer.getAddress() + ":" + QString(nextPlayer.getPort())
+            + "/sendForSig";
+    QJsonObject obj;
+    obj.insert("moveChain", moveChainString);
+    QJsonDocument document(obj);
+    QString resultString = postRequest(url, document);
+
+    // 3. Return
+    if (resultString=="1")
+    {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
 int Client::broadcastNewMove()
 {
     // 1. Fetch the whole MoveChain and enocde.
