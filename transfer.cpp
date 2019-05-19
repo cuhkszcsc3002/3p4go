@@ -16,7 +16,8 @@ transfer::transfer(QWidget *parent) : QDialog (parent){
 
 transfer::~transfer()
 {
-    delete message;delete layout;
+    delete message;
+    delete layout;
 }
 
 
