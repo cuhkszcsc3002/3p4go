@@ -316,7 +316,7 @@ void Game::startGame()
 {
     qDebug() << "Game.startGame";
     gui->loginClose();
-//    gui->transferClose();
+    gui->transferClose();
 //    gui->showGame(myIndex);
 }
 
