@@ -11,6 +11,11 @@ port::port(QWidget *parent) : QWidget(parent)
     buttonLayout = new QHBoxLayout;
     mainLayout = new QVBoxLayout;
 
+    QPalette pal;
+    pal.setColor(QPalette::Text,QColor(0,0,0));
+    lineEdit->setPalette(pal);
+    lineEdit->setMaxLength(25);
+
     labelLayout->addWidget(message);
     labelLayout->addStretch();
 
