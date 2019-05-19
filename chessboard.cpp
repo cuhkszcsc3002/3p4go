@@ -20,8 +20,6 @@ chessBoard::chessBoard(QWidget *parent) : QWidget(parent)
     qDebug()<<"chessboard.chessbaord: initializing chessboard class";
     isJump = false;
     this->resize(1050, 990);            //set the size of the window
-    //this->grabKeyboard();               //catch the input of keyboard
-
 
     /* Initialization of some parameters of the chessbaord:
      * Firstly, the cursor is initionally at (500 pix, 500 pix) of the screen (physical) and correspondingly, the
@@ -160,7 +158,6 @@ void chessBoard::DrawChessboard()
     painter.drawText(textHorizontal17, Qt::AlignTop, horizontalAxis17, nullptr);
     painter.drawText(textHorizontal18, Qt::AlignTop, horizontalAxis18, nullptr);
     painter.drawText(textHorizontal19, Qt::AlignTop, horizontalAxis19, nullptr);
-
 //    qDebug() << "DrawChessboard Finished";
 }
 
@@ -179,7 +176,8 @@ void chessBoard::DrawItems()
     {
         int lastMove = localMoveChain.length()-1;
 //        qDebug() << "MoveChain lastmove: "<< lastMove;
-        if (lastMove>0) {
+        if (lastMove>0)
+        {
             int x = localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
             int y = localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
             leftBoundAxis->setX(x-9);
@@ -197,9 +195,7 @@ void chessBoard::DrawItems()
 
             cout<<"end player x: "<<x<<" y: "<<y<<endl;
         }
-
     }
-
 
     /* Scan all chess stones */
     for (int i=0; i<localMoveChain.length(); i++)
@@ -370,6 +366,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
 void chessBoard::pullMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
+    update();
 }
 
 void chessBoard::setMyIndex(int myIndex)
