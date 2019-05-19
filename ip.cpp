@@ -47,6 +47,14 @@ QDebug operator<<(QDebug dbg, const IP &ip)
 }
 
 
+IP::IP(const QString &addressString, const int &p)
+{
+    qDebug() << "SetIP: " << addressString << p;
+    setAddressFromString(addressString);
+    port = p;
+    qDebug() << "Set  IP:" <<  *this;
+}
+
 QList<int> IP::addressToInt() const
 {
     QList<int> addressList;

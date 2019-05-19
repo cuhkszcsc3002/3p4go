@@ -215,9 +215,8 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 /* I think this method need a signal from client to trigger */
 void Game::receiveInvite(IP host_Ip, HttpResponse &response)
 {
-    qDebug() << "Game.receiveInvite: " << response.getHeaders();
+    qDebug() << "Game.receiveInvite: " << host_Ip;
     receiveInviteRes = &response;
-    qDebug() << receiveInviteRes->getHeaders();
     qDebug() << "Receive Invite";
 //    receiveInviteRes->write("OK", true);
     gui->receiveInvite(host_Ip.getFullAddress(), response);

@@ -29,9 +29,9 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
     QJsonObject obj = doc.object();
 
     qDebug()<<obj;
-
-    qDebug() << "port:" << obj.take("port").toString().toInt();
-    IP inviteIP(obj.take("IP").toString(), obj.take("port").toString().toInt());
+    int port = obj.take("port").toInt();
+    qDebug() << "port:" << port;
+    IP inviteIP = IP(obj.take("IP").toString(), port);
 
 
 //    inviteIP.setPort(invitePort);
@@ -40,7 +40,6 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
 
     QString inviteKey=obj.take("key").toString();
 
-    response.write("", false);
 
     game->receiveInvite(inviteIP,response);
 

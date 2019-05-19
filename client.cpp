@@ -102,6 +102,7 @@ int Client::sendInvite(int playerIndex)
 {
     // 1. Based on the IP, get the IP address.
     IP &ip = game->players[playerIndex];
+    qDebug() << ip;
     QString url = ip.getAddress() + ":" + QString::number(ip.getPort()) + "/sendInvite";
 
     // 2. Send the request for invitation.
@@ -159,8 +160,10 @@ int Client::sendPlayerInfo()
     for (int i=1; i<=2; i++)
     {
         IP & player = game->players[i];
-        QString url = player.getAddress() + ":" + QString(player.getPort())
+        qDebug() << endl << "Full address: " << player.getFullAddress() << endl << player;
+        QString url = player.getFullAddress()
                 + "/" + "sendPlayerInfo";
+        qDebug() << "Client.sendPlayerInfo: url: " << url << document;
         QString resultString = postRequest(url, document);
         if (resultString=="1")
         {
