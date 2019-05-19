@@ -80,9 +80,6 @@ void GUI::showGame(int myIndex){
     qDebug() << "Chess board Show Finished.";
 }
 
-void GUI::newClicked(){
-
-}
 
 void GUI::updateNewMovel(MoveChain localMoveChain){
     chess->pullMoveChain(localMoveChain);

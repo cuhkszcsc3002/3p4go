@@ -48,7 +48,6 @@ public:
     void receiveInvite(const QString &, stefanfrings::HttpResponse &response);
     void showReject();
     void showGame(int myIndex);
-    void newClicked();  //not complete yet
     void updateNewMovel(MoveChain localMoveChain);  //not complete yet
     void gameFinish();
     void takeCount();
