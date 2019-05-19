@@ -141,8 +141,11 @@ void Game::restart() //same as init
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
-    delete &client;
+    delete server;
+    delete client;
     delete gui;
+    server = new Server;
+    client = new Client;
     gui = new GUI;
     gui->init(this);
 
