@@ -116,6 +116,8 @@ login::login(QWidget *parent) : QWidget (parent)
     p2PortLayout->addStretch();
     portLayout->addLayout(p1PortLayout);
     portLayout->addLayout(p2PortLayout);
+    QHBoxLayout blank;
+    portLayout->addLayout(&blank);
 
     editorLayout->addLayout(userLayout);
     editorLayout->addLayout(ipLayout);
