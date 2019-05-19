@@ -153,7 +153,7 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
                 std::cout << std::endl;
 
                 // Check the corresponding direction.
-                int left, right;
+                int left=WINNUM-1, right=WINNUM-1;
                 if (checkDirectionIndex>=0 && checkDirectionIndex<=3) {
                     for (left=WINNUM-1; left>=0; left--) {
                         if (!directions[checkDirectionIndex][left]) break;
