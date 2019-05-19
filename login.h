@@ -33,7 +33,6 @@ private slots:
     void inviteClicked();
     void exitClick();
     void checkScoreClick();
-    void startReceived();
 
     /* Signal section:
      *
@@ -51,7 +50,6 @@ private slots:
      * This slot will hide the login window if the chess game start
      */
 signals:
-    void showTransfer();
     void showScore();
     void emitInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 

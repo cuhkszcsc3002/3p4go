@@ -42,6 +42,7 @@ public:
 
     void init(Game*);
     void loginShow();
+    void loginClose();
     void receiveInvite();
     void showReject();
     void showGame(int myIndex);
@@ -49,8 +50,9 @@ public:
     void updateNewMovel(MoveChain localMoveChain);  //not complete yet
     void gameFinish();
     void takeCount();
+    void transferShow();
+    void transferClose();
 
-    void showPort();
 };
 
 #endif // GAME_INIT_H

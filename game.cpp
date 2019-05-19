@@ -174,6 +174,7 @@ void Game::loginShow()
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
 {
     qDebug() << "Game.sendInvite: Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
+    gui->transferShow();
     setAvailableFlag(0);
 
     /* Storing guest player address information */
@@ -244,6 +245,7 @@ void Game::inviteRejected()
 {
     qDebug()<<endl<<"Game.inviteRejected: Host's invite was rejected..";
     setAvailableFlag(1);
+    gui->transferClose();
     gui->showReject();
 }
 
@@ -279,6 +281,8 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
 
 void Game::startGame()
 {
+    gui->loginClose();
+    gui->transferClose();
     gui->showGame(myIndex);
 }
 

@@ -2,8 +2,6 @@
 #define TRANSFER_H
 
 #include <QtWidgets>
-//#include <QDialog>
-//#include <QLabel>
 
 class transfer : public QDialog
 {
@@ -15,13 +13,11 @@ public:
 
 private slots:
     void receiveInvite();
-    void comfirmClicked();
 
 signals:
     void comfirmReceived();
 
 private:
-    QPushButton *comfirm;
     QLabel *message;
     QVBoxLayout *layout;
 };
