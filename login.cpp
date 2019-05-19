@@ -171,8 +171,9 @@ void login::inviteClicked()
     QString p1Port = player1Port->text();
     QString p2Port = player2Port->text();
 
-    emit emitInvite(p1IP, p2IP, p1Port, p2Port);
     qDebug() << "GUI.Login: Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
+
+    emit emitInvite(p1IP, p2IP, p1Port, p2Port);
 }
 
 void login::setMyIP(IP myIP)

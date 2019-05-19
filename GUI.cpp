@@ -19,7 +19,7 @@ void GUI::setInvite(inviteReceive *value)
     invite = value;
 }
 
-GUI::GUI(QWidget *parent) : QWidget (parent){}
+GUI::GUI(){}
 
 GUI::~GUI(){
     delete log;     delete scor;
@@ -40,6 +40,7 @@ void GUI::init(Game *sgame)
     fini = new finish;
     chess = new chessBoard;
 
+
     qDebug() << "GUI.init: signal and slot connection start...";
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
@@ -48,7 +49,7 @@ void GUI::init(Game *sgame)
     QObject::connect(log, SIGNAL(emitInvite(QString, QString, QString, QString)), sgame, SLOT(sendInvite(QString, QString, QString, QString)));
     QObject::connect(invite, SIGNAL(inviteAccept()), sgame, SLOT(acceptInvite()));
     QObject::connect(invite, SIGNAL(inviteReject()), sgame, SLOT(rejectInvite()));
-    QObject::connect(chess, SIGNAL(pushMoveChain(MoveChain)), sgame, SLOT(newclick(MoveChain)));
+//    QObject::connect(chess, SIGNAL(pushMoveChain(MoveChain)), sgame, SLOT(newclick(MoveChain)));
     qDebug() << "GUI.init: GUI init finish";
 }
 
@@ -71,6 +72,7 @@ void GUI::showReject(){
 }
 
 void GUI::showGame(int myIndex){
+
     qDebug() << "Chessboard Show Started.";
     chess->setMyIndex(myIndex);
     qDebug() << "Chessboard Show Mid.";

@@ -134,6 +134,7 @@ void Game::init2(int port)
     server->init(this, port);
 
     loginShow();
+
     qDebug() << "Game.init2: game initialization succeed.";
 }
 
@@ -177,6 +178,7 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server->receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
+
     gui->loginShow(myIP);
 
 }
@@ -264,7 +266,9 @@ void Game::inviteAccepted(int count)
         }
     }
     if (clientSendPlayerInfo)
-        startGame();
+    {
+        emit emitStartGame();
+    }
     else {
         qDebug() << "Send PlayerInfo Error.";
     }
@@ -308,7 +312,8 @@ void Game::updatePlayerInfo(const IP & host, const IP & B_player, const IP & C_p
             break;
         }
     }
-    startGame();
+//    startGame();
+    emit emitStartGame();
 }
 
 /* For both host and guest */

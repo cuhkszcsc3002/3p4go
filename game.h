@@ -152,7 +152,10 @@ public:
     MoveChain localMoveChain;
 
 public:
-    Game(QApplication * a) {app = a;}
+    Game(QApplication * a)
+    {app = a;
+        QObject::connect(this, SIGNAL(emitStartGame()), this, SLOT(startGame()));
+    }
     ~Game();
 
     /*
@@ -281,17 +284,6 @@ public:
 
 
     /* for all */
-
-    /*
-     * Method: startGame
-     * ---------------------------------------
-     * This method is called by Game.check3P()
-     * and Game.updatePlayerInfo().
-     * It calls GUI.showGame() and change
-     * the signal restartF to 0.
-     */
-
-    void startGame();
 
 
     /* for those who are not the owner of a newmove */
@@ -556,6 +548,21 @@ private slots:
 
 
     void init2(int port);
+
+    /*
+     * Method: startGame
+     * ---------------------------------------
+     * This method is called by Game.check3P()
+     * and Game.updatePlayerInfo().
+     * It calls GUI.showGame() and change
+     * the signal restartF to 0.
+     */
+
+    void startGame();
+
+
+signals:
+    void emitStartGame();
 
 
 

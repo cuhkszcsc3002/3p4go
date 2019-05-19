@@ -15,7 +15,7 @@
 
 class Game;
 
-class GUI : public QWidget
+class GUI : public QObject
 {
     Q_OBJECT
 
@@ -38,7 +38,8 @@ private slots:
 
 public:
 
-    GUI(QWidget *parent = nullptr);
+//    GUI(QWidget *parent = nullptr);
+    GUI();
     ~GUI();
 
     void init(Game*);

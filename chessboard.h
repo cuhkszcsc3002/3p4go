@@ -1,17 +1,13 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
-#include <QMainWindow>
-#include <QMap>
-#include <string>
+#include <QWidget>
 #include "movechain.h"
-
-namespace Ui {
-class MainWindow;
-}
 
 #define INIT_POSX 500
 #define INIT_POSY 500
+
+class Game;
 
 class chessBoard : public QWidget
 {

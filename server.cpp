@@ -47,7 +47,7 @@ void Server::run(int avaliablePort)
     qDebug() << "listenerSettings:" << listenerSettings->allKeys();
 
 
-    new HttpListener(listenerSettings, new RequestMapper(game->app, game),game->app);
+    new HttpListener(listenerSettings, new RequestMapper(game->app, game), game->app);
 //    new HttpListener(listenerSettings, new RequestMapper(nullptr, game));
 };
 

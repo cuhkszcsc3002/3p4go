@@ -10,7 +10,8 @@
 #include <QPoint>
 #include <QMessageBox>
 #include <QMouseEvent>
-#include "chessboard.h"
+//#include "chessboard.h"
+#include "game.h"
 
 using namespace std;
 
@@ -55,6 +56,7 @@ chessBoard::~chessBoard()
 
 void chessBoard::paintEvent(QPaintEvent *e)
 {
+    qDebug() << "Paint Event Start";
     DrawChessboard();		//draw chess board
     DrawItems();			//draw chess stone
 
@@ -65,6 +67,7 @@ void chessBoard::paintEvent(QPaintEvent *e)
 
 void chessBoard::DrawChessboard()
 {
+    qDebug() << "DrawChessboard Start";
     /* Set and draw the boundary lines, chesboard lines, samll balack points and
      * background of the chessboard*/
     QPainter painter(this);             //construct base of the chessboard
@@ -157,11 +160,14 @@ void chessBoard::DrawChessboard()
     painter.drawText(textHorizontal17, Qt::AlignTop, horizontalAxis17, nullptr);
     painter.drawText(textHorizontal18, Qt::AlignTop, horizontalAxis18, nullptr);
     painter.drawText(textHorizontal19, Qt::AlignTop, horizontalAxis19, nullptr);
+
+    qDebug() << "DrawChessboard Finished";
 }
 
 
 void chessBoard::DrawItems()
 {
+    qDebug() << "DrawItem Start";
     /* Set the pen that draw chess stones */
     QPainter painter(this);
     QPen pen = painter.pen();
@@ -172,22 +178,26 @@ void chessBoard::DrawItems()
     if(isJump == false)
     {
         int lastMove = localMoveChain.length()-1;
-        int x = localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
-        int y = localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
-        leftBoundAxis->setX(x-9);
-        rightBoundAxis->setX(x+9);
-        upBoundAxis->setY(y-9);
-        downBoundAxis->setY(y+9);
-        logLocation->setX(x);
-        logLocation->setY(y);
-        phyLocation->setX(INIT_POSX);
-        phyLocation->setY(INIT_POSY);
+//        qDebug() << "MoveChain lastmove: "<< lastMove;
+        if (lastMove>0) {
+            int x = localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
+            int y = localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
+            leftBoundAxis->setX(x-9);
+            rightBoundAxis->setX(x+9);
+            upBoundAxis->setY(y-9);
+            downBoundAxis->setY(y+9);
+            logLocation->setX(x);
+            logLocation->setY(y);
+            phyLocation->setX(INIT_POSX);
+            phyLocation->setY(INIT_POSY);
 
-        isJump = true;
+            isJump = true;
 
-        drawNewMove(painter);
+            drawNewMove(painter);
 
-        cout<<"end player x: "<<x<<" y: "<<y<<endl;
+            cout<<"end player x: "<<x<<" y: "<<y<<endl;
+        }
+
     }
 
 
