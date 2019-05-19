@@ -19,15 +19,15 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
 {
     QByteArray data = request.getBody();
 
-    qDebug()<<data;
+//    qDebug()<<data;
 
     QJsonDocument doc= QJsonDocument::fromJson(data);
 
-    qDebug()<<doc;
+//    qDebug()<<doc;
 
     QJsonArray array = doc.array();
 
-    qDebug()<<array;
+//    qDebug()<<array;
 
     QList<IP> IPArray;
     IP newIP;
@@ -42,7 +42,7 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
         newIP.setPublicKey(newKey);
         IPArray.append(newIP);
     }
-    qDebug() << IPArray;
+//    qDebug() << IPArray;
 //    Q_ASSERT(IPArray.length()==3);
     game->updatePlayerInfo(IPArray.at(0), IPArray.at(1), IPArray.at(2));
 

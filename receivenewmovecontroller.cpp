@@ -18,23 +18,24 @@ void ReceiveNewMoveController::service(HttpRequest &request, HttpResponse &respo
 
     QByteArray data = request.getBody();
 
-    qDebug()<<data;
+//    qDebug()<<data;
 
     QJsonDocument doc= QJsonDocument::fromJson(data);
 
-    qDebug()<<doc;
+//    qDebug()<<doc;
 
     QJsonObject obj = doc.object();
 
-    qDebug()<<obj;
+//    qDebug()<<obj;
 
     QString newMoveChainStr=obj.take("moveChain").toString();
 
-    qDebug()<<newMoveChainStr;
+//    qDebug()<<newMoveChainStr;
 
     MoveChain newMoveChain (newMoveChainStr);
 
     game->checkNewmove(newMoveChain,response);
+
 
     QEventLoop eventLoop;
 

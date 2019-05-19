@@ -20,17 +20,17 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
     qDebug() << "Server.rceiveInviteController service";
     QByteArray data = request.getBody();
 
-    qDebug()<<data;
+//    qDebug()<<data;
 
     QJsonDocument doc= QJsonDocument::fromJson(data);
 
-    qDebug()<<doc;
+//    qDebug()<<doc;
 
     QJsonObject obj = doc.object();
 
-    qDebug()<<obj;
+//    qDebug()<<obj;
     int port = obj.take("port").toInt();
-    qDebug() << "port:" << port;
+//    qDebug() << "port:" << port;
     IP inviteIP = IP(obj.take("IP").toString(), port);
 
 
@@ -43,6 +43,7 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
 
     game->receiveInvite(inviteIP,response);
 
+    qDebug() << "Server.ReceiveInvite: Loop Start.";
     QEventLoop * eventLoop = new QEventLoop;
     QObject::connect(game->gui->invite, SIGNAL(inviteAccept()), eventLoop, SLOT(quit()));
     QObject::connect(game->gui->invite, SIGNAL(inviteReject()), eventLoop, SLOT(quit()));

@@ -21,28 +21,29 @@ void ReceiveForSigController::service(HttpRequest &request, HttpResponse &respon
 
     QByteArray data = request.getBody();
 
-    qDebug()<<data;
+//    qDebug()<<data;
 
     QJsonDocument doc= QJsonDocument::fromJson(data);
 
-    qDebug()<<doc;
+//    qDebug()<<doc;
 
     QJsonObject obj = doc.object();
 
-    qDebug()<<obj;
+//    qDebug()<<obj;
 
     QString newMoveChainStr=obj.take("moveChain").toString();
 
-    qDebug()<<newMoveChainStr;
+//    qDebug()<<newMoveChainStr;
 
     MoveChain newMoveChain (newMoveChainStr);
 
-    qDebug()<<"receive movechain: "<<newMoveChain.toJsonString();
+//    qDebug()<<"receive movechain: "<<newMoveChain.toJsonString();
 
 
     //TODO
     game->validateForSig(newMoveChain, response);
 
+    qDebug() << "Server.ReceiveForSig:  Loop Started.";
     QEventLoop eventLoop;
 
     QObject::connect(game->server, SIGNAL(receiveForSigFinish()), &eventLoop, SLOT(quit()));

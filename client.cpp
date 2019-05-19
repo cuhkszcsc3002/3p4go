@@ -106,7 +106,7 @@ int Client::sendInvite(int playerIndex)
 {
     // 1. Based on the IP, get the IP address.
     IP &ip = game->players[playerIndex];
-    qDebug() << ip;
+//    qDebug() << ip;
     QString url = ip.getFullAddress() + "/sendInvite";
 
     // 2. Send the request for invitation.
