@@ -115,11 +115,11 @@ void Game::init2(int port)
     myIP.setPrivateKey(keys.at(1));
 
     /* Initialization of the child class: GUI, Client, Server */
-    client.init(this);
+    client->init(this);
     gui = new GUI;
     gui->init(this);
 
-    //   server.init(this);
+    //   server->init(this);
 
     loginShow();
     qDebug() << "Game.init2: game initialization succeed.";
@@ -141,11 +141,14 @@ void Game::restart() //same as init
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
+    delete &client;
+    delete gui;
+    gui = new GUI;
     gui->init(this);
 
-    //   server.init(this);
+    //   server->init(this);
 
-    client.init(this);
+    client->init(this);
 }
 
 void Game::exit()
@@ -157,7 +160,7 @@ void Game::loginShow()
 {
     // 1. Invoke gui.loginShow()
     // Note for GUI: Now, 2 options for the player:
-    // 1. Wait for the server.receiveInvite
+    // 1. Wait for the server->receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
     gui->loginShow();
 
@@ -179,9 +182,9 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     qDebug() << "Game.sendInvite: all IP are: " << players[0] << players[1] << players[2] << endl;
 
     /* Sending invite to guest players */
-    int result = client.sendInvite(1);
+    int result = client->sendInvite(1);
     if (result == 1){
-        result = client.sendInvite(2);
+        result = client->sendInvite(2);
         if (result == 1){
             inviteAccepted();//success
         }else{      // Add :  when result = -1, wait please!
@@ -206,13 +209,13 @@ void Game::acceptInvite()
 {
     HttpResponse &response = *receiveInviteRes;
     setAvailableFlag(0);
-    server.replyInvite(response, 1);
+    server->replyInvite(response, 1);
 }
 
 void Game::rejectInvite()
 {
     HttpResponse &response = *receiveInviteRes;
-    server.replyInvite(response, 0);
+    server->replyInvite(response, 0);
 }
 
 
@@ -222,7 +225,7 @@ void Game::inviteAccepted()
 {
     if (check3P() == true){
         int count = 0;
-        while(client.sendPlayerInfo() == 0)
+        while(client->sendPlayerInfo() == 0)
         {
             /* need to sleep and try again or rollback when too many fails*/
         }
@@ -278,12 +281,12 @@ void Game::newclick(MoveChain localMoveChain)       //rules?!
     this->localMoveChain = localMoveChain;
     if (myIndex + 1 <= 2)
     {
-        if (client.sendForSig(localMoveChain, myIndex+1) == false)
+        if (client->sendForSig(localMoveChain, myIndex+1) == false)
             sigRejected();
     }
     else
     {
-        if (client.sendForSig(localMoveChain, 0) == false)
+        if (client->sendForSig(localMoveChain, 0) == false)
             sigRejected();
     }
 }
@@ -312,18 +315,18 @@ void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
             /* Send the new signature to the next player for check */
             if(myIndex+1 <= 2)
             {
-                if (client.sendForSig(newMoveChain, myIndex+1))
+                if (client->sendForSig(newMoveChain, myIndex+1))
                 {
                     /* Return the new signature back to the privious movel if I get the respond from next player */
-                    server.acceptSig(response);
+                    server->acceptSig(response);
                 }
             }
             else
             {
-                if (client.sendForSig(newMoveChain, 0))
+                if (client->sendForSig(newMoveChain, 0))
                 {
                     /* Return the new signature back to the privious movel if I get the respond from next player */
-                    server.acceptSig(response);
+                    server->acceptSig(response);
                 }
             }
         }
@@ -339,15 +342,15 @@ void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
         if(newMoveChain.signLast(newSign))
         {
             /* Return the new signature back to the privious movel */
-            server.acceptSig(response);
+            server->acceptSig(response);
             /* Send the new signature to the next player for check */
             /* TO DO might need to wait for a wile*/
 //            QTimer timer;
 //            timer.
             if(myIndex+1 <= 2)
-                client.sendForSig(newMoveChain, myIndex+1);
+                client->sendForSig(newMoveChain, myIndex+1);
             else
-                client.sendForSig(newMoveChain, 0);
+                client->sendForSig(newMoveChain, 0);
         }
         else
             qDebug()<<"Append Signature Fail! "<<endl;
@@ -356,7 +359,7 @@ void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
     else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 0)
     {
             /* Return the new signature back to the privious movel */
-            server.acceptSig(response);
+            server->acceptSig(response);
             /* Since the signature go back to movel itself and nothing is wrong, hence the movel can broadcast now */
             /* TO DO might need to wait for a wile*/
 //            QTimer timer;
@@ -372,17 +375,17 @@ void Game::rejectForSig(MoveChain newMoveChain, HttpResponse &response)
     /* If I am the first player right after the movel */
     if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 1)
     {
-        server.rejectSig(response);
+        server->rejectSig(response);
     }
     /* If I am the second player right after the movel */
     else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 2)
     {
-        server.rejectSig(response);
+        server->rejectSig(response);
     }
     /* If I am the third player (back to myself) right after the movel */
     else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 2)
     {
-        server.rejectSig(response);
+        server->rejectSig(response);
     }
 
 }
@@ -399,7 +402,7 @@ MoveChain Game::sigRejected()
 
 void Game::broadcastNewmove()
 {
-    if (client.broadcastNewMove() == false)
+    if (client->broadcastNewMove() == false)
     {
 
         //TO DO: if other don't accept your moveChain, you need to broadcast again
@@ -421,13 +424,13 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
 
 void Game::acceptNewmove(MoveChain newMoveChain, HttpResponse &response)
 {
-    server.acceptNewMove(response);
+    server->acceptNewMove(response);
     updateNewmove(newMoveChain);
 }
 
 void Game::rejectNewmove(HttpResponse &response)
 {
-    server.acceptNewMove(response);
+    server->acceptNewMove(response);
 }
 
 void Game::updateNewmove(MoveChain newMoveChain)
@@ -446,8 +449,8 @@ bool Game::checkFinish()
 void Game::finish()
 {
     gui->gameFinish();
-    server.finish();
-    client.finish();
+    server->finish();
+    client->finish();
     history();
 }
 
