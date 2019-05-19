@@ -501,7 +501,9 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
 
         gui->updateNewMovel(newMoveChain);
         gui->chess->update();
+        qDebug() << "Game.checkNewMove -> checkFinish start";
         checkFinish();
+        qDebug() << "Game.checkNewMove -> checkFinish finish";
     }else{
         rejectNewmove(response);
     }
@@ -526,9 +528,9 @@ void Game::updateNewmove(MoveChain newMoveChain)
 void Game::checkFinish()
 {
     int winResult = this->localMoveChain.checkWin();
+    qDebug() << "Game.checkFinish Result: "<< winResult;
     if (winResult == -1)
     {
-        return;
     }
     else {
         finish((winResult-myIndex+3) % 3);

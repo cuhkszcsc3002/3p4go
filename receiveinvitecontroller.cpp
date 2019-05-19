@@ -41,12 +41,13 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
     QString inviteKey=obj.take("key").toString();
 
 
-    game->receiveInvite(inviteIP,response);
 
     qDebug() << "Server.ReceiveInvite: Loop Start.";
     QEventLoop * eventLoop = new QEventLoop;
     QObject::connect(game->gui->invite, SIGNAL(inviteAccept()), eventLoop, SLOT(quit()));
     QObject::connect(game->gui->invite, SIGNAL(inviteReject()), eventLoop, SLOT(quit()));
+    game->receiveInvite(inviteIP,response);
+
     eventLoop->exec();
     delete eventLoop;
 

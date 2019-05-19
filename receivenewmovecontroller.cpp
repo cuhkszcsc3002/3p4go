@@ -34,12 +34,12 @@ void ReceiveNewMoveController::service(HttpRequest &request, HttpResponse &respo
 
     MoveChain newMoveChain (newMoveChainStr);
 
-    game->checkNewmove(newMoveChain,response);
-
 
     QEventLoop eventLoop;
 
     QObject::connect(game->server, SIGNAL(receiveNewMoveFinish()), &eventLoop, SLOT(quit()));
+    game->checkNewmove(newMoveChain,response);
+
 
     eventLoop.exec();
 }
