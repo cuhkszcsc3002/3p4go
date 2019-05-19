@@ -12,8 +12,8 @@ login::login(QWidget *parent) : QWidget (parent)
 
     p1ip = new QLabel(tr("Player1 IP address: "));
     p2ip = new QLabel(tr("Player2 IP address: "));
-    p1port = new QLabel(tr("Port: "));
-    p2port = new QLabel(tr("Port: "));
+    p1port = new QLabel(tr("Port1: "));
+    p2port = new QLabel(tr("Port2: "));
     host = new QLabel(tr("Host"));
 
 
@@ -24,26 +24,37 @@ login::login(QWidget *parent) : QWidget (parent)
     hostIP = new QLineEdit;
     hostIP->setText(myIP.getFullAddress()); //alternate: QString::fromStdString(ipAddress)
 
+    QPalette pal;
+    pal.setColor(QPalette::Text,QColor(0,0,0));
     player1IP->setMaxLength(25);
+    player1IP->setFixedWidth(250);
     player1IP->setAlignment(Qt::AlignLeft);
     player1IP->setReadOnly(false);
+    player1IP->setPalette(pal);
 
     player2IP->setMaxLength(25);
+    player2IP->setFixedWidth(250);
     player2IP->setAlignment(Qt::AlignLeft);
     player2IP->setReadOnly(false);
+    player2IP->setPalette(pal);
 
     player1Port->setMaxLength(25);
+    player1Port->setFixedWidth(250);
     player1Port->setAlignment(Qt::AlignLeft);
     player1Port->setReadOnly(false);
+    player1Port->setPalette(pal);
 
     player2Port->setMaxLength(25);
+    player2Port->setFixedWidth(250);
     player2Port->setAlignment(Qt::AlignLeft);
     player2Port->setReadOnly(false);
+    player2Port->setPalette(pal);
 
     hostIP->setMaxLength(25);
+    hostIP->setFixedWidth(250);
     hostIP->setAlignment(Qt::AlignLeft);
-//    hostIP->setFixedWidth(250);
     hostIP->setReadOnly(true);
+    hostIP->setPalette(pal);
 
     p1Layout = new QHBoxLayout;
     p2Layout = new QHBoxLayout;
