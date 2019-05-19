@@ -104,7 +104,7 @@ void Game::init()
 
 void Game::init2(int port)
 {
-    this->Port = port;
+    Port = port;
     qDebug() << "Game.getPort: receive user enter port: " << port << endl;
 
     myIndex = -1;
@@ -253,11 +253,14 @@ void Game::inviteAccepted(int count)
     bool clientSendPlayerInfo = false;
     while (c<count) {
         ++c;
-
-        if(clientSendPlayerInfo = client->sendPlayerInfo() == 0)
+        clientSendPlayerInfo = client->sendPlayerInfo();
+        if(clientSendPlayerInfo == 0)
         {
             qDebug()<<endl<<"Game.inviteAccepted: Fail to send player information to other player for "<<count<<" times.";
             /* need to sleep and try again or rollback when too many fails*/
+        }
+        else {
+            break;
         }
     }
     if (clientSendPlayerInfo)
@@ -289,8 +292,9 @@ bool Game::check3P()
 
 
 /* for other players */
-void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
+void Game::updatePlayerInfo(const IP & host, const IP & B_player, const IP & C_player)
 {
+    qDebug() << "Game.updatePlayerInfo";
     players[0] = host;
     players[1] = B_player;
     players[2] = C_player;
@@ -298,6 +302,7 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
     {
         if (players[i] == myIP)
         {
+            qDebug() << "My Index: " << i;
             myIndex = i;
             players[i] = myIP;
             break;
@@ -309,9 +314,10 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
 /* For both host and guest */
 void Game::startGame()
 {
+    qDebug() << "Game.startGame";
     gui->loginClose();
-    gui->transferClose();
-    gui->showGame(myIndex);
+//    gui->transferClose();
+//    gui->showGame(myIndex);
 }
 
 void Game::newclick(MoveChain localMoveChain)       //rules?!

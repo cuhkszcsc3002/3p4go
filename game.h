@@ -276,7 +276,7 @@ public:
      * player in order. At last, it will call Game.startGame().
      */
 
-    void updatePlayerInfo(IP host, IP B_player, IP C_player);
+    void updatePlayerInfo(const IP &host, const IP &B_player, const IP &C_player);
 
 
 

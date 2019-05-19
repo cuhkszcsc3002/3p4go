@@ -25,25 +25,26 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
 
     qDebug()<<doc;
 
-//        QJsonArray array = doc.array();
+        QJsonArray array = doc.array();
 
-//        qDebug()<<array;
+        qDebug()<<array;
 
-//        QList<IP> IPArray;
-//        for (QJsonValue value: array)
-//        {
-//            QJsonObject obj = value.toObject();
-//            QString address = obj.take("IP").toString();
-//            int port = obj.take("port").toInt();
-//            Key2 newKey = Key2::decode(obj.take("key").toString());
+        QList<IP> IPArray;
+        IP newIP;
 
-//            IP newIP(address, port);
-//            newIP.setPublicKey(newKey);
-//            IPArray.append(newIP);
-//        }
-
+        for (QJsonValue value: array)
+        {
+            QJsonObject obj = value.toObject();
+            QString address = obj.take("IP").toString();
+            int port = obj.take("port").toInt();
+            Key2 newKey = Key2::decode(obj.take("key").toString());
+            newIP = IP(address, port);
+            newIP.setPublicKey(newKey);
+            IPArray.append(newIP);
+        }
+    qDebug() << IPArray;
 //    Q_ASSERT(IPArray.length()==3);
-//    game->updatePlayerInfo(IPArray[0], IPArray[1], IPArray[2]);
+    game->updatePlayerInfo(IPArray.at(0), IPArray.at(1), IPArray.at(2));
 
     response.write("1", true);
 
