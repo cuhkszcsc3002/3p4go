@@ -44,10 +44,6 @@ void GUI::init(Game *sgame)
     qDebug() << "GUI.init: GUI init finish";
 }
 
-//void GUI::restartReceive(){
-//    this->init();
-//}
-
 void GUI::loginShow(){
     log->show();
 

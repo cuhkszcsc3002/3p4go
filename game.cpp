@@ -79,8 +79,7 @@ void Game::setRestartF(int value)
 
 Game::~Game()
 {
-    delete gui;
-//    delete port;
+    delete gui; delete server; delete client;
 }
 
 
@@ -115,8 +114,11 @@ void Game::init2(int port)
     myIP.setPrivateKey(keys.at(1));
 
     /* Initialization of the child class: GUI, Client, Server */
-    client->init(this);
+    server = new Server;
+    client = new Client;
     gui = new GUI;
+
+    client->init(this);
     gui->init(this);
 
     //   server->init(this);
@@ -237,11 +239,12 @@ void Game::inviteAccepted()
     /* Might need to deal with false case */
 }
 
+/* player1 accepted, while player2 not, or both reject*/
 void Game::inviteRejected()
-{                   //player1 accepted, while player2 not.
+{
+    qDebug()<<endl<<"Game.inviteRejected: Host's invite was rejected..";
     setAvailableFlag(1);
     gui->showReject();
-
 }
 
 bool Game::check3P()
