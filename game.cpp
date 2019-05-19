@@ -469,22 +469,23 @@ void Game::broadcastNewmove()
 
         //TO DO: if other don't accept your moveChain, you need to broadcast again
     }
-
     // HOST after broadcast New Move Success.
     // !!!!!!
-
+    gui->updateNewMovel(this->localMoveChain);
+    gui->chess->update();
+    qDebug()<< "Host: update new move success";
 }
 
   /* For the others */
-
 bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
 {
     if ((this->localMoveChain <= newMoveChain) && (localMoveChain.verifyNewMove(newMoveChain.moveList[newMoveChain.length()-1])))
     {
         acceptNewmove(newMoveChain, response);
         // CLIENT BROADCAST NEW MOVE!!!!!
-
-
+        updateNewmove(newMoveChain);
+        gui->updateNewMovel(newMoveChain);
+        gui->chess->update();
     }else{
         rejectNewmove(response);
     }
