@@ -16,6 +16,7 @@ port::port(QWidget *parent) : QWidget(parent)
     lineEdit->setPalette(pal);
     lineEdit->setMaxLength(25);
 
+    labelLayout->addStretch();
     labelLayout->addWidget(message);
     labelLayout->addStretch();
 
