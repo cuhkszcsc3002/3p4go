@@ -150,6 +150,7 @@ void Game::restart() //same as init
     players.append(IP());
     players.append(IP());
     players.append(IP());
+    qDebug() << "Restart: Players refresh";
 
 //    QString localIP = Client::getLocalIPAddress();
 //    Q_ASSERT(localIP != NULL);
@@ -163,22 +164,24 @@ void Game::restart() //same as init
 //    gui = new GUI;
     gui->finishGUI();
     gui->init(this);
-
+    qDebug() << "Restart GUI";
     server->init(this, myIP.getPort());
-
+    qDebug() << "Restart Server";
     client->init(this);
+    qDebug() << "Restart Client";
     QObject::connect(gui->fini, SIGNAL(restart()), this, SLOT(restart()));
     QObject::connect(gui->fini, SIGNAL(gameExit()), this, SLOT(exit()));
+    qDebug() << "Restart Signal";
 
 }
 
 void Game::exit()
 {
-    delete client;
     qDebug() << "Game Terminate.";
+    delete client;
     delete server;
     delete gui;
-
+    app->exit();
 }
 
 void Game::loginShow()
