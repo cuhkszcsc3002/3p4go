@@ -65,13 +65,18 @@ bool MoveChain::newMove(const Move & newMove)
 
 int MoveChain::checkWin() const
 {
+    qDebug() << "CheckWin";
     if (moveList.length()<9) return -1;
-    for (int i=3*3; i<=moveList.length(); i++)
+    for (int i=3*3+1; i<=moveList.length(); i++)
     {
         QList<Move> testChain = moveList.mid(0, i);
         qDebug() << i ;
-        if (checkLastWin(testChain)) return (i+2)%3;
+        if (checkLastWin(testChain)) {
+            qDebug() << "CheckWin Result:" << (i+2)%3;
+            return (i+2)%3;
+        }
     }
+    qDebug() << "CheckWin Result:" << -1;
     return -1;
 }
 
@@ -146,10 +151,10 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
                 for (left=WINNUM-1; left>=0; left--) {
                     if (!directions[checkDirectionIndex][left]) break;
                 }
-                for (right=WINNUM-1; right<=WINNUM*2; right++) {
+                for (right=WINNUM-1; right<WINNUM*2-1; right++) {
                     if (!directions[checkDirectionIndex][right]) break;
                 }
-                if (right - left >= WINNUM-1) return true;
+                if (right - left >= WINNUM) return true;
             }
         }
     }

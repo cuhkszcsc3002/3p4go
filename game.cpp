@@ -476,10 +476,7 @@ void Game::broadcastNewmove()
     gui->chess->update();
     qDebug()<< "Host: update new move success";
 
-    if (localMoveChain.checkLastWin())
-    {
-
-    }
+    checkFinish();
 }
 
   /* For the others */
@@ -492,6 +489,7 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
         updateNewmove(newMoveChain);
         gui->updateNewMovel(newMoveChain);
         gui->chess->update();
+        checkFinish();
     }else{
         rejectNewmove(response);
     }
@@ -515,7 +513,7 @@ void Game::updateNewmove(MoveChain newMoveChain)
 
 void Game::checkFinish()
 {
-    int winResult = this->localMoveChain.checkLastWin();
+    int winResult = this->localMoveChain.checkWin();
     if (winResult == -1)
     {
         return;
