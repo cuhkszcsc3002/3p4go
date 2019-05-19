@@ -1,6 +1,5 @@
 #include "login.h"
-
-
+#include "game.h"
 
 login::login(QWidget *parent) : QWidget (parent)
 {
@@ -23,7 +22,7 @@ login::login(QWidget *parent) : QWidget (parent)
     player1Port = new QLineEdit;
     player2Port = new QLineEdit;
     hostIP = new QLineEdit;
-//    hostIP->setText(myIP); //alternate: QString::fromStdString(ipAddress)
+    hostIP->setText(myIP.getFullAddress()); //alternate: QString::fromStdString(ipAddress)
 
     player1IP->setMaxLength(25);
     player1IP->setAlignment(Qt::AlignLeft);
@@ -44,7 +43,7 @@ login::login(QWidget *parent) : QWidget (parent)
     hostIP->setMaxLength(25);
     hostIP->setAlignment(Qt::AlignLeft);
     hostIP->setFixedWidth(250);
-//    hostIP->setReadOnly(true);
+    hostIP->setReadOnly(true);
 
     p1Layout = new QHBoxLayout;
     p2Layout = new QHBoxLayout;
@@ -79,7 +78,7 @@ login::login(QWidget *parent) : QWidget (parent)
     hostLayout->addStretch();
     userLayout->addLayout(p1Layout);
     userLayout->addLayout(p2Layout);
-//    userLayout->addLayout(hostLayout);
+    userLayout->addLayout(hostLayout);
 
     port1Layout->addStretch();
     port1Layout->addWidget(p1port);
@@ -98,7 +97,7 @@ login::login(QWidget *parent) : QWidget (parent)
     hostIPLayout->addStretch();
     ipLayout->addLayout(p1IPLayout);
     ipLayout->addLayout(p2IPLayout);
-//    ipLayout->addLayout(hostIPLayout);
+    ipLayout->addLayout(hostIPLayout);
 
     p1PortLayout->addWidget(player1Port);
     p1PortLayout->addStretch();
@@ -165,4 +164,8 @@ void login::inviteClicked()
     qDebug() << "GUI.Login: Login is sending: " << p1IP << p2IP << p1Port << p2Port <<endl;
 }
 
+void login::setMyIP(IP myIP)
+{
+   this->myIP = myIP;
+}
 
