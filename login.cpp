@@ -12,8 +12,8 @@ login::login(QWidget *parent) : QWidget (parent)
 
     p1ip = new QLabel(tr("Player1 IP address: "));
     p2ip = new QLabel(tr("Player2 IP address: "));
-    p1port = new QLabel(tr("Port: "));
-    p2port = new QLabel(tr("Port: "));
+    p1port = new QLabel(tr("Port1: "));
+    p2port = new QLabel(tr("Port2: "));
     host = new QLabel(tr("Host"));
 
 
@@ -116,8 +116,6 @@ login::login(QWidget *parent) : QWidget (parent)
     p2PortLayout->addStretch();
     portLayout->addLayout(p1PortLayout);
     portLayout->addLayout(p2PortLayout);
-    QHBoxLayout blank;
-    portLayout->addLayout(&blank);
 
     editorLayout->addLayout(userLayout);
     editorLayout->addLayout(ipLayout);
