@@ -166,7 +166,7 @@ void login::inviteClicked()
 
 void login::setMyIP(IP myIP)
 {
-    qDebug()<<"login.setMyIP: setting my IP Address to login window";
+    qDebug()<<"login.setMyIP: setting my IP Address"<< myIP.getFullAddress()<<" to login window";
    this->myIP = myIP;
 }
 
