@@ -153,7 +153,8 @@ public:
 
 public:
     Game(QApplication * a)
-    {app = a;
+    {
+        app = a;
         QObject::connect(this, SIGNAL(emitStartGame()), this, SLOT(startGame()));
     }
     ~Game();
@@ -469,6 +470,12 @@ public:
 
     void history(int status);
 
+
+
+    GUI *getGui() const;
+    void setGui(GUI *value);
+
+private slots:
     /*
      * Method: restart
      * ------------------------------------------
@@ -488,10 +495,6 @@ public:
 
     void exit();
 
-    GUI *getGui() const;
-    void setGui(GUI *value);
-
-private slots:
     /*
      * Method: sendInvite
      * Usage:

@@ -41,11 +41,13 @@ finish::~finish()
 }
 
 void finish::exitClicked(){
+    qDebug() << "Finish.exitClicked.";
     emit gameEixt();
     this->close();
 }
 
 void finish::restartClicked(){
+    qDebug() << "Finish.restartClicked.";
     emit restart();
     this->close();
 }

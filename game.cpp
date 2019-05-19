@@ -130,6 +130,8 @@ void Game::init2(int port)
 
     client->init(this);
     gui->init(this);
+    QObject::connect(gui->fini, SIGNAL(restart()), this, SLOT(restart()));
+    QObject::connect(gui->fini, SIGNAL(gameExit()), this, SLOT(exit()));
 
     server->init(this, port);
 
@@ -143,12 +145,15 @@ void Game::restart() //same as init
 {
     myIndex = -1;
     setAvailableFlag(1);
+    players.clear();
+
     players.append(IP());
     players.append(IP());
     players.append(IP());
-    QString localIP = Client::getLocalIPAddress();
-    Q_ASSERT(localIP != NULL);
-    myIP.setAddressFromString(localIP);
+
+//    QString localIP = Client::getLocalIPAddress();
+//    Q_ASSERT(localIP != NULL);
+//    myIP.setAddressFromString(localIP);
 //    myIP.setPort(Server::getPort());
     QList<Key2> keys = RSA2::generateKey();
     myIP.setPublicKey(keys.at(0));
@@ -162,14 +167,20 @@ void Game::restart() //same as init
     gui = new GUI;
     gui->init(this);
 
-    //   server->init(this);
+    server->init(this, myIP.getPort());
 
     client->init(this);
+    QObject::connect(gui->fini, SIGNAL(restart()), this, SLOT(restart()));
+    QObject::connect(gui->fini, SIGNAL(gameExit()), this, SLOT(exit()));
+
 }
 
 void Game::exit()
 {
-
+    delete server;
+    delete client;
+    delete gui;
+    qDebug() << "Game Terminate.";
 }
 
 void Game::loginShow()
@@ -452,7 +463,7 @@ void Game::rejectForSig(MoveChain newMoveChain, HttpResponse &response)
 
 }
 
-MoveChain Game::sigAccepted()//
+MoveChain Game::sigAccepted()
 {
 
 }
@@ -525,7 +536,7 @@ void Game::checkFinish()
 
 void Game::finish(int status)
 {
-
+    qDebug() << "Game.finish: status:" << status;
     gui->gameFinish(status);
     server->finish();
     client->finish();
