@@ -52,15 +52,16 @@ void Server::run(int avaliablePort)
 };
 
 
-int Server::replyInvite(HttpResponse & response,int result)
+int Server::replyInvite(HttpResponse * response,int result)
 {
+    qDebug() << "Server.replyInvite() invoked.";
     if (result==1)
     {
-        response.write("1",true);
+        response->write("1", true);
     }
     else
     {
-        response.write("0",true);
+        response->write("0", true);
     }
 }
 

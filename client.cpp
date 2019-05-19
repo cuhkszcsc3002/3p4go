@@ -84,12 +84,16 @@ QString Client::postRequest(QString url, QJsonDocument data)
     QNetworkReply * reply = manager->post(request, dataArray);
 
     QEventLoop eventLoop;
+    qDebug() << "Post Request Start Loop";
 
+//    QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
     QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
     eventLoop.exec();
 
+
+    qDebug() << "Post Request Finished";
     QByteArray replyData = reply->readAll();
-    qDebug()<<replyData;
+    qDebug()<< "Post Request Reply: " << replyData;
     return replyData;
 }
 

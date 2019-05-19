@@ -7,10 +7,11 @@ RequestMapper::RequestMapper(QObject* parent, Game* game)
     : HttpRequestHandler(parent)
 {
     this->game = game;
-//    receiveForSigController.game = game;
-//    receiveInviteController.game = game;
-//    receiveNewMoveController.game = game;
-//    receivePlayerInfoController.game = game;
+    helloworldController = new HelloworldController(game);
+    receiveForSigController = new ReceiveForSigController(game);
+    receiveInviteController = new ReceiveInviteController(game);
+    receiveNewMoveController = new ReceiveNewMoveController(game);
+    receivePlayerInfoController = new ReceivePlayerInfoController(game);
 
 }
 
@@ -24,33 +25,34 @@ void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
 
     if (path=="/")
     {
-        HelloworldController(game).service(request,response);
+        helloworldController->service(request,response);
     }
     else if (path=="/sendInvite")
     {
-        ReceiveInviteController(game).service(request,response);
+        qDebug() << "Match Path: /sendInvite";
+        receiveInviteController->service(request,response);
     }
 
     else if (path=="/sendPlayerInfo")
     {
-        ReceivePlayerInfoController(game).service(request,response);
+        receivePlayerInfoController->service(request,response);
     }
 
     else if (path=="/sendForSig")
     {
-        ReceiveForSigController(game).service(request,response);
+        receiveForSigController->service(request,response);
     }
 
     else if (path=="/broadcastNewMove")
     {
-        ReceiveNewMoveController(game).service(request,response);
+        receiveNewMoveController->service(request,response);
     }
 
     else
     {
         response.setStatus(404,"Not found");
 
-        response.write("The URL is wrong, no such document.");
+        response.write("The URL is wrong, no such document.", true);
     }
 
     qDebug("RequestMapper: finished request");

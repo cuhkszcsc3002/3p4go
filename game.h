@@ -97,7 +97,7 @@ class Game : public QObject
 
 //    IP lastPlayer;
 
-    HttpResponse *receiveInviteRes;
+    HttpResponse * receiveInviteRes;
 
     /*
      * Game.newmoveSig stores the signature state of a newmove.

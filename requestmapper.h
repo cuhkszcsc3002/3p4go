@@ -28,11 +28,11 @@ public:
 //    static HttpSessionStore* sessionStore;
 private:
     Game * game;
-//    ReceiveForSigController receiveForSigController;
-//    ReceiveInviteController receiveInviteController;
-//    ReceivePlayerInfoController receivePlayerInfoController;
-//    ReceiveNewMoveController receiveNewMoveController;
-//    HelloworldController helloworldController;
+    ReceiveForSigController *receiveForSigController;
+    ReceiveInviteController *receiveInviteController;
+    ReceivePlayerInfoController *receivePlayerInfoController;
+    ReceiveNewMoveController *receiveNewMoveController;
+    HelloworldController *helloworldController;
 
 };
 

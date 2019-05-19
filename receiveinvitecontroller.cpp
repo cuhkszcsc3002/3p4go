@@ -17,6 +17,7 @@ ReceiveInviteController::ReceiveInviteController(Game* g, QObject* parent)
 
 void ReceiveInviteController::service(HttpRequest &request, HttpResponse &response)
 {
+    qDebug() << "Server.rceiveInviteController service";
     QByteArray data = request.getBody();
 
     qDebug()<<data;
@@ -29,15 +30,16 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
 
     qDebug()<<obj;
 
-    IP inviteIP(obj.take("IP").toString());
+    qDebug() << "port:" << obj.take("port").toString().toInt();
+    IP inviteIP(obj.take("IP").toString(), obj.take("port").toString().toInt());
+
+
+//    inviteIP.setPort(invitePort);
 
     qDebug()<<inviteIP;
 
-    int invitePort=obj.take("port").toString().toInt();
-
-    qDebug()<<invitePort;
-
     QString inviteKey=obj.take("key").toString();
+
 
     game->receiveInvite(inviteIP,response);
 

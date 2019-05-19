@@ -9,7 +9,8 @@ inviteReceive::inviteReceive(QWidget *parent) : QDialog (parent)
     rejectInvite = new QPushButton(tr("Reject (Alt+&r)"));
 
     info = new QLabel();
-    info->setText("Player XXX wants to invite you for a new 3P4Go game.");
+    QString infoString = QString("Player from ") + QString("wants to invite you for a new 3P4Go game.");
+    info->setText(infoString);
 
     button = new QHBoxLayout();
     information = new QHBoxLayout();
@@ -46,7 +47,7 @@ inviteReceive::~inviteReceive()
 void inviteReceive::receiveInvite(const QString ipAddress)
 {
     QString message = "Player " + ipAddress +  " wants to invite you for a new 3P4Go game.";
-    info = new QLabel(message);
+    this->info->setText(message);
     this->show();
 
 }

@@ -37,7 +37,7 @@ IP &IP::operator=(const IP &ip)
 
 QDebug operator<<(QDebug dbg, const IP &ip)
 {
-    dbg << "-----------------\n"
+    dbg << "-----------------" << endl
        << "Address: " << ip.address << endl
        << "Port: " << ip.port << endl
        << "Full address: " << ip.getFullAddress() << endl

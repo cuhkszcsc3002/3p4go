@@ -51,8 +51,8 @@ void GUI::loginClose(){
     log->close();
 }
 
-void GUI::receiveInvite(){
-    invite->show();
+void GUI::receiveInvite(const QString & ipAddress){
+    invite->receiveInvite(ipAddress);
 }
 
 void GUI::showReject(){

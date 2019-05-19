@@ -77,7 +77,7 @@ public:
      *
      */
 
-    IP(const QString & addressString, const int & port) {setAddressFromString(addressString); setPort(port);}
+    IP(const QString & addressString, const int & port) { setAddressFromString(addressString); setPort(port);}
 
     /*
      * Method: IP(QList<int>)

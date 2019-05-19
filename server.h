@@ -77,7 +77,7 @@ public:
      * Usage: server.receivite();
      */
 
-    int replyInvite(HttpResponse & response,int result);
+    int replyInvite(HttpResponse * response,int result);
 
 
     /*

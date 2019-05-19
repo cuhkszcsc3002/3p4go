@@ -10,9 +10,10 @@ class inviteReceive : public QDialog
 public:
     explicit inviteReceive(QWidget *parent = nullptr);
     ~inviteReceive();
+    void receiveInvite(const QString ipAddress);
+
 
 private slots:
-    void receiveInvite(const QString ipAddress);
     void acceptClick();
     void rejectClick();
 

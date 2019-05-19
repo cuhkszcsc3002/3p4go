@@ -206,22 +206,24 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 void Game::receiveInvite(IP host_Ip, HttpResponse &response)
 {
     receiveInviteRes = &response;
-    gui->receiveInvite();
+    qDebug() << "Receive Invite";
+    gui->receiveInvite(host_Ip.getFullAddress());
     //change gui signal? store host_IP in players[0]?
 }
 
 // TO DO: need to store "response" into receiveInviteRes!
 void Game::acceptInvite()
 {
-    HttpResponse &response = *receiveInviteRes;
+    qDebug() << "Game.acceptInvite() invoked";
+//    HttpResponse &response = receiveInviteRes;
     setAvailableFlag(0);
-    server->replyInvite(response, 1);
+    server->replyInvite(receiveInviteRes, 1);
 }
 
 void Game::rejectInvite()
 {
-    HttpResponse &response = *receiveInviteRes;
-    server->replyInvite(response, 0);
+    qDebug() << "Game.rejectInvite() invoked";
+    server->replyInvite(receiveInviteRes, 0);
 }
 
 

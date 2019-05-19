@@ -43,7 +43,7 @@ public:
     void init(Game*);
     void loginShow(IP myIP);
     void loginClose();
-    void receiveInvite();
+    void receiveInvite(const QString &);
     void showReject();
     void showGame(int myIndex);
     void newClicked();  //not complete yet
