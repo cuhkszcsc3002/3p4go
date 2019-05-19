@@ -44,7 +44,6 @@ void GUI::init(Game *sgame)
 
 void GUI::loginShow(IP myIP){
     log->setMyIP(myIP);
-    log->update();
     log->show();
 }
 
