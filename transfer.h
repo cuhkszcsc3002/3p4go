@@ -11,12 +11,6 @@ public:
     explicit transfer(QWidget *parent = nullptr);
     ~transfer();
 
-private slots:
-    void receiveInvite();
-
-signals:
-    void comfirmReceived();
-
 private:
     QLabel *message;
     QVBoxLayout *layout;
