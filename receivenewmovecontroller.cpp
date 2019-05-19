@@ -36,8 +36,9 @@ void ReceiveNewMoveController::service(HttpRequest &request, HttpResponse &respo
 
     game->checkNewmove(newMoveChain,response);
 
-//    QEventLoop eventLoop;
-//    QObject::connect(game->gui->invite, SIGNAL(inviteAccept()), &eventLoop, SLOT(quit()));
-//    QObject::connect(game->gui->invite, SIGNAL(inviteReject()), &eventLoop, SLOT(quit()));
-//    eventLoop.exec();
+    QEventLoop eventLoop;
+
+    QObject::connect(game->server, SIGNAL(receiveNewMoveFinish()), &eventLoop, SLOT(quit()));
+
+    eventLoop.exec();
 }
