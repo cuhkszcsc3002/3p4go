@@ -13,11 +13,15 @@ public:
 
     void readScore();
     QString getWin();
+    QString getDraw();
     QString getLose();
     QString getTotalScore();
+    QString getTotalPlay();
     void setWin(int w);
+    void setDraw(int d);
     void setLose(int l);
     void setTotalScore(int t);
+    void setTotalPlay(int p);
 
 private slots:
     void backClicked();
@@ -35,16 +39,22 @@ private:
 
     QPushButton *back;
     QLabel *WinShow;
+    QLabel *DrawShow;
     QLabel *LoseShow;
     QLabel *TotalShow;
+    QLabel *TotalPlay;
 
     QLabel *WinSocre;
+    QLabel *DrawScore;
     QLabel *LoseScore;
-    QLabel *TotalScore ;
+    QLabel *TotalScore;
+    QLabel *PlayTime;
 
     QHBoxLayout *Win;
+    QHBoxLayout *Draw;
     QHBoxLayout *Lose;
     QHBoxLayout *Total;
+    QHBoxLayout *Play;
     QHBoxLayout *Button;
 
     QVBoxLayout *MainLayout;
