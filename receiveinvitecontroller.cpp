@@ -1,10 +1,10 @@
 #include "receiveinvitecontroller.h"
 #include "game.h"
 
-ReceiveInviteController::ReceiveInviteController(QObject* parent)
+ReceiveInviteController::ReceiveInviteController(Game* g, QObject* parent)
     : HttpRequestHandler(parent)
 {
-
+    game = g;
 }
 
 /*

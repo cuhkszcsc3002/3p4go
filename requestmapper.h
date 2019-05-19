@@ -8,6 +8,7 @@
 #include "receiveplayerinfocontroller.h"
 #include "receivenewmovecontroller.h"
 #include "helloworldcontroller.h"
+class Game;
 
 using namespace stefanfrings;
 
@@ -24,13 +25,14 @@ class RequestMapper : public HttpRequestHandler
 public:
     RequestMapper(QObject* parent, Game * game);
     void service(HttpRequest& request, HttpResponse& response);
-    static HttpSessionStore* sessionStore;
+//    static HttpSessionStore* sessionStore;
 private:
-    ReceiveForSigController receiveForSigController;
-    ReceiveInviteController receiveInviteController;
-    ReceivePlayerInfoController receivePlayerInfoController;
-    ReceiveNewMoveController receiveNewMoveController;
-    HelloworldController helloworldController;
+    Game * game;
+//    ReceiveForSigController receiveForSigController;
+//    ReceiveInviteController receiveInviteController;
+//    ReceivePlayerInfoController receivePlayerInfoController;
+//    ReceiveNewMoveController receiveNewMoveController;
+//    HelloworldController helloworldController;
 
 };
 

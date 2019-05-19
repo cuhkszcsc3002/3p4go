@@ -1,10 +1,10 @@
 #include "helloworldcontroller.h"
 #include "game.h"
-HelloworldController::HelloworldController(QObject* parent)
+HelloworldController::HelloworldController(Game *g, QObject* parent)
     : HttpRequestHandler(parent)
 
 {
-
+    game = g;
 }
 
 void HelloworldController::service(HttpRequest &request, HttpResponse &response)

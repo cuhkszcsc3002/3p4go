@@ -7,6 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+//    QCoreApplication serverApp(argc, argv);
+//    serverApp.exec();
 //    testServer(a);
 //    qDebug()<<"Testing...";
     Game g(&a);

@@ -40,7 +40,7 @@ class Game : public QObject
     Client *client;
     Server *server;
     GUI *gui;
-    QCoreApplication * app;
+    QApplication * app;
     port myPort;
 
     int Port;
@@ -151,7 +151,7 @@ class Game : public QObject
     MoveChain localMoveChain;
 
 public:
-    Game(QCoreApplication* a) {app = a;}
+    Game(QApplication * a) {app = a;}
     ~Game();
 
     /*

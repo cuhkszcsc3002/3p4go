@@ -1,10 +1,11 @@
 #include "receiveforsigcontroller.h"
 #include "game.h"
 
-ReceiveForSigController::ReceiveForSigController(QObject* parent)
+ReceiveForSigController::ReceiveForSigController(Game* g, QObject* parent)
     : HttpRequestHandler(parent)
 {
     // empty
+    game = g;
 }
 
 /*

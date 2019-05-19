@@ -1,16 +1,22 @@
 #include "game.h"
 
-HttpSessionStore* RequestMapper::sessionStore=0;
+//HttpSessionStore* RequestMapper::sessionStore=0;
 
 RequestMapper::RequestMapper(QObject* parent, Game* game)
 
     : HttpRequestHandler(parent)
 {
-    receiveForSigController.game = game;
+    this->game = game;
+//    receiveForSigController.game = game;
+//    receiveInviteController.game = game;
+//    receiveNewMoveController.game = game;
+//    receivePlayerInfoController.game = game;
+
 }
 
 void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
 
+    qDebug() << "Service Triggered.";
     QByteArray path=request.getPath();
 
     qDebug("RequestMapper: path=%s",path.data());
@@ -18,26 +24,26 @@ void RequestMapper::service(HttpRequest& request, HttpResponse& response) {
 
     if (path=="/")
     {
-        helloworldController.service(request,response);
+        HelloworldController(game).service(request,response);
     }
     else if (path=="/sendInvite")
     {
-        receiveInviteController.service(request,response);
+        ReceiveInviteController(game).service(request,response);
     }
 
     else if (path=="/sendPlayerInfo")
     {
-        receivePlayerInfoController.service(request,response);
+        ReceivePlayerInfoController(game).service(request,response);
     }
 
     else if (path=="/sendForSig")
     {
-        receiveForSigController.service(request,response);
+        ReceiveForSigController(game).service(request,response);
     }
 
     else if (path=="/broadcastNewMove")
     {
-        receiveNewMoveController.service(request,response);
+        ReceiveNewMoveController(game).service(request,response);
     }
 
     else

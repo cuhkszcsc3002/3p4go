@@ -22,7 +22,7 @@ class ReceiveForSigController : public HttpRequestHandler
 
 public:
     Game * game;
-    ReceiveForSigController(QObject* parent=0);
+    ReceiveForSigController(Game* g, QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

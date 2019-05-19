@@ -22,7 +22,7 @@ class HelloworldController: public HttpRequestHandler
 
 public:
     Game * game;
-    HelloworldController(QObject* parent=0);
+    HelloworldController(Game * g, QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

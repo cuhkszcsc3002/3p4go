@@ -23,7 +23,7 @@ class ReceivePlayerInfoController : public HttpRequestHandler
 
 public:
     Game * game;
-    ReceivePlayerInfoController(QObject* parent=0);
+    ReceivePlayerInfoController(Game* g, QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 };
 

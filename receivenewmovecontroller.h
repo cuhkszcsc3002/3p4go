@@ -24,7 +24,7 @@ public:
 
     Game *game;
 
-    ReceiveNewMoveController(QObject* parent=0);
+    ReceiveNewMoveController(Game* g, QObject* parent=0);
 
     void service(HttpRequest& request, HttpResponse& response);
 };

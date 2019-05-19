@@ -1,9 +1,9 @@
 #include "receivenewmovecontroller.h"
 #include "game.h"
 
-ReceiveNewMoveController::ReceiveNewMoveController(QObject* parent)
+ReceiveNewMoveController::ReceiveNewMoveController(Game *g, QObject* parent)
     : HttpRequestHandler(parent) {
-    // empty
+    game = g;
 }
 
 /*

@@ -1,10 +1,10 @@
 #include "receiveplayerinfocontroller.h"
 #include "game.h"
 
-ReceivePlayerInfoController::ReceivePlayerInfoController(QObject* parent)
+ReceivePlayerInfoController::ReceivePlayerInfoController(Game *g, QObject* parent)
     : HttpRequestHandler(parent)
 {
-
+    game = g;
 }
 
 /*

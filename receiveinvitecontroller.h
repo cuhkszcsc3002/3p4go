@@ -25,7 +25,7 @@ public:
 
     Game *game;
 
-    ReceiveInviteController(QObject* parent=0);
+    ReceiveInviteController(Game * g, QObject* parent=0);
 
     void service(HttpRequest& request, HttpResponse& response);
 
