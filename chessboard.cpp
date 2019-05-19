@@ -171,31 +171,6 @@ void chessBoard::DrawItems()
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
 
-    /* These codes are the junping mechanism, do once when receive new move from other player */
-    if(isJump == false)
-    {
-        int lastMove = localMoveChain.length()-1;
-//        qDebug() << "MoveChain lastmove: "<< lastMove;
-        if (lastMove>0)
-        {
-            int x = localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
-            int y = localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
-            leftBoundAxis->setX(x-9);
-            rightBoundAxis->setX(x+9);
-            upBoundAxis->setY(y-9);
-            downBoundAxis->setY(y+9);
-            logLocation->setX(x);
-            logLocation->setY(y);
-            phyLocation->setX(INIT_POSX);
-            phyLocation->setY(INIT_POSY);
-
-            isJump = true;
-
-            drawNewMove(painter);
-
-            cout<<"end player x: "<<x<<" y: "<<y<<endl;
-        }
-    }
 
     /* Scan all chess stones */
     for (int i=0; i<localMoveChain.length(); i++)
@@ -238,10 +213,36 @@ void chessBoard::drawStoneAtPoint(QPainter& painter, int logX, int logY)
     painter.drawEllipse(phyX-25, phyY-25, 50, 50);
 }
 
+void chessBoard::jumpToNewMove()
+{
+/* These codes are the junping mechanism, do once when receive new move from other player */
+    int lastMove = this->localMoveChain.length()-1;
+//        qDebug() << "MoveChain lastmove: "<< lastMove;
+    if (lastMove>0)
+    {
+        int x = this->localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
+        int y = this->localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
+        leftBoundAxis->setX(x-9);
+        rightBoundAxis->setX(x+9);
+        upBoundAxis->setY(y-9);
+        downBoundAxis->setY(y+9);
+        logLocation->setX(x);
+        logLocation->setY(y);
+        phyLocation->setX(INIT_POSX);
+        phyLocation->setY(INIT_POSY);
+
+        isJump = true;
+
+        noteNewMove();
+
+//            cout<<"end player x: "<<x<<" y: "<<y<<endl;
+    }
+}
 
 /* Draw a indicate simbol on the new move chess stone */
-void chessBoard::drawNewMove(QPainter& painter)
+void chessBoard::noteNewMove()
 {
+    QPainter painter(this);
     QPen pen = painter.pen();
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
