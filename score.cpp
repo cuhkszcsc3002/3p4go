@@ -9,6 +9,12 @@ using namespace std;
 
 score::score(QWidget *parent) : QDialog (parent)
 {
+    win = 0;
+    draw = 0;
+    lose = 0;
+    totalScore = 0;
+    totalPlay = 0;
+
     qDebug()<<"score.score: constructing score class...";
     readScore();
     this->resize(QSize(300,100));
@@ -84,6 +90,7 @@ score::~score()
 
 void score::readScore()
 {
+    qDebug() << "score.readScore: reading score";
     fstream file;
     string line, score;
     file.open(FILENAME, ios::in);
@@ -91,24 +98,31 @@ void score::readScore()
     /* If user play this game first time */
     if(!file)
     {
-        file.open(FILENAME, ios::out);      //initialize the score record
-        if(file.is_open())
+        qDebug() << "score.readScore: new player, creating file";
+        file.close();
+        ofstream newfile(FILENAME);
+        qDebug() << "ofstream";
+        /*newfile.open(FILENAME, ios::out);*/      //initialize the score record
+        if(newfile)
         {
-             file << "w 0\n";     //win
-             file << "d 0\n";     //draw
-             file << "l 0\n";     //lose
-             file << "t 0\n";     //totalScore
-             file << "p 0\n";     //totalPlay
+             newfile << "w 0\n";     //win
+             newfile << "d 0\n";     //draw
+             newfile << "l 0\n";     //lose
+             newfile << "t 0\n";     //totalScore
+             newfile << "p 1\n";     //totalPlay
 
              win = 0;
              draw = 0;
              lose = 0;
              totalScore = 0;
              totalPlay = 1;
+
+             newfile.close();
         }
     }
     else
     {
+        qDebug() << "score.readScore: new player, creating file";
         while(getline(file, line))
         {
             char Fchar = line[0];
@@ -131,8 +145,8 @@ void score::readScore()
                 totalPlay = stoi(score);
             }
         }
-    }
-    file.close();
+        file.close();
+    } 
 }
 
 QString score::getWin()
