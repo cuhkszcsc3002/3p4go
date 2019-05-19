@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include <QApplication>
 //#include "client.h"
 #include "game.h"
