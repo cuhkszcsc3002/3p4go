@@ -42,7 +42,7 @@ login::login(QWidget *parent) : QWidget (parent)
 
     hostIP->setMaxLength(25);
     hostIP->setAlignment(Qt::AlignLeft);
-    hostIP->setFixedWidth(250);
+//    hostIP->setFixedWidth(250);
     hostIP->setReadOnly(true);
 
     p1Layout = new QHBoxLayout;

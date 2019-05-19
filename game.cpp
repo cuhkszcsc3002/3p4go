@@ -167,7 +167,7 @@ void Game::loginShow()
     // Note for GUI: Now, 2 options for the player:
     // 1. Wait for the server->receiveInvite
     // 2. When the player invites 2 other players, call sendInvite.
-    gui->loginShow();
+    gui->loginShow(myIP);
 
 }
 

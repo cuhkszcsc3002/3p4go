@@ -41,7 +41,7 @@ public:
     ~GUI();
 
     void init(Game*);
-    void loginShow();
+    void loginShow(IP myIP);
     void loginClose();
     void receiveInvite();
     void showReject();
