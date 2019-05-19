@@ -171,7 +171,6 @@ void chessBoard::DrawItems()
     pen.setColor(Qt::transparent);
     painter.setPen(pen);
 
-
     /* Scan all chess stones */
     for (int i=0; i<localMoveChain.length(); i++)
     {
@@ -222,19 +221,16 @@ void chessBoard::jumpToNewMove()
     {
         int x = this->localMoveChain.moveList[lastMove].getX(); //atoi(strX.c_str());
         int y = this->localMoveChain.moveList[lastMove].getY(); //atoi(strY.c_str());
-        leftBoundAxis->setX(x-9);
-        rightBoundAxis->setX(x+9);
-        upBoundAxis->setY(y-9);
-        downBoundAxis->setY(y+9);
-        logLocation->setX(x);
-        logLocation->setY(y);
-        phyLocation->setX(INIT_POSX);
-        phyLocation->setY(INIT_POSY);
-
-        isJump = true;
+        this->leftBoundAxis->setX(x-9);
+        this->rightBoundAxis->setX(x+9);
+        this->upBoundAxis->setY(y-9);
+        this->downBoundAxis->setY(y+9);
+        this->logLocation->setX(x);
+        this->logLocation->setY(y);
+        this->phyLocation->setX(INIT_POSX);
+        this->phyLocation->setY(INIT_POSY);
 
         noteNewMove();
-
 //            cout<<"end player x: "<<x<<" y: "<<y<<endl;
     }
 }
@@ -367,6 +363,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
 void chessBoard::pullMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
+    jumpToNewMove();
     update();
 }
 
