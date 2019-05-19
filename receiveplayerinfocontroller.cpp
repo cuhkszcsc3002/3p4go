@@ -44,11 +44,13 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
 
 //    TODO
     game->updatePlayerInfo(inviteIP,inviteIP,inviteIP);
+
     response.write("1", true);
 
 //    QEventLoop eventLoop;
-//    QObject::connect(game->gui->invite, SIGNAL(inviteAccept()), &eventLoop, SLOT(quit()));
-//    QObject::connect(game->gui->invite, SIGNAL(inviteReject()), &eventLoop, SLOT(quit()));
+
+//    QObject::connect(game->server, SIGNAL(receivePlayerInfoFinish()), &eventLoop, SLOT(quit()));
+
 //    eventLoop.exec();
 
 //    qDebug()<<"receive movechain: "<<newMoveChain.toJsonString();

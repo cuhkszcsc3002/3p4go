@@ -35,8 +35,11 @@ class Server: public QObject
     QCoreApplication * serverApp;
 
 signals:
+
     void receiveForSigFinish();
+
     void receiveNewMoveFinish();
+
     void receivePlayerInfoFinish();
 
 public:
