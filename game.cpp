@@ -230,14 +230,17 @@ void Game::inviteAccepted()
 {
     qDebug()<<"Both Guests accept Host's invite.";
     if (check3P() == true){
-        int count = 0;
-        while(client->sendPlayerInfo() == 0)
+        if(client->sendPlayerInfo() == 0)
         {
+            qDebug()<<endl<<"Game.inviteAccepted: Fail to send player information to other player.";
             /* need to sleep and try again or rollback when too many fails*/
         }
-        startGame();
+        else
+            startGame();
     }
-    /* Might need to deal with false case */
+    else
+        qDebug()<<"Game.check3P: check3P return error.";
+        /* Might need to deal with false case */
 }
 
 /* player1 accepted, while player2 not, or both reject*/
