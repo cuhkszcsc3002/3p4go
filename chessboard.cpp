@@ -276,7 +276,8 @@ void chessBoard::drawLocatorWithKeyboard()
     msg.sprintf("physical locator: %d, %d. logical locator: %d, %d.  left:%d, right:%d, up:%d, down:%d",
                 phyLocation->x(), phyLocation->y(), logLocation->x(), logLocation->y(),
                 leftBoundAxis->x(), rightBoundAxis->x(), upBoundAxis->y(), downBoundAxis->y());
-    setWindowTitle(msg);
+    QString index =  "Player" + QString::number(myIndex) + ": " + msg;
+    setWindowTitle(index);
 }
 
 
@@ -353,6 +354,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
             {
                 localMoveChain.newMove(newMove);
                 emit pushMoveChain(localMoveChain);
+                this->update();
             }
             else
                 std::cout<<"New move error!"<<endl;
