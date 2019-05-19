@@ -161,7 +161,7 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
                     for (right=WINNUM-1; right<WINNUM*2-1; right++) {
                         if (!directions[checkDirectionIndex][right]) break;
                     }
-                    if (right - left >= WINNUM) return true;
+                    if (right - left + 1 >= WINNUM) return true;
                 }
             }
         }
