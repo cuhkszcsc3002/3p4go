@@ -67,10 +67,12 @@ QString Client::postRequest(QString url, QJsonDocument data)
      * If http:// is lacked, add it automatically as default.
      */
 
-    if (!url.startsWith("http") || !url.startsWith("https"))
+    if ((!url.startsWith("http")) || (!url.startsWith("https")))
     {
         url = "http://" + url;
     }
+
+    qDebug() << "Post Request Url:" << url;
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     QNetworkRequest request;
@@ -94,6 +96,8 @@ QString Client::postRequest(QString url, QJsonDocument data)
     qDebug() << "Post Request Finished";
     QByteArray replyData = reply->readAll();
     qDebug()<< "Post Request Reply: " << replyData;
+//    delete manager;
+
     return replyData;
 }
 
