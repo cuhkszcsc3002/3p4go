@@ -344,6 +344,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
     else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         Move newMove(myIndex, logLocation->x(), logLocation->y());
+        qDebug() << "ENTER" << newMove.getGrid();
 
         /* Check if is player's turn */
         if(localMoveChain.length()%3 == myIndex)

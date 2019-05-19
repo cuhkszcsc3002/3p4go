@@ -191,6 +191,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 
     /* Storing guest player address information */
     players[0] = myIP;
+    myIndex = 0;
     IP player1, player2;
     player1.setAddressFromString(p1IP);
     player1.setPort(p1Port.toInt());
