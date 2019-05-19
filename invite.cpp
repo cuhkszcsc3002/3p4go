@@ -10,8 +10,8 @@ inviteReceive::inviteReceive(QWidget *parent) : QDialog (parent)
     rejectInvite = new QPushButton(tr("Reject (Alt+&r)"));
 
     info = new QLabel();
-    QString infoString = QString("Player from ") + QString("wants to invite you for a new 3P4Go game.");
-    info->setText(infoString);
+//    QString infoString = QString("Player from ") + QString("wants to invite you for a new 3P4Go game.");
+//    info->setText(infoString);
 
     button = new QHBoxLayout();
     information = new QHBoxLayout();
