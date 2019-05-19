@@ -233,7 +233,7 @@ public:
      * call check3p以及startgame连起来了
      */
 
-    void inviteAccepted();
+    void inviteAccepted(int count);
 
     /*
      * Method: inviteRejected

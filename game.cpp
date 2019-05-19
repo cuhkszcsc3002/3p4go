@@ -193,7 +193,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     if (result == 1){
         result = client->sendInvite(2);
         if (result == 1){
-            inviteAccepted();//success
+            inviteAccepted(0);//success
         }else{      // Add :  when result = -1, wait please!
             inviteRejected();
         }
@@ -226,21 +226,35 @@ void Game::rejectInvite()
 
 
 /* For the host*/
-void Game::inviteAccepted()
+void Game::inviteAccepted(int count)
 {
     qDebug()<<"Both Guests accept Host's invite.";
+    /* Deal with the case that sendPlayerInfo fails */
     if (check3P() == true){
-        if(client->sendPlayerInfo() == 0)
+        if (count == 6)
+            return;
+        else if(client->sendPlayerInfo() == 0)
         {
-            qDebug()<<endl<<"Game.inviteAccepted: Fail to send player information to other player.";
+            count++;
+            qDebug()<<endl<<"Game.inviteAccepted: Fail to send player information to other player for "<<count<<" times.";
+            inviteAccepted(count);
             /* need to sleep and try again or rollback when too many fails*/
         }
         else
             startGame();
     }
+    /* Deal with the case that check3P fails */
     else
-        qDebug()<<"Game.check3P: check3P return error.";
-        /* Might need to deal with false case */
+    {
+        if (count == 6)
+            return;
+        else
+        {
+            count++;
+            qDebug()<<"Game.check3P: check3P return error for "<<count<<" times.";
+            inviteAccepted(count);
+        }
+    }
 }
 
 /* player1 accepted, while player2 not, or both reject*/
@@ -255,13 +269,9 @@ void Game::inviteRejected()
 bool Game::check3P()
 {
     if (players.count() == 3)
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 ///* for other players */
