@@ -273,10 +273,12 @@ void chessBoard::drawLocatorWithKeyboard()
     painter.drawLine(phyLocation->x()-25, phyLocation->y()-10, phyLocation->x()-25, phyLocation->y()-25);
 
     QString msg;
+    QString index = "Player" + QString::number(myIndex) + ": ";
     msg.sprintf("physical locator: %d, %d. logical locator: %d, %d.  left:%d, right:%d, up:%d, down:%d",
                 phyLocation->x(), phyLocation->y(), logLocation->x(), logLocation->y(),
                 leftBoundAxis->x(), rightBoundAxis->x(), upBoundAxis->y(), downBoundAxis->y());
-    setWindowTitle(msg);
+    index = index + msg;
+    setWindowTitle(index);
 }
 
 
