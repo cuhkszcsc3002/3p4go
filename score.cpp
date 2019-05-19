@@ -10,10 +10,6 @@ using namespace std;
 score::score(QWidget *parent) : QDialog (parent)
 {
     qDebug()<<"score.score: constructing score class...";
-    setWin(2);
-    setLose(55);
-    setTotalScore(-12);
-    //
     readScore();
     this->resize(QSize(300,100));
 
