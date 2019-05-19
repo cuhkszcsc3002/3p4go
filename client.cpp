@@ -107,7 +107,7 @@ int Client::sendInvite(int playerIndex)
     // 1. Based on the IP, get the IP address.
     IP &ip = game->players[playerIndex];
     qDebug() << ip;
-    QString url = ip.getAddress() + ":" + QString::number(ip.getPort()) + "/sendInvite";
+    QString url = ip.getFullAddress() + "/sendInvite";
 
     // 2. Send the request for invitation.
     IP &myIP = game->myIP;
@@ -194,7 +194,7 @@ int Client::sendForSig()
 
     // 2. Send the whole MoveChain to the next player.
     IP & nextPlayer = game->players[(game->myIndex+1)%3];
-    QString url = nextPlayer.getAddress() + ":" + QString(nextPlayer.getPort())
+    QString url = nextPlayer.getFullAddress()
             + "/sendForSig";
     QJsonObject obj;
     obj.insert("moveChain", moveChainString);
@@ -222,7 +222,7 @@ int Client::sendForSig(const MoveChain &mc, int playerIndex)
 
     // 2. Send the whole MoveChain to the next player.
     IP & nextPlayer = game->players[playerIndex];
-    QString url = nextPlayer.getAddress() + ":" + QString(nextPlayer.getPort())
+    QString url = nextPlayer.getFullAddress()
             + "/sendForSig";
     QJsonObject obj;
     obj.insert("moveChain", moveChainString);
@@ -252,7 +252,7 @@ int Client::broadcastNewMove()
     for (int i=0; i<3; i++) {
         if (i != game->myIndex){
             IP & player = game->players[i];
-            QString url = player.getAddress() + ":" + QString(player.getPort())
+            QString url = player.getFullAddress()
                     + "/broadcastNewMove";
             QJsonObject obj;
             obj.insert("moveChain", moveChainString);
