@@ -37,9 +37,10 @@ void GUI::finishGUI() {
 //    fini->close();
     chess->close();
 
-    delete log;     delete scor;
-    delete trans;   delete rej;
-    delete invite;  delete fini;
+//    delete log;     delete scor;
+//    delete trans;   delete rej;
+//    delete invite;
+//    delete fini;
 //    delete chess;
 }
 

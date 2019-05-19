@@ -229,8 +229,10 @@ void chessBoard::jumpToNewMove()
         this->logLocation->setY(y);
         this->phyLocation->setX(INIT_POSX);
         this->phyLocation->setY(INIT_POSY);
+        update();
 
-        noteNewMove();
+
+//        noteNewMove();
 //            cout<<"end player x: "<<x<<" y: "<<y<<endl;
     }
 }
@@ -363,8 +365,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
 void chessBoard::pullMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
-    //jumpToNewMove();
-    update();
+    jumpToNewMove();
 }
 
 void chessBoard::setMyIndex(int myIndex)
