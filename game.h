@@ -446,16 +446,17 @@ public:
      * 1, then Game.finish() will be called.
      */
 
-    bool checkFinish();
+    void checkFinish();
 
     /*
      * Method: finish
      * ---------------------------------------------
      * This method is called when Game.checkFinish()
      * returns 1, and it calls GUI.finish().
+     * Passing 1 if lose, 2 if draw, 0 if win.
      */
 
-    void finish();
+    void finish(int status);
 
     /*
      * Method: history

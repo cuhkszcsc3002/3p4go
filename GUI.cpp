@@ -86,7 +86,17 @@ void GUI::updateNewMovel(MoveChain localMoveChain){
     chess->update();
 }
 
-void GUI::gameFinish(){
+void GUI::gameFinish(int status){
+    if (status==0) {
+        fini->message->setText("You Win!\nAnother Game?");
+    }
+    else if (status==1)
+    {
+        fini->message->setText("Oh! You lose!\nAnother Game?");
+    }
+    else {
+        fini->message->setText("DRAW!\nAnother Game?");
+    }
     fini->show();
 }
 

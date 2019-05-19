@@ -32,7 +32,7 @@ signals:
     void restart();
     void gameEixt();
 
-private:
+public:
     QPushButton *again;
     QPushButton *exit;
     QLabel *message;

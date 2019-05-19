@@ -49,7 +49,7 @@ public:
     void showReject();
     void showGame(int myIndex);
     void updateNewMovel(MoveChain localMoveChain);  //not complete yet
-    void gameFinish();
+    void gameFinish(int status);
     void takeCount();
     void transferShow();
     void transferClose();

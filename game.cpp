@@ -471,9 +471,15 @@ void Game::broadcastNewmove()
     }
     // HOST after broadcast New Move Success.
     // !!!!!!
+
     gui->updateNewMovel(this->localMoveChain);
     gui->chess->update();
     qDebug()<< "Host: update new move success";
+
+    if (localMoveChain.checkLastWin())
+    {
+
+    }
 }
 
   /* For the others */
@@ -507,17 +513,22 @@ void Game::updateNewmove(MoveChain newMoveChain)
     this->localMoveChain = newMoveChain;
 }
 
-bool Game::checkFinish()
+void Game::checkFinish()
 {
-    if (this->localMoveChain.checkLastWin() == true)
+    int winResult = this->localMoveChain.checkLastWin();
+    if (winResult == -1)
     {
-        finish();
+        return;
+    }
+    else {
+        finish((winResult-myIndex+3) % 3);
     }
 }
 
-void Game::finish()
+void Game::finish(int status)
 {
-    gui->gameFinish();
+
+    gui->gameFinish(status);
     server->finish();
     client->finish();
     history();
