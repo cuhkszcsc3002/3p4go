@@ -56,7 +56,7 @@ chessBoard::~chessBoard()
 
 void chessBoard::paintEvent(QPaintEvent *e)
 {
-    qDebug() << "Paint Event Start";
+//    qDebug() << "Paint Event Start";
     DrawChessboard();		//draw chess board
     DrawItems();			//draw chess stone
 
@@ -67,7 +67,7 @@ void chessBoard::paintEvent(QPaintEvent *e)
 
 void chessBoard::DrawChessboard()
 {
-    qDebug() << "DrawChessboard Start";
+//    qDebug() << "DrawChessboard Start";
     /* Set and draw the boundary lines, chesboard lines, samll balack points and
      * background of the chessboard*/
     QPainter painter(this);             //construct base of the chessboard
@@ -161,13 +161,13 @@ void chessBoard::DrawChessboard()
     painter.drawText(textHorizontal18, Qt::AlignTop, horizontalAxis18, nullptr);
     painter.drawText(textHorizontal19, Qt::AlignTop, horizontalAxis19, nullptr);
 
-    qDebug() << "DrawChessboard Finished";
+//    qDebug() << "DrawChessboard Finished";
 }
 
 
 void chessBoard::DrawItems()
 {
-    qDebug() << "DrawItem Start";
+//    qDebug() << "DrawItem Start";
     /* Set the pen that draw chess stones */
     QPainter painter(this);
     QPen pen = painter.pen();
