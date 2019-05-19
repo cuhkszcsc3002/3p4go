@@ -169,5 +169,6 @@ void login::setMyIP(IP myIP)
     qDebug()<<"login.setMyIP: setting my IP Address "<< myIP.getFullAddress()<<" to login window";
     this->myIP = myIP;
     this->hostIP->setText(myIP.getFullAddress());
+    this->setWindowTitle(myIP.getFullAddress()+tr(": Starting a new 3P4GO..."));
 }
 
