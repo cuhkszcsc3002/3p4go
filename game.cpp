@@ -77,6 +77,16 @@ void Game::setRestartF(int value)
     restartF = value;
 }
 
+GUI *Game::getGui() const
+{
+    return gui;
+}
+
+void Game::setGui(GUI *value)
+{
+    gui = value;
+}
+
 Game::~Game()
 {
     delete gui; delete server; delete client;
@@ -205,9 +215,12 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 /* I think this method need a signal from client to trigger */
 void Game::receiveInvite(IP host_Ip, HttpResponse &response)
 {
+    qDebug() << "Game.receiveInvite: " << response.getHeaders();
     receiveInviteRes = &response;
+    qDebug() << receiveInviteRes->getHeaders();
     qDebug() << "Receive Invite";
-    gui->receiveInvite(host_Ip.getFullAddress());
+//    receiveInviteRes->write("OK", true);
+    gui->receiveInvite(host_Ip.getFullAddress(), response);
     //change gui signal? store host_IP in players[0]?
 }
 
@@ -216,6 +229,8 @@ void Game::acceptInvite()
 {
     qDebug() << "Game.acceptInvite() invoked";
 //    HttpResponse &response = receiveInviteRes;
+    qDebug() << receiveInviteRes->getHeaders();
+
     setAvailableFlag(0);
     server->replyInvite(receiveInviteRes, 1);
 }
@@ -223,6 +238,7 @@ void Game::acceptInvite()
 void Game::rejectInvite()
 {
     qDebug() << "Game.rejectInvite() invoked";
+    qDebug() << receiveInviteRes->getHeaders();
     server->replyInvite(receiveInviteRes, 0);
 }
 

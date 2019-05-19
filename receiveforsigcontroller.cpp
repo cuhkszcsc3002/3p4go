@@ -41,6 +41,12 @@ void ReceiveForSigController::service(HttpRequest &request, HttpResponse &respon
 
 
     //TODO
-    game->validateForSig(newMoveChain,1,response);
+//    game->validateForSig(newMoveChain,1,response);
+//    QEventLoop eventLoop;
+//    QObject::connect(game->gui->invite, SIGNAL(()), &eventLoop, SLOT(quit()));
+//    QObject::connect(game->gui->invite, SIGNAL(inviteReject()), &eventLoop, SLOT(quit()));
+//    eventLoop.exec();
+
+//    qDebug() << "Loop Finished.";
 
 }

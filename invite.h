@@ -17,6 +17,7 @@ private slots:
     void acceptClick();
     void rejectClick();
 
+public:
 signals:
     void inviteAccept();
     void inviteReject();

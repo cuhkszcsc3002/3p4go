@@ -33,8 +33,8 @@ void Server::run(int avaliablePort)
     settings->setValue("port", avaliablePort);
     settings->setValue("minThreads", 4);
     settings->setValue("maxThreads", 100);
-    settings->setValue("cleanupInterval", 60000);
-    settings->setValue("readTimeout", 60000);
+    settings->setValue("cleanupInterval", 6000000);
+    settings->setValue("readTimeout", 6000000);
     settings->setValue("maxRequestSize", 16000);
     settings->setValue("maxMultiPartSize", 10000000);
 
@@ -57,11 +57,20 @@ int Server::replyInvite(HttpResponse * response,int result)
     qDebug() << "Server.replyInvite() invoked.";
     if (result==1)
     {
-        response->write("1", true);
+        QJsonObject result;
+        result.insert("result", 1);
+        result.insert("key", game->myIP.getPublicKey().toString());
+        QJsonDocument doc(result);
+
+        response->write(doc.toJson(), true);
     }
     else
     {
-        response->write("0", true);
+        QJsonObject result;
+        result.insert("result", 0);
+        QJsonDocument doc(result);
+
+        response->write(doc.toJson(), true);
     }
 }
 

@@ -31,10 +31,11 @@ using namespace std;
 class Game : public QObject
 {
     Q_OBJECT
-
+public:
     friend class Client;
     friend class Server;
     friend class GUI;
+    friend class HttpRequestHandler;
 //    friend class port;
 
     Client *client;
@@ -493,6 +494,9 @@ public:
      */
 
     void exit();
+
+    GUI *getGui() const;
+    void setGui(GUI *value);
 
 private slots:
     /*

@@ -40,7 +40,15 @@ void ReceiveInviteController::service(HttpRequest &request, HttpResponse &respon
 
     QString inviteKey=obj.take("key").toString();
 
+    response.write("", false);
 
     game->receiveInvite(inviteIP,response);
+
+    QEventLoop eventLoop;
+    QObject::connect(game->gui->invite, SIGNAL(inviteAccept()), &eventLoop, SLOT(quit()));
+    QObject::connect(game->gui->invite, SIGNAL(inviteReject()), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
+
+    qDebug() << "Loop End";
 
 }

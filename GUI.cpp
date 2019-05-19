@@ -9,6 +9,16 @@
 /*/
 #include "game.h"
 
+inviteReceive *GUI::getInvite() const
+{
+    return invite;
+}
+
+void GUI::setInvite(inviteReceive *value)
+{
+    invite = value;
+}
+
 GUI::GUI(QWidget *parent) : QWidget (parent){}
 
 GUI::~GUI(){
@@ -51,7 +61,8 @@ void GUI::loginClose(){
     log->close();
 }
 
-void GUI::receiveInvite(const QString & ipAddress){
+void GUI::receiveInvite(const QString & ipAddress, HttpResponse & response){
+    qDebug() << "GUI.receiveInvite";
     invite->receiveInvite(ipAddress);
 }
 

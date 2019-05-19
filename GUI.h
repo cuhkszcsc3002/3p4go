@@ -11,6 +11,7 @@
 #include "finish.h"
 #include "timer.h"
 #include "port.h"
+#include "httpresponse.h"
 
 class Game;
 
@@ -22,7 +23,7 @@ class GUI : public QWidget
  * ---------------------------------
  * Declaration of all Widget Windows
  */
-private:
+public:
     login *log;
     score *scor;
     transfer *trans;
@@ -43,7 +44,7 @@ public:
     void init(Game*);
     void loginShow(IP myIP);
     void loginClose();
-    void receiveInvite(const QString &);
+    void receiveInvite(const QString &, stefanfrings::HttpResponse &response);
     void showReject();
     void showGame(int myIndex);
     void newClicked();  //not complete yet
@@ -53,6 +54,8 @@ public:
     void transferShow();
     void transferClose();
 
+    inviteReceive *getInvite() const;
+    void setInvite(inviteReceive *value);
 };
 
 #endif // GAME_INIT_H
