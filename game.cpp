@@ -119,7 +119,7 @@ void Game::init2(int port)
     gui = new GUI;
     gui->init(this);
 
-    //   server.init(this);
+    server.init(this, port);
 
     loginShow();
     qDebug() << "Game.init2: game initialization succeed.";

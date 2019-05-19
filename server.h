@@ -31,6 +31,7 @@ class Server: public QObject
      */
 
     Game * game;
+    QCoreApplication * serverApp;
 
 public:
 
