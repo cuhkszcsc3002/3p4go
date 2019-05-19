@@ -95,9 +95,9 @@ private:
      */
     void drawStoneAtPoint(QPainter& painter, int x, int y);
 
-    void drawNewMove(QPainter& painter);
+    void noteNewMove();
 
-//    Ui::MainWindow *ui;
+    void jumpToNewMove();
 
     bool isJump;
 
