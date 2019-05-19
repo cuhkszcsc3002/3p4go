@@ -3,6 +3,7 @@
 
 inviteReceive::inviteReceive(QWidget *parent) : QDialog (parent)
 {
+    qDebug() << "inviteReceive Constructor start.";
     this->resize(QSize(500,150));
 
     acceptInvite = new QPushButton(tr("Accept (Alt+&a)"));
@@ -34,6 +35,7 @@ inviteReceive::inviteReceive(QWidget *parent) : QDialog (parent)
     //setFixedWidth(sizeHint().width()+100);
     //setFixedHeight(sizeHint().height());
     setLayout(mainLayout);
+    qDebug() << "inviteReceive Constructor end.";
 }
 
 inviteReceive::~inviteReceive()

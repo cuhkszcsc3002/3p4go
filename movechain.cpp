@@ -265,6 +265,11 @@ MoveChain MoveChain::jsonToMoveChain(const QString & jsonString)
     return newMoveChain;
 }
 
+MoveChain MoveChain::operator=(const MoveChain &mc)
+{
+    this->moveList = mc.moveList;
+}
+
 
 void testMoveChain()
 {

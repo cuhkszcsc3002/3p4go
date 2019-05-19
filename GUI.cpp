@@ -48,6 +48,7 @@ void GUI::init(Game *sgame)
     chess = new chessBoard;
 
 
+
     qDebug() << "GUI.init: signal and slot connection start...";
     /* Connect GUI's subclasses */
     QObject::connect(log, SIGNAL(showScore()), scor, SLOT(checkReceived()));
