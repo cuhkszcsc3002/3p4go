@@ -78,6 +78,7 @@ int Server::replyInvite(HttpResponse * response,int result)
 void Server::rejectSig(HttpResponse & response)
 {
     response.write("0", true);
+    emit receiveForSigFinish();
 
 }
 
@@ -85,6 +86,7 @@ void Server::rejectSig(HttpResponse & response)
 void Server::acceptSig(HttpResponse &response)
 {
     response.write("1",true);
+    emit receiveForSigFinish();
 }
 
 
