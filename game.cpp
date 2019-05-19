@@ -486,8 +486,9 @@ void Game::broadcastNewmove()
     gui->updateNewMovel(this->localMoveChain);
     gui->chess->update();
     qDebug()<< "Host: update new move success";
-
+    qDebug() << "Game.checkNewMove -> checkFinish Host start";
     checkFinish();
+    qDebug() << "Game.checkNewMove -> checkFinish Host finish";
 }
 
   /* For the others */

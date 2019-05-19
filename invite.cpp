@@ -50,6 +50,7 @@ void inviteReceive::receiveInvite(const QString ipAddress)
     QString message = "Player " + ipAddress +  " wants to invite you for a new 3P4Go game.";
     this->info->setText(message);
     this->show();
+    qDebug() << "Invite.receiveInvite Pass";
 
 }
 //
