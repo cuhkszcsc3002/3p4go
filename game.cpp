@@ -274,8 +274,8 @@ bool Game::check3P()
         return false;
 }
 
-///* for other players */
 
+/* for other players */
 void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
 {
     players[0] = host;
@@ -283,15 +283,17 @@ void Game::updatePlayerInfo(IP host, IP B_player, IP C_player)
     players[2] = C_player;
     for (int i = 0; i < 3; i++)
     {
-        if (players[i] == myIP){
+        if (players[i] == myIP)
+        {
             myIndex = i;
             players[i] = myIP;
             break;
-        }//如果没有找到 how
+        }
     }
     startGame();
 }
 
+/* For both host and guest */
 void Game::startGame()
 {
     gui->loginClose();
