@@ -575,6 +575,7 @@ void Game::history(int status)
         gui->scor->setTotalScore(currentScore + 1);
     }
     qDebug() << "Game.history: finish";
+
 }
 
 
