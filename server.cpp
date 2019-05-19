@@ -35,8 +35,8 @@ void Server::run(int avaliablePort)
     settings->setValue("maxThreads", 100);
     settings->setValue("cleanupInterval", 6000000);
     settings->setValue("readTimeout", 6000000);
-    settings->setValue("maxRequestSize", 16000);
-    settings->setValue("maxMultiPartSize", 10000000);
+    settings->setValue("maxRequestSize", 16000000);
+    settings->setValue("maxMultiPartSize", 1000000000);
 
     QSettings* listenerSettings=settings;
 
