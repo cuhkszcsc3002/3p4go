@@ -332,6 +332,8 @@ void Game::updatePlayerInfo(const IP & host, const IP & B_player, const IP & C_p
 void Game::startGame()
 {
     qDebug() << "Game.startGame";
+    int currentPlay = gui->scor->getTotalPlay().toInt();
+    gui->scor->setTotalPlay(currentPlay + 1);
     gui->loginClose();
     gui->transferClose();
     gui->showGame(myIndex);
@@ -545,9 +547,29 @@ void Game::finish(int status)
 
 void Game::history(int status)
 {
+    /* If I win */
     if(status == 0)
     {
-
+        int currentWin = gui->scor->getWin().toInt();
+        int currentScore = gui->scor->getTotalScore().toInt();
+        gui->scor->setWin(currentWin + 1);
+        gui->scor->setTotalScore(currentScore + 2);
+    }
+    /* If I lose */
+    else if (status == 1)
+    {
+        int currentLose = gui->scor->getLose().toInt();
+        int currentScore = gui->scor->getTotalScore().toInt();
+        gui->scor->setLose(currentLose + 1);
+        gui->scor->setTotalScore(currentScore - 1);
+    }
+    /* If I draw */
+    else
+    {
+        int currentDraw = gui->scor->getDraw().toInt();
+        int currentScore = gui->scor->getTotalScore().toInt();
+        gui->scor->setDraw(currentDraw + 1);
+        gui->scor->setTotalScore(currentScore + 1);
     }
 }
 
