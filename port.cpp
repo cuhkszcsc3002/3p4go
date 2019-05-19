@@ -7,13 +7,14 @@ port::port(QWidget *parent) : QWidget(parent)
     message = new QLabel(tr("Enter your port here: "));
     lineEdit = new QLineEdit;
     labelLayout = new QHBoxLayout;
-    lineEditLayout = new QHBoxLayout;
+    lineEditLayout = new QVBoxLayout;
     buttonLayout = new QHBoxLayout;
     mainLayout = new QVBoxLayout;
 
     labelLayout->addWidget(message);
     labelLayout->addStretch();
 
+    lineEditLayout->addLayout(labelLayout);
     lineEditLayout->addWidget(lineEdit);
 
     buttonLayout->addStretch();
