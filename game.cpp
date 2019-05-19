@@ -329,6 +329,7 @@ void Game::startGame()
 void Game::newclick(MoveChain localMoveChain)       //rules?!
 {
     this->localMoveChain = localMoveChain;
+    /* Send the move chain and signature to the player that next to host*/
     if (myIndex + 1 <= 2)
     {
         if (client->sendForSig(localMoveChain, myIndex+1) == false)
