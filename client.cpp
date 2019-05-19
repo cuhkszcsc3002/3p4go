@@ -34,6 +34,7 @@ QString Client::getLocalIPAddress()
       if(!listAddress.at(j).isNull()
           && listAddress.at(j).protocol() == QAbstractSocket::IPv4Protocol
           && listAddress.at(j) != QHostAddress::LocalHost
+              && !listAddress.at(j).toString().startsWith("192.168.1")
           ){
               localIPAddress = listAddress.at(j).toString();
               qDebug() << "Local IP Address Received: "<< localIPAddress;
