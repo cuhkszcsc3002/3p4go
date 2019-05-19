@@ -43,7 +43,7 @@ chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
     palette.setColor(QPalette::Background, QColor("#B1723C"));
     this->setPalette(palette);
     setMouseTracking(true);
-    qDebug()<<"chessboard.chessboard: chessboard class initialization completed"
+    qDebug()<<"chessboard.chessboard: chessboard class initialization completed";
 }
 
 chessBoard::~chessBoard()
