@@ -16,6 +16,7 @@ using namespace std;
 
 chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
 {
+    qDebug()<<"chessboard.chessbaord: initializing chessboard class";
     isJump = false;
     this->resize(1050, 990);            //set the size of the window
     //this->grabKeyboard();               //catch the input of keyboard
@@ -42,6 +43,7 @@ chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
     palette.setColor(QPalette::Background, QColor("#B1723C"));
     this->setPalette(palette);
     setMouseTracking(true);
+    qDebug()<<"chessboard.chessboard: chessboard class initialization completed"
 }
 
 chessBoard::~chessBoard()
