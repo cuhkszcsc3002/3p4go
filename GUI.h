@@ -31,7 +31,6 @@ private:
     finish *fini;
     chessBoard *chess;
 //    timer *counter;
-    port *myPort;
 
 private slots:
     //void restartReceive();

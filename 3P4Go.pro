@@ -67,7 +67,8 @@ SOURCES += \
     finish.cpp \
     chessboard.cpp \
     timer.cpp \
-    GUI.cpp
+    GUI.cpp \
+    port.cpp
 
 
 HEADERS += \
@@ -80,7 +81,8 @@ HEADERS += \
     finish.h \
     GUI.h \
     timer.h \
-    chessboard.h
+    chessboard.h \
+    port.h
 
 
 #HEADERS += client.h

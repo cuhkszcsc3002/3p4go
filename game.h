@@ -41,7 +41,7 @@ class Game : public QObject
     Server server;
     GUI *gui;
     QCoreApplication * app;
-//    port *port;
+    port myPort;
 
     int Port;
 
@@ -177,7 +177,6 @@ public:
     /*
      * The set, get methods.
      */
-    void setPort();
     int getMyIndex() const;
     void setMyIndex(int value);
     bool getAvailableFlag() const;
@@ -552,7 +551,7 @@ private slots:
     void newclick(MoveChain localMoveChain);
 
 
-    void getPort(int port);
+    void init2(int port);
 
 
 

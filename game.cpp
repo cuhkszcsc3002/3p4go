@@ -89,11 +89,14 @@ void Game::init()
 {
     qDebug() << "Game.init: game initialize started.";
 
-//    port->show();
-//    QObject::connect(port, SIGNAL(emitPort(int)), this, SLOT(getPort(int)));
-//    setPort(&myPort);
-    qDebug()<< "Game.init: port received."<< endl;
+    myPort.show();
+    QObject::connect(&myPort, SIGNAL(emitPort(int)), this, SLOT(init2(int)));
+}
 
+void Game::init2(int port)
+{
+    this->Port = port;
+    qDebug() << "Game.getPort: receive user enter port: " << port << endl;
 
     myIndex = -1;
     setAvailableFlag(1);
@@ -113,21 +116,13 @@ void Game::init()
 
     /* Initialization of the child class: GUI, Client, Server */
     client.init(this);
+    gui = new GUI;
     gui->init(this);
-    qDebug() << "GUI init succeed.";
 
     //   server.init(this);
 
     loginShow();
-
-}
-
-void Game::setPort()
-{
-
-    Port = -1;
-//    while (Port == -1)
-//    {}
+    qDebug() << "Game.init2: game initialization succeed.";
 }
 
 
@@ -181,7 +176,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     player2.setPort(p2Port.toInt());
     players[1] = player1;
     players[2] = player2;
-//    qDebug() << "Game.sendInvite: all IP are: " << players[0] << players[1] << players[2] << endl;
+    qDebug() << "Game.sendInvite: all IP are: " << players[0] << players[1] << players[2] << endl;
 
     /* Sending invite to guest players */
     int result = client.sendInvite(1);
@@ -461,10 +456,5 @@ void Game::history()
 
 }
 
-void Game::getPort(int port)
-{
-    this->Port = port;
-    qDebug() << "Game.getPort: receive user enter port: " << port << endl;
-}
 
 
