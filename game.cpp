@@ -531,12 +531,15 @@ void Game::finish(int status)
     gui->gameFinish(status);
     server->finish();
     client->finish();
-    history();
+    history(status);
 }
 
-void Game::history()
+void Game::history(int status)
 {
+    if(status == 0)
+    {
 
+    }
 }
 
 

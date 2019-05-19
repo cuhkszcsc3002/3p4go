@@ -74,6 +74,7 @@ void score::readScore()
     string line, score;
     file.open(FILENAME, ios::in);
 
+    /* IF */
     if(!file)
     {
         file.open(FILENAME, ios::out);      //initialize the score record
@@ -81,11 +82,15 @@ void score::readScore()
         {
              file << "w 0\n";     //win
              file << "l 0\n";     //lose
-             file << "t 0\n";     //total
+             file << "d 0\n";     //draw
+             file << "t 0\n";     //totalScore
+             file << "p 0\n";     //totalPlay
 
              win = 0;
              lose = 0;
+             draw = 0;
              totalScore = 0;
+             totalPlay = 1;
         }
     }
     else

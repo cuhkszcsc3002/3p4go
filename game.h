@@ -467,7 +467,7 @@ public:
      * in history_score.txt.
      */
 
-    void history();
+    void history(int status);
 
     /*
      * Method: restart

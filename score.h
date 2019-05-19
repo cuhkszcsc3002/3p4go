@@ -29,7 +29,9 @@ signals:
 private:
     int win;
     int lose;
+    int draw;
     int totalScore;
+    int totalPlay;
 
     QPushButton *back;
     QLabel *WinShow;
