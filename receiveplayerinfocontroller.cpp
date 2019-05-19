@@ -47,6 +47,7 @@ void ReceivePlayerInfoController::service(HttpRequest &request, HttpResponse &re
     game->updatePlayerInfo(IPArray.at(0), IPArray.at(1), IPArray.at(2));
 
     response.write("1", true);
+    qDebug() << "ReceivePlayerInfo Complete.";
 
 //    QEventLoop eventLoop;
 

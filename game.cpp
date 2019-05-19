@@ -316,8 +316,8 @@ void Game::startGame()
 {
     qDebug() << "Game.startGame";
     gui->loginClose();
-//    gui->transferClose();
-//    gui->showGame(myIndex);
+    gui->transferClose();
+    gui->showGame(myIndex);
 }
 
 void Game::newclick(MoveChain localMoveChain)       //rules?!

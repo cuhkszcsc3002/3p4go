@@ -101,7 +101,7 @@ private:
 
     void drawNewMove(QPainter& painter);
 
-    Ui::MainWindow *ui;
+//    Ui::MainWindow *ui;
 
     bool isJump;
 
