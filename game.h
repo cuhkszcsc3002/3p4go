@@ -37,8 +37,8 @@ class Game : public QObject
     friend class GUI;
 //    friend class port;
 
-    Client client;
-    Server server;
+    Client *client;
+    Server *server;
     GUI *gui;
     QCoreApplication * app;
     port myPort;
@@ -125,13 +125,13 @@ class Game : public QObject
 
     int sendSigTimes = 0;
 
-    /*Client加了一个Client.updateNewmove(ones'IP) to inform 另外两个players update the chain.
+    /*Client加了一个client->updateNewmove(ones'IP) to inform 另外两个players update the chain.
      * Game.broadcastTimes represents the state of broadcastNewmove().
-     * If one player returns True through Client.broadcastNewmove(),
+     * If one player returns True through client->broadcastNewmove(),
      * the signal will plus 1. If one player returns false, the player will
      * send the history chain again to others and the signal will be
      * changed back to 0. If the signal equals to 2, Game.updateNewmove and
-     * Client.updateNewmove(ones'IP) will be called.
+     * client->updateNewmove(ones'IP) will be called.
      */
 
     int broadcastTimes = 0;
@@ -165,7 +165,7 @@ public:
     /*
      * Method: init
      * The initializer of the Game.
-     * Note: the constructor will call the constructors of GUI, Server, Client.
+     * Note: the constructor will call the constructors of GUI, Server, client->
      * It will be called not only in the first round, but also in the restart.
      * ---------------------------------------------------------------------
      * Usage: ;
@@ -255,7 +255,7 @@ public:
      * host and other two players are ready for the
      * game. By checking the acceptInvite signals
      * of other players that the host invited,
-     * the client.sendPlayerInfo() is called if
+     * the client->sendPlayerInfo() is called if
      * it returns true. At last, it will call
      * Game.startGame().
      */
@@ -343,7 +343,7 @@ public:
      * Method: sigAccepted
      * Usage:
      * ---------------------------------------
-     * This method is called if Client.sendForSig() returns 1.
+     * This method is called if client->sendForSig() returns 1.
      * the player who send the moveChain will be informed of
      * that the next player has accepted the history chain and
      * signatures. It will save signatures and recover the
@@ -356,7 +356,7 @@ public:
      * Method: sigRejected
      * Usage:
      * ---------------------------------------
-     * This method is called if Client.sendForSig() returns 0.
+     * This method is called if client->sendForSig() returns 0.
      * the player will be asked to send a new history chain
      * with correct signatures, and the signal
      * Game.sendSigTimes will plus 1 every time.
@@ -384,7 +384,7 @@ public:
      * Usage:
      * -------------------------------------------
      * This method is called by Game.collectAllSig().
-     * It will call Client.broadcastNewmove() to send
+     * It will call client->broadcastNewmove() to send
      * the new history movechain to the other two players,
      * and wait for their responses. If one player response
      * false (broadcastTimes = -1), it will send the history
@@ -437,7 +437,7 @@ public:
      * Usage:
      * ---------------------------------------
      * This method is called by Newmove.broadcastNewmove()
-     * or Client.updateMoveChain, and used to update the movechain
+     * or client->updateMoveChain, and used to update the movechain
      * in localMoveChain and call GUI.updateNewmove().
      * newmoveSig will be changed back to 0.
      */
@@ -503,12 +503,12 @@ private slots:
      * nextPlayer, while 2 represents the lastPlayer.
      * This method is called when the host
      * inviting other players through IP at GUI.
-     * It calls Client.sendInvite() respectively.
+     * It calls client->sendInvite() respectively.
      *
      * ----------------------------------------------------------
      * Called by GUI, when the player pushes the "invite" button.
      *
-     * Then, call client.sendInvite(players_IP).
+     * Then, call client->sendInvite(players_IP).
      * Note: DON'T modify players[p]! This will be done by client
      * because client will receive the privateKey.???
      *
@@ -545,7 +545,7 @@ private slots:
      * This method is triggered by GUI.newclick(),
      * which has checked whether the coordinate
      * is available or not, and Game.newclick() is
-     * used to call client.sendForSig().
+     * used to call client->sendForSig().
      */
 
     void newclick(MoveChain localMoveChain);
