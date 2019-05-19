@@ -173,6 +173,7 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
 {
     qDebug() << "Game.sendInvite: Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
     setAvailableFlag(0);
+
     /* Storing guest player address information */
     players[0] = myIP;
     IP player1, player2;
@@ -196,7 +197,6 @@ void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port
     }else{
         inviteRejected();
     }
-
 }
 
 /* I think this method need a signal from client to trigger */
@@ -222,10 +222,10 @@ void Game::rejectInvite()
 }
 
 
-///* For the host*/
-
+/* For the host*/
 void Game::inviteAccepted()
 {
+    qDebug()<<"Both Guests accept Host's invite.";
     if (check3P() == true){
         int count = 0;
         while(client->sendPlayerInfo() == 0)
