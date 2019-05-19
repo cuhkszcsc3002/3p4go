@@ -30,7 +30,7 @@ private slots:
 
 signals:
     void restart();
-    void gameEixt();
+    void gameExit();
 
 public:
     QPushButton *again;

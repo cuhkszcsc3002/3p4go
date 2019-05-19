@@ -29,11 +29,13 @@ GUI::~GUI(){
 }
 
 void GUI::finishGUI() {
-//    log->close();
+
 //    scor->close();
 //    trans->close();
 //    rej->close();
 //    invite->close();
+//    fini->close();
+    chess->close();
 
 //    delete log;     delete scor;
 //    delete trans;   delete rej;

@@ -42,7 +42,7 @@ finish::~finish()
 
 void finish::exitClicked(){
     qDebug() << "Finish.exitClicked.";
-    emit gameEixt();
+    emit gameExit();
     this->close();
 }
 

@@ -171,6 +171,7 @@ void Game::restart() //same as init
     qDebug() << "Restart Client";
     QObject::connect(gui->fini, SIGNAL(restart()), this, SLOT(restart()));
     QObject::connect(gui->fini, SIGNAL(gameExit()), this, SLOT(exit()));
+    loginShow();
     qDebug() << "Restart Signal";
 
 }
