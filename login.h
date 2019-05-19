@@ -67,12 +67,15 @@ private:
     QLineEdit *player2IP;
     QLineEdit *player2Port;
     QLineEdit *hostIP;
+    QLineEdit *hostPort;
+
 
     QLabel *p1ip;
     QLabel *p1port;
     QLabel *p2ip;
     QLabel *p2port;
     QLabel *host;
+    QLabel *hostPortLabel;
 
     QPushButton *invite;
     QPushButton *exit;
@@ -83,12 +86,14 @@ private:
     QHBoxLayout *hostLayout;
     QHBoxLayout *port1Layout;
     QHBoxLayout *port2Layout;
+    QHBoxLayout *hostPortLayout;
 
     QHBoxLayout *p1IPLayout;
     QHBoxLayout *p2IPLayout;
     QHBoxLayout *p1PortLayout;
     QHBoxLayout *p2PortLayout;
     QHBoxLayout *hostIPLayout;
+    QHBoxLayout *hostPortValueLayout;
 
     QHBoxLayout *editorLayout;
     QHBoxLayout *buttonLayout;

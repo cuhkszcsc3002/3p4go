@@ -14,7 +14,8 @@ login::login(QWidget *parent) : QWidget (parent)
     p2ip = new QLabel(tr("Player2 IP address: "));
     p1port = new QLabel(tr("Port1: "));
     p2port = new QLabel(tr("Port2: "));
-    host = new QLabel(tr("Host"));
+    host = new QLabel(tr("My IP: "));
+    hostPortLabel = new QLabel(tr("My Port: "));
 
 
     player1IP = new QLineEdit;
@@ -22,7 +23,9 @@ login::login(QWidget *parent) : QWidget (parent)
     player1Port = new QLineEdit;
     player2Port = new QLineEdit;
     hostIP = new QLineEdit;
-    hostIP->setText(myIP.getFullAddress()); //alternate: QString::fromStdString(ipAddress)
+    hostIP->setText(myIP.getAddress()); //alternate: QString::fromStdString(ipAddress)
+    hostPort = new QLineEdit;
+    hostPort->setText(QString::number(myIP.getPort()));
 
     QPalette pal;
     pal.setColor(QPalette::Text,QColor(0,0,0));
@@ -56,6 +59,14 @@ login::login(QWidget *parent) : QWidget (parent)
     hostIP->setReadOnly(true);
     hostIP->setPalette(pal);
 
+    hostPort->setMaxLength(25);
+    hostPort->setFixedWidth(250);
+    hostPort->setAlignment(Qt::AlignLeft);
+    hostPort->setReadOnly(false);
+    hostPort->setPalette(pal);
+    hostPort->setReadOnly(true);
+
+
     p1Layout = new QHBoxLayout;
     p2Layout = new QHBoxLayout;
     hostLayout = new QHBoxLayout;
@@ -68,6 +79,8 @@ login::login(QWidget *parent) : QWidget (parent)
     p1PortLayout = new QHBoxLayout;
     p2PortLayout = new QHBoxLayout;
     hostIPLayout = new QHBoxLayout;
+    hostPortLayout = new QHBoxLayout;
+    hostPortValueLayout = new QHBoxLayout;
 
     editorLayout = new QHBoxLayout;
     buttonLayout = new QHBoxLayout;
@@ -110,17 +123,32 @@ login::login(QWidget *parent) : QWidget (parent)
     ipLayout->addLayout(p2IPLayout);
     ipLayout->addLayout(hostIPLayout);
 
+    hostPortLayout->addStretch();
+    hostPortLayout->addWidget(hostPortLabel);
+    hostPortLayout->addStretch();
+//    hostPortLayout->addWidget(hostPort);
+//    hostPortLayout->addStretch();
+    hostPortValueLayout->addStretch();
+    hostPortValueLayout->addWidget(hostPort);
+
+    userPortlayout->addLayout(hostPortLayout);
+
+
+
+
     p1PortLayout->addWidget(player1Port);
     p1PortLayout->addStretch();
     p2PortLayout->addWidget(player2Port);
     p2PortLayout->addStretch();
     portLayout->addLayout(p1PortLayout);
     portLayout->addLayout(p2PortLayout);
+    portLayout->addLayout(hostPortValueLayout);
 
     editorLayout->addLayout(userLayout);
     editorLayout->addLayout(ipLayout);
     editorLayout->addLayout(userPortlayout);
     editorLayout->addLayout(portLayout);
+
 
     buttonLayout->addStretch();
     buttonLayout->addWidget(invite);
@@ -151,7 +179,8 @@ login::~login()
     delete hostLayout;  delete port1Layout; delete port2Layout; delete p1IPLayout;
     delete p2IPLayout;  delete p1PortLayout;delete p2PortLayout;delete hostIPLayout;
     delete editorLayout;delete buttonLayout;delete ipLayout;    delete portLayout;
-    delete userLayout;  delete userPortlayout;
+    delete userLayout;  delete userPortlayout; delete hostPort; delete hostPortLabel;
+    delete hostPortLayout; delete hostPortValueLayout;
 }
 
 void login::exitClick()
@@ -180,7 +209,8 @@ void login::setMyIP(IP myIP)
 {
     qDebug()<<"login.setMyIP: setting my IP Address "<< myIP.getFullAddress()<<" to login window";
     this->myIP = myIP;
-    this->hostIP->setText(myIP.getFullAddress());
+    this->hostIP->setText(myIP.getAddress());
+    this->hostPort->setText(QString::number(myIP.getPort()));
     this->setWindowTitle(myIP.getFullAddress()+tr(": Starting a new 3P4GO..."));
 }
 
