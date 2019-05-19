@@ -151,6 +151,7 @@ void Game::restart() //same as init
     players.append(IP());
     players.append(IP());
     qDebug() << "Restart: Players refresh";
+    localMoveChain = MoveChain();
 
 //    QString localIP = Client::getLocalIPAddress();
 //    Q_ASSERT(localIP != NULL);
