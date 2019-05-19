@@ -11,6 +11,12 @@ public:
     explicit score(QWidget *parent = nullptr);
     ~score();
 
+    int win;
+    int lose;
+    int draw;
+    int totalScore;
+    int totalPlay;
+
     void readScore();
     QString getWin();
     QString getDraw();
@@ -31,12 +37,6 @@ signals:
     //void ComfirmReceived();
 
 private:
-    int win;
-    int lose;
-    int draw;
-    int totalScore;
-    int totalPlay;
-
     QPushButton *back;
     QLabel *WinShow;
     QLabel *DrawShow;
