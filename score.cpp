@@ -398,6 +398,7 @@ void score::backClicked()
 
 void score::checkReceived()
 {
+    this->readScore();
     this->show();
 }
 
