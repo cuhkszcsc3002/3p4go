@@ -363,7 +363,7 @@ void chessBoard::keyPressEvent(QKeyEvent *event)
 void chessBoard::pullMoveChain(MoveChain localMoveChain)
 {
     this->localMoveChain = localMoveChain;
-    jumpToNewMove();
+    //jumpToNewMove();
     update();
 }
 

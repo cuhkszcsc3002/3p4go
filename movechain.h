@@ -171,9 +171,6 @@ public:
 
 
     static MoveChain jsonToMoveChain(const QString & jsonString);
-
-    MoveChain operator=(const MoveChain & mc);
-
 };
 
 void testMoveChain();

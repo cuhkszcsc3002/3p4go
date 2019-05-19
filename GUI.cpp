@@ -91,7 +91,7 @@ void GUI::showGame(int myIndex){
 
 void GUI::updateNewMovel(MoveChain localMoveChain){
     chess->pullMoveChain(localMoveChain);
-    chess->update();
+//    chess->update();
 }
 
 void GUI::gameFinish(int status){

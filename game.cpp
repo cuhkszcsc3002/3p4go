@@ -484,7 +484,7 @@ void Game::broadcastNewmove()
     // !!!!!!
 
     gui->updateNewMovel(this->localMoveChain);
-    gui->chess->update();
+//    gui->chess->update();
     qDebug()<< "Host: update new move success";
     qDebug() << "Game.checkNewMove -> checkFinish Host start";
     checkFinish();
@@ -501,7 +501,7 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
         updateNewmove(newMoveChain);
 
         gui->updateNewMovel(newMoveChain);
-        gui->chess->update();
+//        gui->chess->update();
         qDebug() << "Game.checkNewMove -> checkFinish start";
         checkFinish();
         qDebug() << "Game.checkNewMove -> checkFinish finish";
@@ -576,6 +576,7 @@ void Game::history(int status)
     }
     qDebug() << "Game.history: finish";
 }
+
 
 
 

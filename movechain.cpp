@@ -66,10 +66,7 @@ bool MoveChain::newMove(const Move & newMove)
 int MoveChain::checkWin() const
 {
     qDebug() << "CheckWin";
-    if (moveList.length()<=9) {
-        qDebug() << "CheckWin -1";
-        return -1;
-    }
+    if (moveList.length()<9) return -1;
     for (int i=3*3+1; i<=moveList.length(); i++)
     {
         QList<Move> testChain = moveList.mid(0, i);
@@ -93,12 +90,10 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
     Move last = testMoveChain.back();
     // directions store the 7-bit lines of 4 directions.
 
-    QList<QList<bool>> directions;
-
+    bool directions[4][WINNUM*2-1];
     for (int i=0; i<4; i++) {
-        directions.append(QList<bool>());
         for (int j = 0; j < WINNUM*2-1; ++j) {
-            directions[i].append(false);
+            directions[i][j] = false;
         }
     }
     int checkDirectionIndex = -1;
@@ -166,7 +161,7 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
                     for (right=WINNUM-1; right<WINNUM*2-1; right++) {
                         if (!directions[checkDirectionIndex][right]) break;
                     }
-                    if (right - left - 1 >= WINNUM) return true;
+                    if (right - left >= WINNUM) return true;
                 }
             }
         }
@@ -263,11 +258,6 @@ MoveChain MoveChain::jsonToMoveChain(const QString & jsonString)
        newMoveChain.moveList.append(Move(v.toObject()));
     }
     return newMoveChain;
-}
-
-MoveChain MoveChain::operator=(const MoveChain &mc)
-{
-    this->moveList = mc.moveList;
 }
 
 
