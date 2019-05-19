@@ -214,13 +214,13 @@ void chessBoard::DrawItems()
         {
             switch (player)
             {
-            case 1 :
+            case 0 :
                 painter.setBrush(Qt::red);
                 break;
-            case 2 :
+            case 1 :
                 painter.setBrush(Qt::yellow);
                 break;
-            case 3 :
+            case 2 :
                 painter.setBrush(Qt::blue);
                 break;
             default:
