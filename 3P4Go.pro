@@ -63,7 +63,7 @@ SOURCES += \
 
 
 #HEADERS += \
-##    mainwindow.h \
+#    mainwindow.h \
 
 
 
@@ -110,8 +110,8 @@ SOURCES += \
 
 
 
-FORMS += \
-        mainwindow.ui
+#FORMS += \
+#        mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -119,9 +119,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 include(QtWebApp/httpserver/httpserver.pri)
+include(GUI.pri)
+
 include(client.pri)
 include(server.pri)
 include(game.pri)
 include(baseClasses.pri)
-include(GUI.pri)
 

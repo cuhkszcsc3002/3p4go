@@ -1,7 +1,7 @@
 #include <QApplication>
-//#include "client.h"
+//#include "mainwindow.h"
 #include "game.h"
-//#include "rsa2.h"
+#include <QMainWindow>
 
 int main(int argc, char *argv[])
 {

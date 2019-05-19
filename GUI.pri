@@ -1,4 +1,4 @@
-SOURCES +=     invite.h \
+HEADERS +=     invite.h \
     login.h \
     score.h \
     transfer.h \
@@ -9,7 +9,7 @@ SOURCES +=     invite.h \
     chessboard.h \
     port.h
 
-HEADERS +=     invite.cpp \
+SOURCES +=     invite.cpp \
     score.cpp \
     transfer.cpp \
     reject.cpp \
