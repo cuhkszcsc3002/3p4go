@@ -89,7 +89,13 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
 {
     Move last = testMoveChain.back();
     // directions store the 7-bit lines of 4 directions.
-    bool directions[4][WINNUM*2-1] = {{false}};
+
+    bool directions[4][WINNUM*2-1];
+    for (int i=0; i<4; i++) {
+        for (int j = 0; j < WINNUM*2-1; ++j) {
+            directions[i][j] = false;
+        }
+    }
     int checkDirectionIndex = -1;
 
     for (int i=0; i<4; i++) {
@@ -152,10 +158,10 @@ bool MoveChain::checkLastWin(const QList<Move> & testMoveChain) const
                     for (left=WINNUM-1; left>=0; left--) {
                         if (!directions[checkDirectionIndex][left]) break;
                     }
-                    for (right=WINNUM-1; right<=WINNUM*2-1; right++) {
+                    for (right=WINNUM-1; right<WINNUM*2-1; right++) {
                         if (!directions[checkDirectionIndex][right]) break;
                     }
-                    if (right - left-1 >= WINNUM) return true;
+                    if (right - left >= WINNUM) return true;
                 }
             }
         }
