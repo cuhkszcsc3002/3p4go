@@ -470,6 +470,9 @@ void Game::broadcastNewmove()
         //TO DO: if other don't accept your moveChain, you need to broadcast again
     }
 
+    // HOST after broadcast New Move Success.
+    // !!!!!!
+
 }
 
   /* For the others */
@@ -479,6 +482,9 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
     if ((this->localMoveChain <= newMoveChain) && (localMoveChain.verifyNewMove(newMoveChain.moveList[newMoveChain.length()-1])))
     {
         acceptNewmove(newMoveChain, response);
+        // CLIENT BROADCAST NEW MOVE!!!!!
+
+
     }else{
         rejectNewmove(response);
     }
