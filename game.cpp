@@ -159,12 +159,9 @@ void Game::restart() //same as init
     myIP.setPublicKey(keys.at(0));
     myIP.setPrivateKey(keys.at(1));
 
-    delete server;
-    delete client;
-    delete gui;
-    server = new Server;
-    client = new Client;
-    gui = new GUI;
+//    delete gui;
+//    gui = new GUI;
+    gui->finishGUI();
     gui->init(this);
 
     server->init(this, myIP.getPort());
@@ -177,10 +174,11 @@ void Game::restart() //same as init
 
 void Game::exit()
 {
-    delete server;
     delete client;
-    delete gui;
     qDebug() << "Game Terminate.";
+    delete server;
+    delete gui;
+
 }
 
 void Game::loginShow()
@@ -500,6 +498,7 @@ bool Game::checkNewmove(MoveChain newMoveChain, HttpResponse &response)
         acceptNewmove(newMoveChain, response);
         // CLIENT BROADCAST NEW MOVE!!!!!
         updateNewmove(newMoveChain);
+
         gui->updateNewMovel(newMoveChain);
         gui->chess->update();
         checkFinish();
@@ -540,13 +539,14 @@ void Game::finish(int status)
 {
     qDebug() << "Game.finish: status:" << status;
     gui->gameFinish(status);
-    server->finish();
-    client->finish();
+//    server->finish();
+//    client->finish();
     history(status);
 }
 
 void Game::history(int status)
 {
+    qDebug() << "Game.history: Status="<<status;
     /* If I win */
     if(status == 0)
     {
@@ -571,6 +571,7 @@ void Game::history(int status)
         gui->scor->setDraw(currentDraw + 1);
         gui->scor->setTotalScore(currentScore + 1);
     }
+    qDebug() << "Game.history: finish";
 }
 
 

@@ -56,6 +56,7 @@ public:
 
     inviteReceive *getInvite() const;
     void setInvite(inviteReceive *value);
+    void finishGUI();
 };
 
 #endif // GAME_INIT_H

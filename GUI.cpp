@@ -28,6 +28,13 @@ GUI::~GUI(){
     delete chess;
 }
 
+void GUI::finishGUI() {
+    delete log;     delete scor;
+    delete trans;   delete rej;
+    delete invite;  delete fini;
+    delete chess;
+}
+
 
 void GUI::init(Game *sgame)
 {

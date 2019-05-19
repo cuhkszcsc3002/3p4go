@@ -95,6 +95,7 @@ void Server::acceptSig(HttpResponse &response)
 void Server::acceptNewMove(HttpResponse &response)
 {
     response.write("1",true);
+    qDebug() << "Server.acceptNewMove";
 
     emit receiveNewMoveFinish();
 }
