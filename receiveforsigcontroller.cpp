@@ -41,7 +41,7 @@ void ReceiveForSigController::service(HttpRequest &request, HttpResponse &respon
 
 
     //TODO
-    game->validateForSig(newMoveChain, 1, response);
+    game->validateForSig(newMoveChain, response);
 
     QEventLoop eventLoop;
 

@@ -168,7 +168,7 @@ bool MoveChain::signLast(QString newSign, int index)
     return moveList.last().addSign(newSign, index);
 }
 
-bool MoveChain::checkLastSign(const Key2 & publicKey, int index) const
+bool MoveChain::checkLastSign(const Key2 & publicKey, const int & index) const
 {
     if (index>=moveList.last().getSignatures().length()) {
         qDebug() << "CheckLastSign: index overflow.";

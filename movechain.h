@@ -132,7 +132,7 @@ public:
     bool signLast(QString newSign);
     bool signLast(QString newSign, int index);
 
-    bool checkLastSign(const Key2 & publicKey, int index) const;
+    bool checkLastSign(const Key2 & publicKey, const int & index) const;
 
     /*
      * default index: the last signature.

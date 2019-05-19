@@ -328,12 +328,22 @@ void Game::startGame()
 
 void Game::newclick(MoveChain localMoveChain)       //rules?!
 {
-    this->localMoveChain = localMoveChain;
+//    this->localMoveChain = localMoveChain;
+    QString absStr = localMoveChain.abstract();
+    QString newSign = RSA2::generateSign(absStr, myIP.getPrivateKey());
+    localMoveChain.signLast(newSign);
+
     /* Send the move chain and signature to the player that next to host*/
     if (myIndex + 1 <= 2)
     {
         if (client->sendForSig(localMoveChain, myIndex+1) == false)
+        {
             sigRejected();
+        }
+        else {
+//            this->localMoveChain = localMoveChain
+        }
+
     }
     else
     {
@@ -342,10 +352,10 @@ void Game::newclick(MoveChain localMoveChain)       //rules?!
     }
 }
 
-void Game::validateForSig(MoveChain newMoveChain, int lastSigIndex, HttpResponse & response)
+void Game::validateForSig(MoveChain newMoveChain, HttpResponse & response)
 {
-    Key2 publicKey = players[myIndex - 1].getPublicKey();
-    if (newMoveChain.checkLastSign(publicKey, lastSigIndex)){
+    Key2 publicKey = players[(myIndex + 2)%3].getPublicKey();
+    if (newMoveChain.checkLastSign(publicKey)){
         acceptForSig(newMoveChain, response);
     }else{
         rejectForSig(newMoveChain, response);
@@ -409,6 +419,7 @@ void Game::acceptForSig(MoveChain newMoveChain, HttpResponse &response)
     /* If I am the third player (back to myself) right after the movel */
     else if ((3+myIndex-newMoveChain.moveList[newMoveChain.length()-1].getPlayerIndex())%3 == 0)
     {
+        this->localMoveChain = newMoveChain;
             /* Return the new signature back to the privious movel */
             server->acceptSig(response);
             /* Since the signature go back to movel itself and nothing is wrong, hence the movel can broadcast now */

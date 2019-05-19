@@ -301,7 +301,7 @@ public:
      * other methods.
      */
 
-    void validateForSig(MoveChain newMoveChain, int lastSigIndex, HttpResponse &response);
+    void validateForSig(MoveChain newMoveChain, HttpResponse &response);
 
     /*
      * Method: acceptForSig
