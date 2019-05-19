@@ -10,6 +10,13 @@ mpz_class Key2::getN() const
     return N;
 }
 
+Key2 Key2::operator=(const Key2 & newKey)
+{
+    keyValue = newKey.keyValue;
+    N = newKey.N;
+    return *this;
+}
+
 QDebug operator<<(QDebug dbg, const Key2 &key)
 {
     dbg << "---------------------\n"

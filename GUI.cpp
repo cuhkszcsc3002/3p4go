@@ -74,7 +74,7 @@ void GUI::showGame(int myIndex){
     qDebug() << "Chessboard Show Started.";
     chess->setMyIndex(myIndex);
     qDebug() << "Chessboard Show Mid.";
-//    chess->show();
+    chess->show();
     qDebug() << "Chess board Show Finished.";
 }
 

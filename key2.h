@@ -59,6 +59,8 @@ public:
     mpz_class getN() const;
 
     friend QDebug operator<<(QDebug dbg, const Key2 & key);
+
+    Key2 operator=(const Key2 & newKey);
 };
 
 #endif // KEY2_H

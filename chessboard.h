@@ -13,7 +13,7 @@ class MainWindow;
 #define INIT_POSX 500
 #define INIT_POSY 500
 
-class chessBoard : public QMainWindow
+class chessBoard : public QWidget
 {
     Q_OBJECT
 
@@ -28,7 +28,7 @@ class chessBoard : public QMainWindow
      *      downBoundAxis:  the logical axis value of down boundary
      */
 public:
-    explicit chessBoard(QWidget *parent = nullptr);
+    chessBoard(QWidget *parent = nullptr);
     ~chessBoard();
 
     QPoint *phyLocation;

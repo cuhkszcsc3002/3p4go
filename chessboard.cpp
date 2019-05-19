@@ -14,7 +14,7 @@
 
 using namespace std;
 
-chessBoard::chessBoard(QWidget *parent) : QMainWindow(parent)
+chessBoard::chessBoard(QWidget *parent) : QWidget(parent)
 {
     qDebug()<<"chessboard.chessbaord: initializing chessboard class";
     isJump = false;
