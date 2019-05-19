@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 
-#define FILENAME "F:\\3P4Go_Score.txt"
+#define FILENAME "C:\\3P4Go_Score.txt"
 
 using namespace std;
 
