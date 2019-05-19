@@ -173,7 +173,7 @@ void Game::loginShow()
 
 void Game::sendInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port)
 {
-    qDebug() << "Game.sendInvite: Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
+    //qDebug() << "Game.sendInvite: Receive from login: " << p1IP << p2IP << p1Port << p2Port <<endl;
     gui->transferShow();
     setAvailableFlag(0);
 
