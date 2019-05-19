@@ -42,7 +42,8 @@ void GUI::init(Game *sgame)
     qDebug() << "GUI.init: GUI init finish";
 }
 
-void GUI::loginShow(){
+void GUI::loginShow(IP myIP){
+    log->setMyIP(myIP);
     log->show();
 }
 

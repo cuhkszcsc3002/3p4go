@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include <string>
+#include "ip.h"
+
+
+class Game;
 
 class login : public QWidget
 {
@@ -12,6 +16,8 @@ class login : public QWidget
 public:
     login(QWidget *parent = nullptr);
     ~login();
+
+    void setMyIP(IP myIP);
 
     /* SLOT section:
      *
@@ -54,6 +60,8 @@ signals:
     void emitInvite(QString p1IP, QString p2IP, QString p1Port, QString p2Port);
 
 private:
+    IP myIP;
+
     QLineEdit *player1IP;
     QLineEdit *player1Port;
     QLineEdit *player2IP;
