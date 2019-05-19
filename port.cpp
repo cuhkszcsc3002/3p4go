@@ -27,6 +27,7 @@ port::port(QWidget *parent) : QWidget(parent)
     buttonLayout->addWidget(save);
     buttonLayout->addStretch();
     buttonLayout->addWidget(exit);
+    buttonLayout->addStretch();
 
     mainLayout->addLayout(labelLayout);
     mainLayout->addLayout(lineEditLayout);
